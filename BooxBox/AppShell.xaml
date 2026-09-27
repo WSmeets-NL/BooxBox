@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BooxBox.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BooxBox"
+    Title="BooxBox">
+
+    <TabBar>
+
+        <Tab Title="Mijn Boeken">
+            <ShellContent
+                Title="Mijn Boeken"
+                ContentTemplate="{DataTemplate local:BooksPage}"
+                Route="BooksPage" />
+        </Tab>
+
+        <Tab Title="Mijn Verzamelingen">
+            <ShellContent
+                Title="Mijn Verzamelingen"
+                ContentTemplate="{DataTemplate local:CollectionsPage}"
+                Route="CollectionsPage" />
+        </Tab>
+
+        <Tab Title="Boek toevoegen">
+            <ShellContent
+                Title="Boek toevoegen"
+                ContentTemplate="{DataTemplate local:AddBookPage}"
+                Route="AddBookPage" />
+        </Tab>
+
+        <Tab Title="Welkom">
+            <ShellContent
+                Title="Welkom"
+                ContentTemplate="{DataTemplate local:WelcomePage}"
+                Route="WelcomePage" />
+        </Tab>
+
+    </TabBar>
+
+</Shell>

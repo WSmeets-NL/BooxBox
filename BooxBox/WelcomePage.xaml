@@ -1,0 +1,15 @@
+<ContentPage
+    x:Class="BooxBox.WelcomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Welkom">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label 
+            Text="Welkom in de app"
+            FontSize="24"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+    </VerticalStackLayout>
+
+</ContentPage>

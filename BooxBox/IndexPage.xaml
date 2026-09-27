@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BooxBox.IndexPage"
+             Title="Welkom">
+
+    <ContentPage Title="Nijn Boeken">
+        <Label Text="Hier is een lijst van alle boeken die je hebt verzameld"></Label>
+    </ContentPage>
+    <ContentPage Title="Nijn Verzamelingen">
+        <Label Text="Hier zijn alle verzamelingen"></Label>
+    </ContentPage>
+    <ContentPage Title="Boek toevoegen">
+        <Label Text="Kies hieronder een manier om een nieuw boek toe te voegen."></Label>
+    </ContentPage>
+
+    <ContentPage Title="Welkom">
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Label 
+            Text="Welkom in de app"
+            FontSize="24"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+        </VerticalStackLayout>
+    </ContentPage>
+
+</TabbedPage>

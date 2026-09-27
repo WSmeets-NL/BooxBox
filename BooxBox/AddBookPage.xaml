@@ -1,0 +1,11 @@
+<ContentPage
+    x:Class="BooxBox.AddBookPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Boek toevoegen">
+
+    <VerticalStackLayout Padding="20">
+        <Label Text="Kies hieronder een manier om een nieuw boek toe te voegen." />
+    </VerticalStackLayout>
+
+</ContentPage>
