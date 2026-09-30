@@ -2,21 +2,20 @@
 {
     public class Book
     {
+        public int Id { get; set; } = 0;
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Publisher { get; set; }
+        public string Language { get; set; }
+        public int NumberOfPages { get; set; }
+        public string ReadingStatus { get; set; } = "Nog niet gelezen";
 
-        int Id { get; set; } = 0;
-        string Title { get; set; }
-        string Author { get; set; }
-        string Publisher { get; set; }
-        string Language { get; set; }
-        int NumberOfPages { get; set; }
-        string ReadingStatus { get; set; } = "Nog niet gelezen";
-
-        Bookcase AssignedBookcase { get; set; }
-        int BookcaseId { get; set; }
-        int ReadingScore { get; set; }
-        string ReaderComment { get; set; }
-        DateTime PublishingDate { get; set; }
-        List<BookCollection> InCollections { get; set; } = new List<BookCollection>();
+        public Bookcase InBookcase { get; set; }
+        public int BookcaseId { get; set; }
+        public int BookRating { get; set; }
+        public string ReaderComment { get; set; }
+        public DateTime PublishingDate { get; set; }
+        public List<BookCollection> InCollections { get; set; } = new List<BookCollection>();
 
         public Book(int id, string title, string author, string publisher, int numberOfPages, DateTime publishingDate)
         {
