@@ -1,7 +1,12 @@
-﻿namespace BooxBox.Models
+﻿using Microsoft.EntityFrameworkCore;
+using SQLite;
+using PrimaryKeyAttribute = SQLite.PrimaryKeyAttribute;
+
+namespace BooxBox.Models
 {
     public class Book
     {
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; } = 0;
         public string Title { get; set; }
         public string Author { get; set; }
@@ -16,6 +21,10 @@
         public string? ReaderComment { get; set; }
         public DateTime PublishingDate { get; set; }
         public List<BookCollection> InCollections { get; set; } = new List<BookCollection>();
+
+        public Book()
+        {
+        }
 
         public Book(int id, string title, string author, string publisher, int numberOfPages, DateTime publishingDate)
         {
