@@ -1,12 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using BooxBox.Models;
+﻿using BooxBox.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BooxBox.Data
 {
-    internal class BooxBoxDbContext : DbContext
+    public class BooxBoxDbContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Bookcase> Bookcases { get; set; }
@@ -16,6 +13,18 @@ namespace BooxBox.Data
             : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Book>()
+                .HasOne(c => c.InBookcase)
+                .WithMany(b => b.ContainedBooks)
+                .HasForeignKey(c =>c.BookcaseId);
+
+            modelBuilder.Entity<Book>()
+                .HasMany(b => b.InCollections)
+                .WithMany(c => c.BooksInCollection);
         }
     }
 }

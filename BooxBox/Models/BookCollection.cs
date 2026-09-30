@@ -6,9 +6,15 @@ namespace BooxBox.Models
 {
     public class BookCollection
     {
-        int Id { get; set; } = 0;
-        string Name { get; set; }
-        string Description { get; set; }
-        List<Book> BooksInCollection { get; set; } = new List<Book>();
+        public int Id { get; set; } = 0;
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<Book> BooksInCollection { get; set; } = new List<Book>();
+
+        public BookCollection(string  name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
     }
 }
