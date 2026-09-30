@@ -11,7 +11,8 @@ namespace BooxBox
     {
         public static MauiApp CreateMauiApp()
         {
-            string Defaultconnection = "Data source=BooxBox.db";
+            string Defaultconnection = "Data source=Data/BooxBox.db";
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -21,9 +22,7 @@ namespace BooxBox
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.
-                Services.AddDbContext<BooxBoxDbContext>(options => options.UseSqlite(Defaultconnection));
-
+            builder.Services.AddDbContext<BooxBoxDbContext>(options => options.UseSqlite(Defaultconnection));
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

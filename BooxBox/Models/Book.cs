@@ -6,14 +6,14 @@
         public string Title { get; set; }
         public string Author { get; set; }
         public string Publisher { get; set; }
-        public string Language { get; set; }
+        public string? Language { get; set; }
         public int NumberOfPages { get; set; }
         public string ReadingStatus { get; set; } = "Nog niet gelezen";
 
-        public Bookcase InBookcase { get; set; }
-        public int BookcaseId { get; set; }
-        public int BookRating { get; set; }
-        public string ReaderComment { get; set; }
+        public Bookcase? InBookcase { get; set; }
+        public int? BookcaseId { get; set; }
+        public int? BookRating { get; set; }
+        public string? ReaderComment { get; set; }
         public DateTime PublishingDate { get; set; }
         public List<BookCollection> InCollections { get; set; } = new List<BookCollection>();
 
