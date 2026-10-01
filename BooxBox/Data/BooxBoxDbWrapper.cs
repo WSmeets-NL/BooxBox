@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using BooxBox.Models
+using BooxBox.Models;
 
 namespace BooxBox.Data
 {
