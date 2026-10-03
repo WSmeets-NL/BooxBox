@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SQLite;
+using System.ComponentModel.DataAnnotations;
 using PrimaryKeyAttribute = SQLite.PrimaryKeyAttribute;
 
 namespace BooxBox.Models
@@ -19,14 +20,14 @@ namespace BooxBox.Models
         public int? BookcaseId { get; set; }
         public int? BookRating { get; set; }
         public string? ReaderComment { get; set; }
-        public DateTime PublishingDate { get; set; }
+        public DateTime? PublishingDate { get; set; }
         public List<BookCollection> InCollections { get; set; } = new List<BookCollection>();
 
         public Book()
         {
         }
 
-        public Book(int id, string title, string author, string publisher, int numberOfPages, DateTime publishingDate)
+        public Book(int id, string title, string author, string publisher, int numberOfPages, DateTime? publishingDate = null)
         {
             Id = id;
             Title = title;
