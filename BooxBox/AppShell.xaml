@@ -3,7 +3,7 @@
     x:Class="BooxBox.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BooxBox"
+    xmlns:local="clr-namespace:BooxBox.Pages"
     Title="BooxBox">
 
     <TabBar>
@@ -22,18 +22,18 @@
                 Route="CollectionsPage" />
         </Tab>
 
+        <Tab Title="Mijn Boekenkasten">
+            <ShellContent
+                Title="Mijn Boekenkasten"
+                ContentTemplate="{DataTemplate local:BookcasePage}"
+                Route="BookcasePage" />
+        </Tab>
+
         <Tab Title="Boek toevoegen">
             <ShellContent
                 Title="Boek toevoegen"
                 ContentTemplate="{DataTemplate local:AddBookPage}"
                 Route="AddBookPage" />
-        </Tab>
-
-        <Tab Title="Welkom">
-            <ShellContent
-                Title="Welkom"
-                ContentTemplate="{DataTemplate local:WelcomePage}"
-                Route="WelcomePage" />
         </Tab>
 
     </TabBar>

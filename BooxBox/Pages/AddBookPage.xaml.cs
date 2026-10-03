@@ -1,6 +1,6 @@
 using BooxBox.Pages;
 
-namespace BooxBox;
+namespace BooxBox.Pages;
 
 public partial class AddBookPage : ContentPage
 {

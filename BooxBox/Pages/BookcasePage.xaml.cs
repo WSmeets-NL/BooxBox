@@ -17,5 +17,3 @@ public partial class BookcasePage : ContentPage
         BindingContext = this;
     }
 }
-	}
-}

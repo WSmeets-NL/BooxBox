@@ -1,4 +1,4 @@
-namespace BooxBox;
+namespace BooxBox.Pages;
 using BooxBox.Models;
 
 public partial class CollectionsPage : ContentPage

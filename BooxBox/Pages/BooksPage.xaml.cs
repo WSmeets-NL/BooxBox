@@ -1,5 +1,5 @@
 using BooxBox.Models;
-namespace BooxBox;
+namespace BooxBox.Pages;
 public partial class BooksPage : ContentPage
 {
 	public IEnumerable<Book> Books { get; set;  }

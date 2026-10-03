@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BooxBox.Pages.BookcasePage"
              Title="BookcasePage">
-    Title="Mijn Verzamelingen">
 
     <Grid RowDefinitions="Auto,*">
 
@@ -17,11 +16,11 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                    <Border BackgroundColor="MintCream" StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
                         <Grid RowDefinitions="80,*" ColumnSpacing="10">
-                            <Image Grid.Row="0"  Source="genericcollection.png" VerticalOptions="Center" />
+                            <Image Grid.Row="0"  Source="genericbookcase.png" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Row="1">
-                                <Label Text="{Binding Description}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" />
+                                <Label Text="{Binding Description}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
                                 <Label Text="{Binding Location}" HorizontalTextAlignment="Center" TextColor="Gray" />
                             </VerticalStackLayout>
                         </Grid>
