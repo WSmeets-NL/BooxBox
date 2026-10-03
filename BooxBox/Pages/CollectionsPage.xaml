@@ -4,8 +4,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Mijn Verzamelingen">
 
-    <VerticalStackLayout Padding="20">
-        <Label Text="Hier zijn alle verzamelingen" />
-    </VerticalStackLayout>
+    <Grid RowDefinitions="Auto,*">
 
+        <SearchBar Placeholder="Zoek een Verzameling..." Margin="10" />
+
+        <CollectionView Grid.Row="1" Margin="10" ItemsSource="{Binding BookCollections}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                        <Grid RowDefinitions="80,*" ColumnSpacing="10">
+                            <Image Grid.Row="0"  Source="genericcollection.png" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Row="1">
+                                <Label Text="{Binding Name}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" />
+                                <Label Text="{Binding Description}" HorizontalTextAlignment="Center" TextColor="Gray" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
