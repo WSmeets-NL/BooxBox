@@ -1,9 +1,6 @@
 ﻿using BooxBox.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-{
-    
-}
 
 namespace BooxBox
 {
@@ -11,6 +8,7 @@ namespace BooxBox
     {
         public static MauiApp CreateMauiApp()
         {
+            System.Diagnostics.Debug.WriteLine("MauiProgram gestart");
 
             var builder = MauiApp.CreateBuilder();
             builder
