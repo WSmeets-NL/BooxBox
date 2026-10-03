@@ -15,10 +15,10 @@
             <Border Padding="20" StrokeShape="RoundRectangle 16">
 
                 <Grid ColumnDefinitions="60,*" ColumnSpacing="15">
-                    <Image Grid.Column="0" Source="manualadd.svg" HeightRequest="32" WidthRequest="32" VerticalOptions="Center" />
+                    <Image Grid.Column="0" Source="manualadd.png" HeightRequest="60" WidthRequest="60" VerticalOptions="Center" />
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label Text="Handmatig toevoegen" FontSize="18" FontAttributes="Bold" />
-                        <Label Text="Vul de gegevens van het boek zelf in" TextColor="Gray" />
+                        <Label Text="Vul de gegevens van het boek zelf in" TextColor="Gray"  />
                     </VerticalStackLayout>
                 </Grid>
                 <Border.GestureRecognizers>
@@ -30,8 +30,8 @@
             <Border Padding="20" StrokeShape="RoundRectangle 16">
 
                 <Grid ColumnDefinitions="60,*" ColumnSpacing="15">
-                    <Image Grid.Column="0" Source="searchadd.svg" HeightRequest="32" WidthRequest="32" VerticalOptions="Center" />
-                    <VerticalStackLayout Grid.Column="0"  Spacing="4">
+                    <Image Grid.Column="0" Source="searchadd.png" HeightRequest="60" WidthRequest="60" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1"  Spacing="4">
                         <Label Text="Boek opzoeken" FontSize="18" FontAttributes="Bold" />
                         <Label Text="Zoek een boek op basis van de titel" TextColor="Gray" />
                     </VerticalStackLayout>
@@ -43,7 +43,7 @@
 
             <Border Padding="20" StrokeShape="RoundRectangle 16">
                 <Grid ColumnDefinitions="60,*" ColumnSpacing="15">
-                    <Image Grid.Column="0" Source="scanadd.svg" HeightRequest="32" WidthRequest="32" VerticalOptions="Center" />
+                    <Image Grid.Column="0" Source="scanadd.png" HeightRequest="60" WidthRequest="60" VerticalOptions="Center" />
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label Text="Barcode scannen" FontSize="18" FontAttributes="Bold" />
                         <Label Text="Scan de barcode om de gegevens op te halen." TextColor="Gray" />
