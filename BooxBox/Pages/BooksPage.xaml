@@ -4,8 +4,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Mijn Boeken">
 
-    <VerticalStackLayout Padding="20">
-        <Label Text="Hier is een lijst van alle boeken die je hebt verzameld" />
-    </VerticalStackLayout>
 
+    <Grid RowDefinitions="Auto,*">
+
+        <SearchBar Placeholder="Zoek een boek..." Margin="10" />
+
+        <CollectionView Grid.Row="1" Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,5" Padding="10">
+                        <VerticalStackLayout>
+                            <Label Text="Boektitel" FontSize="18" FontAttributes="Bold" />
+                            <Label Text="Auteur" TextColor="Gray" />
+                            <Label Text="Uitgeverij" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
