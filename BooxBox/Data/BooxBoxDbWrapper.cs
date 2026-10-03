@@ -22,19 +22,19 @@ namespace BooxBox.Data
 
         }
 
-        public async Task<List<Book>> GetAllBooks()
+        public async Task<List<Book>> GetAllBooksAsync()
         {
             await Init();
             return await database.Table<Book>().ToListAsync();
         }
 
-        public async Task<List<Bookcase>> GetAllBookcases()
+        public async Task<List<Bookcase>> GetAllBookcasesAsync()
         {
             await Init();
             return await database.Table<Bookcase>().ToListAsync();
         }
 
-        public async Task<List<BookCollection>> GetAllBookCollections()
+        public async Task<List<BookCollection>> GetAllBookCollectionsAsync()
         {
             await Init();
             return await database.Table<BookCollection>().ToListAsync();
