@@ -2,33 +2,30 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BooxBox.Pages.ManualAddPage"
-             Title="ManualAddPage">
+             Title="Handmatig toevoegen">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-            
-            <Label Text="Nieuw boek toevoegen" FontSize="24" FontAttributes="Bold" />
+           
+            <Label Text="Nieuw boek toevoegen" HorizontalTextAlignment="Center" FontSize="24" FontAttributes="Bold" />
             
             <Label Text="Titel" />
-            <Entry Placeholder="Voer de titel in" Text="{Binding Title}" />
+            <Entry Placeholder="Voer de titel in" x:Name="TitleEntry" />
 
             <Label Text="Auteur" />
-            <Entry Placeholder="Voer de auteur in" Text="{Binding Author}" />
+            <Entry Placeholder="Voer de auteur in" x:Name="AuthorEntry" />
 
             <Label Text="ISBN" />
-            <Entry Placeholder="9781234567890" Keyboard="Numeric" Text="{Binding ISBN}" />
+            <Entry Placeholder="9781234567890"  MaxLength="13" Keyboard="Numeric" x:Name="ISBNEntry" />
 
-            <Label Text="Aantal pagina's" />
-            <Entry Placeholder="100" Keyboard="Numeric" Text="{Binding NumberOfPages}" />
-            
             <Label Text="Uitgeverij"/>
-            <Entry Placeholder="Voer hier de uitgeverij in." Text="{Binding Publisher}" />
+            <Entry Placeholder="Voer hier de uitgeverij in." x:Name="PublisherEntry" />
 
             <Label Text="Publicatiedatum" />
-            <DatePicker Date="{Binding PublicationDate}" />
-            
+            <DatePicker x:Name="PublicationDateEntry"/>
+
             <!-- Opslaan -->
-            <Button Text="Boek opslaan" Command="{Binding SaveCommand}" BackgroundColor="DarkBlue" TextColor="White" />
+            <Button Text="Boek toevoegen" Clicked="OnClickSubmit" BackgroundColor="DarkBlue" TextColor="White" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

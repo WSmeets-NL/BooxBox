@@ -7,7 +7,7 @@ namespace BooxBox
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(AddBookForm), typeof(AddBookForm));
+            Routing.RegisterRoute(nameof(ManualAddPage), typeof(ManualAddPage));
             Routing.RegisterRoute(nameof(FindBook), typeof(FindBook));
             Routing.RegisterRoute(nameof(ScanBook), typeof(ScanBook));
         }

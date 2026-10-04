@@ -39,5 +39,10 @@ namespace BooxBox.Data
             await Init();
             return await database.Table<BookCollection>().ToListAsync();
         }
+
+        public async void AddBookAsync(Book book)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
