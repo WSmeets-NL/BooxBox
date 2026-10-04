@@ -8,7 +8,7 @@ namespace BooxBox.Data
 {
     public class BooxBoxDbWrapper
     {
-        SQLiteAsyncConnection database;
+        public SQLiteAsyncConnection database { get; private set; }
 
         async Task Init()
         {
@@ -40,9 +40,11 @@ namespace BooxBox.Data
             return await database.Table<BookCollection>().ToListAsync();
         }
 
-        public async void AddBookAsync(Book book)
+        public async Task AddBookAsync(Book book)
         {
-            throw new NotImplementedException();
+            await Init();
+            await database.InsertAsync(book);
+
         }
     }
 }

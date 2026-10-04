@@ -4,15 +4,17 @@ using BooxBox.Data;
 
 public partial class ManualAddPage : ContentPage
 {
-	public ManualAddPage()
+	public readonly BooxBoxDbWrapper _database;
+	public ManualAddPage(BooxBoxDbWrapper database)
 	{
 		InitializeComponent();
+		_database = database;
 	}
 
-	public async void OnClickSubmit(object sender, EventArgs e)
+	public async Task OnClickSubmit(object sender, EventArgs e)
 	{
 		Book NewBook = CreateNewBook();
-		await BooxBoxDbWrapper.AddBookAsync(NewBook);
+        await _database.AddBookAsync(NewBook);
 	}
 
 	public Book CreateNewBook()

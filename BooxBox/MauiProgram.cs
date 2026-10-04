@@ -1,6 +1,7 @@
 ﻿using BooxBox.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using BooxBox.Pages;
 
 namespace BooxBox
 {
@@ -21,6 +22,7 @@ namespace BooxBox
 
 
             builder.Services.AddSingleton<BooxBoxDbWrapper>();
+            builder.Services.AddTransient<ManualAddPage>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
