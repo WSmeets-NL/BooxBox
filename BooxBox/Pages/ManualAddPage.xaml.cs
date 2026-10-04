@@ -11,7 +11,7 @@ public partial class ManualAddPage : ContentPage
 		_database = database;
 	}
 
-	public async Task OnClickSubmit(object sender, EventArgs e)
+	public async void OnClickSubmit(object sender, EventArgs e)
 	{
 		Book NewBook = CreateNewBook();
         await _database.AddBookAsync(NewBook);
@@ -24,9 +24,8 @@ public partial class ManualAddPage : ContentPage
 			Title = TitleEntry.Text,
 			Author = AuthorEntry.Text,
 			Publisher = PublisherEntry.Text,
-			ISBN = Convert.ToInt32(ISBNEntry.Text),
-			PublishingDate = PublicationDateEntry.Date
+			ISBN = ISBNEntry.Text,
+			PublicationDate = PublicationDateEntry.Date
 		};
-
 	}
 }

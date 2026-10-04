@@ -24,7 +24,6 @@
             <Label Text="Publicatiedatum" />
             <DatePicker x:Name="PublicationDateEntry"/>
 
-            <!-- Opslaan -->
             <Button Text="Boek toevoegen" Clicked="OnClickSubmit" BackgroundColor="DarkBlue" TextColor="White" />
         </VerticalStackLayout>
     </ScrollView>
