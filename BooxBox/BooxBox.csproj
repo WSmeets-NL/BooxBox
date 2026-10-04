@@ -113,6 +113,9 @@
 	  <MauiXaml Update="Pages\FindBook.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\ManualAddPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\ScanBook.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

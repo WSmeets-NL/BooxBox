@@ -11,9 +11,11 @@ namespace BooxBox.Models
         public int Id { get; set; } = 0;
         public string Title { get; set; }
         public string Author { get; set; }
+
+        public int ISBN { get; set; }
         public string Publisher { get; set; }
         public string? Language { get; set; }
-        public int NumberOfPages { get; set; }
+        public int? NumberOfPages { get; set; }
         public string ReadingStatus { get; set; } = "Nog niet gelezen";
 
         public Bookcase? InBookcase { get; set; }
@@ -27,13 +29,13 @@ namespace BooxBox.Models
         {
         }
 
-        public Book(int id, string title, string author, string publisher, int numberOfPages, DateTime? publishingDate = null)
+        public Book(int id, string title, string author, string publisher, int iSBN, DateTime? publishingDate = null)
         {
             Id = id;
             Title = title;
             Author = author;
             Publisher = publisher;
-            NumberOfPages = numberOfPages;
+            ISBN = iSBN;
             PublishingDate = publishingDate;
         }
 

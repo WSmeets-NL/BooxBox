@@ -11,16 +11,18 @@ public partial class AddBookPage : ContentPage
 
     private async void ManualAddNavigation(object? sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(AddBookForm));
+        await Shell.Current.GoToAsync(nameof(ManualAddPage));
     }
 
     private async void SearchAddNavigation(object? sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(FindBook));
+        throw new NotImplementedException();
+        //await Shell.Current.GoToAsync(nameof(SearchAddPage));
     }
 
     private async void ScanAddNavigation(object? sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(ScanBook));
+        throw new NotImplementedException();
+        //await Shell.Current.GoToAsync(nameof(ScanAddPage));
     }
 }
