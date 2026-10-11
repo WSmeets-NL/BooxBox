@@ -67,6 +67,7 @@ namespace BooxBox.Data
             await _database.InsertAsync(publisher);
         }
 
+        //Manual-add methodes voor het ophalen van items o.b.v. de ingegeven naam
         public async Task<Author> GetAuthorByName(string name)
         {
             await Init();

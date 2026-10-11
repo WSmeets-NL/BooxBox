@@ -6,7 +6,7 @@ public partial class BooksPage : ContentPage
 
 	public BooksPage()
 	{
-		InitializeComponent();
+        InitializeComponent();
 		Books = new List<Book>
 			{
 			new Book("Harry Potter en de steen der wijzen", 0, 0, "1234567890123"),

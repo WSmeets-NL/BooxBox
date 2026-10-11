@@ -12,7 +12,7 @@ public partial class ManualAddPage : ContentPage
 		_database = database;
 	}
 
-	public async Task OnClickSubmit(object sender, EventArgs e)
+	public async void OnClickSubmit(object sender, EventArgs e)
 	{
         Book NewBook = new Book()
             {
