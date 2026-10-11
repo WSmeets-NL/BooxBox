@@ -10,7 +10,7 @@ namespace BooxBox.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; } = 0;    
-        string Name { get; set; }
+        public string Name { get; set; }
 
         //public List<Book> Books { get; set; } = new List<Book>();
 

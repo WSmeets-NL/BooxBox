@@ -7,21 +7,28 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
            
-            <Label Text="Nieuw boek toevoegen" HorizontalTextAlignment="Center" FontSize="24" FontAttributes="Bold" />
+            <Label Text="Nieuw boek toevoegen" HorizontalTextAlignment="Center" FontSize="30" FontAttributes="Bold" />
             
-            <Label Text="Titel" />
+            <Label Text="Wat is de titel?" FontSize="18" />
             <Entry Placeholder="Voer de titel in" x:Name="TitleEntry" />
 
-            <Label Text="Auteur" />
+            <Label Text="Wie is de auteur?" FontSize="18"/>
             <Entry Placeholder="Voer de auteur in" x:Name="AuthorEntry" />
 
-            <Label Text="ISBN" />
+            <Label Text="Wie is de illustrator? (Is er geen illustrator, laat dit veld dan leeg.)" FontSize="18"/>
+            <Entry Placeholder="Voer de illustrator in." x:Name="IllustratorEntry"/>
+
+            <Label Text="Wat is de ISBN?" FontSize="18"/>
             <Entry Placeholder="9781234567890"  MaxLength="13" Keyboard="Numeric" x:Name="ISBNEntry" />
 
-            <Label Text="Uitgeverij"/>
+            <Label Text="Geef de Uitgeverij van het boek" FontSize="18"/>
             <Entry Placeholder="Voer hier de uitgeverij in." x:Name="PublisherEntry" />
 
-            <Label Text="Publicatiedatum" />
+            <Label Text="In welke taal is het boek geschreven?" FontSize="18"/>
+            <Entry Placeholder="Geef de taal van het boek in." x:Name="LanguageEntry" />
+
+
+            <Label Text="Wanneer is dit boek gepubliceerd?" FontSize="18"/>
             <DatePicker x:Name="PublicationDateEntry"/>
 
             <Button Text="Boek toevoegen" Clicked="OnClickSubmit" BackgroundColor="DarkBlue" TextColor="White" />

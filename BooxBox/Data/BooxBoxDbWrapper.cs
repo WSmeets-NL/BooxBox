@@ -51,8 +51,7 @@ namespace BooxBox.Data
         public async Task AddBookAsync(Book book)
         {
             await Init();
-            await _database.InsertAsync(book);
-
+            await _database.InsertAsync(book); 
         }
 
         public async Task AddAuthorAsync(Author author)
@@ -67,6 +66,17 @@ namespace BooxBox.Data
             await _database.InsertAsync(publisher);
         }
 
+        public async Task AddLanguageAsync(Language language)
+        {
+            await Init();
+            await _database.InsertAsync(language);
+        }
+
+        public async Task AddIllustratorAsync(Illustrator illustrator)
+        {
+            await Init();
+            await _database.InsertAsync(illustrator);
+        }
         //Manual-add methodes voor het ophalen van items o.b.v. de ingegeven naam
         public async Task<Author> GetAuthorByName(string name)
         {
@@ -104,6 +114,46 @@ namespace BooxBox.Data
                 Publisher newPublisher = new Publisher(name);
                 await AddPublisherAsync(newPublisher);
                 return newPublisher;
+            }
+
+        }
+
+        public async Task<Language> GetLanguageByDescription(string description)
+        {
+            await Init();
+
+            Language? language = await _database.Table<Language>().Where(l => l.Description == description).FirstOrDefaultAsync();
+
+            if (language != null)
+            {
+                return language;
+            }
+
+            else
+            {
+                Language newLanguage = new Language(description);
+                await AddLanguageAsync(newLanguage);
+                return newLanguage;
+            }
+
+        }
+
+        public async Task<Illustrator> GetIllustratorByName(string name)
+        {
+            await Init();
+
+            Illustrator? illustrator = await _database.Table<Illustrator>().Where(i => i.Name == name).FirstOrDefaultAsync();
+
+            if (illustrator != null)
+            {
+                return illustrator;
+            }
+
+            else
+            {
+                Illustrator newIllustrator = new Illustrator(name);
+                await AddIllustratorAsync(newIllustrator);
+                return newIllustrator;
             }
 
         }
