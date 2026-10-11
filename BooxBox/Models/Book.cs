@@ -13,12 +13,10 @@ namespace BooxBox.Models
         public int AuthorId { get; set; }
         public int? IllustratorId { get; set; }
         public int LanguageId { get; set; }
-        public int ISBN { get; set; }
+        public string ISBN { get; set; }
         public int PublisherId { get; set; }
-        public string? Language { get; set; }
         public int? NumberOfPages { get; set; }
         public string ReadingStatus { get; set; } = "Nog niet gelezen";
-
         public Bookcase? InBookcase { get; set; }
         public int? BookcaseId { get; set; }
         public int? BookRating { get; set; }
@@ -26,11 +24,13 @@ namespace BooxBox.Models
         public DateTime? PublishingDate { get; set; }
         public List<BookCollection> InCollections { get; set; } = new List<BookCollection>();
 
+        public List<Genre> BookGenres { get; set; } = new List<Genre>();
+
         public Book()
         {
         }
 
-        public Book(int id, string title, int authorId, int publisherId, int iSBN, DateTime? publishingDate = null)
+        public Book(int id, string title, int authorId, int publisherId, string iSBN, DateTime? publishingDate = null)
         {
             Id = id;
             Title = title;
