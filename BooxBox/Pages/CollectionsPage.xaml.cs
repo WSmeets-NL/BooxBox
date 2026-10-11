@@ -17,4 +17,29 @@ public partial class CollectionsPage : ContentPage
 
         BindingContext = this;
     }
+
+    public void AddCollection(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SortAlphabetically(Object sendeer, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SearchCollection(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ToCollectionDetails(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DeleteCollection(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }
