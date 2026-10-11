@@ -14,14 +14,18 @@ public partial class ManualAddPage : ContentPage
 
 	public async void OnClickSubmit(object sender, EventArgs e)
 	{
-        Book NewBook = new Book()
-            {
-                Title = TitleEntry.Text,
-				AuthorId = _database.GetAuthorByName(AuthorEntry.Text).Id,
-				PublisherId = _database.GetPublisherByName(PublisherEntry.Text).Id,
-				ISBN = ISBNEntry.Text,
-				PublishingDate = PublicationDateEntry.Date
-			};
+		Author author = await _database.GetAuthorByName(AuthorEntry.Text);
+		Publisher publisher = await _database.GetPublisherByName(PublisherEntry.Text);
+
+		Book NewBook = new Book()
+		{
+			Title = TitleEntry.Text,
+			AuthorId = author.Id,
+			PublisherId = publisher.Id,
+			ISBN = ISBNEntry.Text,
+			PublishingDate = PublicationDateEntry.Date
+		};
+
         await _database.AddBookAsync(NewBook);
 	}
 
