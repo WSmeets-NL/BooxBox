@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,9 +7,12 @@ namespace BooxBox.Models
 {
     public class BookGenre
     {
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; } = 0;
         public int BookId { get; set; }
         public int GenreId { get; set; }
+
+        //public List<Book> Books { get; set; }
 
         public BookGenre()
         {

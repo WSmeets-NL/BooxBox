@@ -17,14 +17,16 @@ namespace BooxBox.Models
         public int PublisherId { get; set; }
         public int? NumberOfPages { get; set; }
         public string ReadingStatus { get; set; } = "Nog niet gelezen";
-        public Location? InLocation { get; set; }
         public int? LocationId { get; set; }
         public int? BookRating { get; set; }
         public string? ReaderComment { get; set; }
         public DateTime? PublishingDate { get; set; }
-        public List<BookCollection> InCollections { get; set; } = new List<BookCollection>();
 
-        public List<Genre> BookGenres { get; set; } = new List<Genre>();
+        //public Location? InLocation { get; set; }
+
+        //public List<BookCollection> InCollections { get; set; } = new List<BookCollection>();
+
+        //public List<Genre> BookGenres { get; set; } = new List<Genre>();
 
         public Book()
         {
