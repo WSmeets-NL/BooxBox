@@ -19,11 +19,11 @@ namespace BooxBox.Data
             await database.CreateTableAsync<Author>();
             await database.CreateTableAsync<Book>();
             await database.CreateTableAsync<BookGenre>();
-            await database.CreateTableAsync<Bookcase>();
             await database.CreateTableAsync<BookCollection>();
             await database.CreateTableAsync<Genre>();
             await database.CreateTableAsync<Illustrator>();
             await database.CreateTableAsync<Language>();
+            await database.CreateTableAsync<Models.Location>();
             await database.CreateTableAsync<Publisher>();
 
         }
@@ -34,10 +34,10 @@ namespace BooxBox.Data
             return await database.Table<Book>().ToListAsync();
         }
 
-        public async Task<List<Bookcase>> GetAllBookcasesAsync()
+        public async Task<List<Models.Location>> GetAllLocationssAsync()
         {
             await Init();
-            return await database.Table<Bookcase>().ToListAsync();
+            return await database.Table<Models.Location>().ToListAsync();
         }
 
         public async Task<List<BookCollection>> GetAllBookCollectionsAsync()

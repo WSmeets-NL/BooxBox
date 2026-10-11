@@ -22,11 +22,11 @@
                 Route="CollectionsPage" />
         </Tab>
 
-        <Tab Title="Mijn Boekenkasten">
+        <Tab Title="Mijn Locaties">
             <ShellContent
-                Title="Mijn Boekenkasten"
-                ContentTemplate="{DataTemplate local:BookcasePage}"
-                Route="BookcasePage" />
+                Title="Mijn Locaties"
+                ContentTemplate="{DataTemplate local:LocationPage}"
+                Route="LocationPage" />
         </Tab>
 
         <Tab Title="Boek toevoegen">

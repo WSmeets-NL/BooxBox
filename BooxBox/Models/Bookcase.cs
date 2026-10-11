@@ -5,22 +5,22 @@ using System.Text;
 
 namespace BooxBox.Models
 {
-    public class Bookcase
+    public class Location
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; } = 0;
+        public string Name { get; set; }
         public string Description { get; set; }
-        public string Location { get; set; }
         public List<Book> ContainedBooks { get; set; } = new List<Book>();
 
-        public Bookcase()
-        {
+        public Location()
+        { 
         }
 
-        public Bookcase(string description, string location)
+        public Location(string name, string description)
         {
+            Name = name;
             Description = description;
-            Location = location;
         }
     }
 }

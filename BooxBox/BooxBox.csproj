@@ -86,6 +86,9 @@
 	  <Compile Update="IndexPage.xaml.cs">
 	    <DependentUpon>IndexPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\LocationPage.xaml.cs">
+	    <DependentUpon>LocationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\CollectionsPage.xaml.cs">
 	    <DependentUpon>CollectionsPage.xaml</DependentUpon>
 	  </Compile>
@@ -104,7 +107,7 @@
 	  <MauiXaml Update="CollectionsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\BookcasePage.xaml">
+	  <MauiXaml Update="Pages\LocationPageLocation.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\FindBook.xaml">

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BooxBox.Pages.BookcasePage"
-             Title="BookcasePage">
+             x:Class="BooxBox.Pages.LocationPage"
+             Title="LocationPage">
 
     <Grid RowDefinitions="Auto,*">
 
         <SearchBar Placeholder="Zoek een Verzameling..." Margin="10" />
 
-        <CollectionView Grid.Row="1" Margin="10" ItemsSource="{Binding Bookcases}">
+        <CollectionView Grid.Row="1" Margin="10" ItemsSource="{Binding Locations}">
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="3" />
@@ -20,8 +20,8 @@
                         <Grid RowDefinitions="80,*" ColumnSpacing="10">
                             <Image Grid.Row="0"  Source="genericbookcase.png" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Row="1">
-                                <Label Text="{Binding Description}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Text="{Binding Location}" HorizontalTextAlignment="Center" TextColor="Gray" />
+                                <Label Text="{Binding Name}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Text="{Binding Description}" HorizontalTextAlignment="Center" TextColor="Gray" />
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
