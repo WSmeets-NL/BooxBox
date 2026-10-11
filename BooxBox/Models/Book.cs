@@ -10,8 +10,7 @@ namespace BooxBox.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; } = 0;
         public string Title { get; set; }
-        public string Author { get; set; }
-
+        public int AuthorId { get; set; }
         public int ISBN { get; set; }
         public string Publisher { get; set; }
         public string? Language { get; set; }
@@ -29,11 +28,11 @@ namespace BooxBox.Models
         {
         }
 
-        public Book(int id, string title, string author, string publisher, int iSBN, DateTime? publishingDate = null)
+        public Book(int id, string title, int authorId, string publisher, int iSBN, DateTime? publishingDate = null)
         {
             Id = id;
             Title = title;
-            Author = author;
+            AuthorId = authorId;
             Publisher = publisher;
             ISBN = iSBN;
             PublishingDate = publishingDate;
