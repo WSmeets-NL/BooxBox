@@ -32,8 +32,9 @@
                 <Grid ColumnDefinitions="60,*" ColumnSpacing="15">
                     <Image Grid.Column="0" Source="searchadd.png" HeightRequest="60" WidthRequest="60" VerticalOptions="Center" />
                     <VerticalStackLayout Grid.Column="1"  Spacing="4">
-                        <Label Text="Boek opzoeken" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-                        <Label Text="Zoek een boek op basis van de titel" TextColor="Gray" />
+                        <Label Text="Boek halen uit OpenLibrary" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Geef de titel, en je boek wordt automatisch opgehaald vanuit OpenLibrary.org" TextColor="Gray" />
+                        <Label Text="Let op! Het kan voorkomen dat het boek dat je zoekt niet in OpenLibrary staat." TextColor="Gray" />
                     </VerticalStackLayout>
                 </Grid>
                 <Border.GestureRecognizers>
@@ -47,6 +48,7 @@
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label Text="Barcode scannen" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
                         <Label Text="Scan de barcode om de gegevens op te halen." TextColor="Gray" />
+                        <Label Text=" Let op! Het kan voorkomen dat je boek niet gevonden kan worden." TextColor="Gray" />
                     </VerticalStackLayout>
                 </Grid>
                 <Border.GestureRecognizers>
