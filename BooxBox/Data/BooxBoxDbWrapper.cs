@@ -18,6 +18,7 @@ namespace BooxBox.Data
             database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
             await database.CreateTableAsync<Author>();
             await database.CreateTableAsync<Book>();
+            await database.CreateTableAsync<BookGenre>();
             await database.CreateTableAsync<Bookcase>();
             await database.CreateTableAsync<BookCollection>();
             await database.CreateTableAsync<Genre>();
