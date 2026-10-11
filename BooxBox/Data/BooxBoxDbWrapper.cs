@@ -61,6 +61,12 @@ namespace BooxBox.Data
             await _database.InsertAsync(author);
         }
 
+        public async Task AddPublisherAsync(Publisher publisher)
+        {
+            await Init();
+            await _database.InsertAsync(publisher);
+        }
+
         public async Task<Author> GetAuthorByName(string name)
         {
             await Init();
@@ -77,6 +83,26 @@ namespace BooxBox.Data
                 Author newAuthor = new Author(name);
                 await AddAuthorAsync(newAuthor);
                 return newAuthor;
+            }
+
+        }
+
+        public async Task<Publisher> GetPublisherByName(string name)
+        {
+            await Init();
+
+            Publisher? publisher = await _database.Table<Publisher>().Where(p => p.Name == name).FirstOrDefaultAsync();
+
+            if (publisher != null)
+            {
+                return publisher;
+            }
+
+            else
+            {
+                Publisher newPublisher = new Publisher(name);
+                await AddPublisherAsync(newPublisher);
+                return newPublisher;
             }
 
         }

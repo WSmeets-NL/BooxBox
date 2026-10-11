@@ -23,8 +23,8 @@ public partial class ManualAddPage : ContentPage
 		return new Book
 		{
 			Title = TitleEntry.Text,
-			AuthorId = await _database.
-			PublisherId = PublisherEntry.Int,
+			AuthorId = _database.GetAuthorByName(AuthorEntry.Text).Id,
+            PublisherId = _database.GetPublisherByName(PublisherEntry.Text).Id,
 			ISBN = ISBNEntry.Text,
 			PublishingDate = PublicationDateEntry.Date
 		};
