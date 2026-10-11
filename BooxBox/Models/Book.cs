@@ -12,6 +12,7 @@ namespace BooxBox.Models
         public string Title { get; set; }
         public int AuthorId { get; set; }
         public int? IllustratorId { get; set; }
+        public int LanguageId { get; set; }
         public int ISBN { get; set; }
         public string Publisher { get; set; }
         public string? Language { get; set; }

@@ -21,6 +21,7 @@ namespace BooxBox.Data
             await database.CreateTableAsync<Bookcase>();
             await database.CreateTableAsync<BookCollection>();
             await database.CreateTableAsync<Illustrator>();
+            await database.CreateTableAsync<Language>();
 
         }
 
