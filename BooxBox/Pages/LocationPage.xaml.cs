@@ -14,6 +14,32 @@ public partial class LocationPage : ContentPage
 
             };
 
+        BindingContext = this;
+
     }
 
+    public void AddLocation(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SortAlphabetically(Object sendeer, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SearchLocation(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ToLocationDetails(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DeleteLocation(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }
