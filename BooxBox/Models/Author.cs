@@ -10,6 +10,11 @@ namespace BooxBox.Models
         public string Name { get; set; }
         public List<Book> Books { get; set; } = new List<Book>();
 
+        public Author()
+        {
+
+        }
+
         public Author(string name)
         {
             Name = name;
