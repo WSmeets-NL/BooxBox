@@ -1,6 +1,7 @@
 namespace BooxBox.Pages;
 using BooxBox.Models;
 using BooxBox.Data;
+using Microsoft.EntityFrameworkCore.Storage;
 
 public partial class ManualAddPage : ContentPage
 {
@@ -17,14 +18,14 @@ public partial class ManualAddPage : ContentPage
         await _database.AddBookAsync(NewBook);
 	}
 
-	public Book CreateNewBook()
+	public async Task<Book> CreateNewBook()
 	{
 		return new Book
 		{
 			Title = TitleEntry.Text,
-			Author = AuthorEntry.Text,
-			Publisher = PublisherEntry.Text,
-			ISBN = Convert.ToInt32(ISBNEntry.Text),
+			AuthorId = await _database.
+			PublisherId = PublisherEntry.Int,
+			ISBN = ISBNEntry.Text,
 			PublishingDate = PublicationDateEntry.Date
 		};
 

@@ -32,9 +32,8 @@ namespace BooxBox.Models
         {
         }
 
-        public Book(int id, string title, int authorId, int publisherId, string iSBN, DateTime? publishingDate = null)
+        public Book(string title, int authorId, int publisherId, string iSBN, DateTime? publishingDate = null)
         {
-            Id = id;
             Title = title;
             AuthorId = authorId;
             PublisherId = publisherId;
