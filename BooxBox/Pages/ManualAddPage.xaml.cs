@@ -25,7 +25,6 @@ public partial class ManualAddPage : ContentPage
 	public async void OnClickSubmit(object sender, EventArgs e)
 	{
 		Author author = await _database.GetAuthorByName(AuthorEntry.Text);
-		Publisher publisher = await _database.GetPublisherByName(PublisherEntry.Text);
 		Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text);
 		Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
 
@@ -34,10 +33,8 @@ public partial class ManualAddPage : ContentPage
 		{
 			Title = TitleEntry.Text,
 			AuthorId = author.Id,
-			PublisherId = publisher.Id,
+			IllustratorId = illustrator.Id,
             LanguageId = selectedLanguage.Id,
-            ISBN = ISBNEntry.Text,
-			PublishingDate = PublicationDateEntry.Date
 		};
 
         if (IllustratorEntry != null)

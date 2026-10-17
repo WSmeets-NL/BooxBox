@@ -18,17 +18,8 @@
             <Label Text="Wie is de illustrator? (Is er geen illustrator, laat dit veld dan leeg.)" FontSize="18"/>
             <Entry Placeholder="Voer de illustrator in." x:Name="IllustratorEntry"/>
 
-            <Label Text="Wat is de ISBN?" FontSize="18"/>
-            <Entry Placeholder="9781234567890"  MaxLength="13" Keyboard="Numeric" x:Name="ISBNEntry" />
-
-            <Label Text="Geef de Uitgeverij van het boek" FontSize="18"/>
-            <Entry Placeholder="Voer hier de uitgeverij in." x:Name="PublisherEntry" />
-
             <Label Text="In welke taal is het boek geschreven?" FontSize="18"/>
             <Picker x:Name="LanguagePicker" ItemDisplayBinding="{Binding Description}" />
-
-            <Label Text="Wanneer is dit boek gepubliceerd?" FontSize="18"/>
-            <DatePicker x:Name="PublicationDateEntry"/>
 
             <Button Text="Boek toevoegen" Clicked="OnClickSubmit" BackgroundColor="DarkBlue" TextColor="White" />
         </VerticalStackLayout>
