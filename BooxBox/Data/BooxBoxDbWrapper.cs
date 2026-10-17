@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using BooxBox.Models;
 using System.Text.Json.Nodes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BooxBox.Data
 {
@@ -47,6 +48,12 @@ namespace BooxBox.Data
             return await _database.Table<BookCollection>().ToListAsync();
         }
 
+        public async Task<List<Language>> GetAllLanguagesAsync()
+        {
+            await Init();
+            return await _database.Table<Language>().ToListAsync();
+        }
+
         //Create-methods
         public async Task AddBookAsync(Book book)
         {
@@ -64,12 +71,6 @@ namespace BooxBox.Data
         {
             await Init();
             await _database.InsertAsync(publisher);
-        }
-
-        public async Task AddLanguageAsync(Language language)
-        {
-            await Init();
-            await _database.InsertAsync(language);
         }
 
         public async Task AddIllustratorAsync(Illustrator illustrator)
@@ -118,25 +119,7 @@ namespace BooxBox.Data
 
         }
 
-        public async Task<Language> GetLanguageByDescription(string description)
-        {
-            await Init();
 
-            Language? language = await _database.Table<Language>().Where(l => l.Description == description).FirstOrDefaultAsync();
-
-            if (language != null)
-            {
-                return language;
-            }
-
-            else
-            {
-                Language newLanguage = new Language(description);
-                await AddLanguageAsync(newLanguage);
-                return newLanguage;
-            }
-
-        }
 
         public async Task<Illustrator> GetIllustratorByName(string name)
         {

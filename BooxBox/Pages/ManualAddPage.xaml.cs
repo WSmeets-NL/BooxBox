@@ -2,22 +2,29 @@ namespace BooxBox.Pages;
 using BooxBox.Models;
 using BooxBox.Data;
 
-
 public partial class ManualAddPage : ContentPage
 {
 	public readonly BooxBoxDbWrapper _database;
+
+	public List<Language> languages;
 	public ManualAddPage(BooxBoxDbWrapper database)
 	{
 		InitializeComponent();
 		_database = database;
+		getLanguages();
+	}
+
+	private async void getLanguages()
+	{
+		languages = await _database.GetAllLanguagesAsync();
 	}
 
 	public async void OnClickSubmit(object sender, EventArgs e)
 	{
 		Author author = await _database.GetAuthorByName(AuthorEntry.Text);
 		Publisher publisher = await _database.GetPublisherByName(PublisherEntry.Text);
-		Language language = await _database.GetLanguageByDescription(LanguageEntry.Text);
-		Illustrator? illustrator;
+		Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text);
+		Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
 
 
 		Book NewBook = new Book()
@@ -25,7 +32,7 @@ public partial class ManualAddPage : ContentPage
 			Title = TitleEntry.Text,
 			AuthorId = author.Id,
 			PublisherId = publisher.Id,
-            LanguageId = language.Id,
+            LanguageId = selectedLanguage.Id,
             ISBN = ISBNEntry.Text,
 			PublishingDate = PublicationDateEntry.Date
 		};
