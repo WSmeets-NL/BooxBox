@@ -25,7 +25,7 @@
             <Entry Placeholder="Voer hier de uitgeverij in." x:Name="PublisherEntry" />
 
             <Label Text="In welke taal is het boek geschreven?" FontSize="18"/>
-            <Picker x:Name="LanguagePicker" ItemsSource="{Binding languages}" ItemDisplayBinding="{Binding Description}" />
+            <Picker x:Name="LanguagePicker" ItemDisplayBinding="{Binding Description}" />
 
             <Label Text="Wanneer is dit boek gepubliceerd?" FontSize="18"/>
             <DatePicker x:Name="PublicationDateEntry"/>

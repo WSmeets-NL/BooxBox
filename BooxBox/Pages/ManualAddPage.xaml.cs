@@ -1,6 +1,7 @@
 namespace BooxBox.Pages;
 using BooxBox.Models;
 using BooxBox.Data;
+using System.Diagnostics;
 
 public partial class ManualAddPage : ContentPage
 {
@@ -12,12 +13,14 @@ public partial class ManualAddPage : ContentPage
 		InitializeComponent();
 		_database = database;
 		getLanguages();
-	}
+    }
 
 	private async void getLanguages()
 	{
 		languages = await _database.GetAllLanguagesAsync();
-	}
+		Debug.WriteLine($"Aantal talen = {languages.Count}");
+        LanguagePicker.ItemsSource = languages;
+    }
 
 	public async void OnClickSubmit(object sender, EventArgs e)
 	{
