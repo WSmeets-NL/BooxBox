@@ -1,20 +1,23 @@
+using BooxBox.Data;
 using BooxBox.Models;
+using System.Diagnostics;
 namespace BooxBox.Pages;
 public partial class BooksPage : ContentPage
 {
-	public IEnumerable<Book> Books { get; set;  }
+    public readonly BooxBoxDbWrapper _database;
+	public List<Book> Books { get; set;  }
 
-	public BooksPage()
+	public BooksPage(BooxBoxDbWrapper database)
 	{
         InitializeComponent();
-		Books = new List<Book>
-			{
-			new Book("Harry Potter en de steen der wijzen", 0, 0, "1234567890123"),
-			new Book("Harry Potter en de geheime kamer", 0, 0, "22345678901234"),
-			new Book("Harry Potter en de gevangene van Azkaban", 0, 0, "3456789012345")
-			};
+        _database = database;
+        GetAllBooks();
+    }
 
-		BindingContext = this;
+    public async void GetAllBooks()
+    {
+        Books = await _database.GetAllBooksAsync();
+        BookView.ItemsSource = Books;
     }
 
     public void SortAlphabetically(Object sendeer, EventArgs e)

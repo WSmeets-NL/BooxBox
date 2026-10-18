@@ -1,10 +1,12 @@
-﻿using SQLite;
+﻿using BooxBox.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using BooxBox.Models;
-using System.Text.Json.Nodes;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
+using System.Text.Json.Nodes;
+using static Java.Util.Concurrent.Flow;
+using static Java.Util.Jar.Attributes;
 
 namespace BooxBox.Data
 {
@@ -30,10 +32,27 @@ namespace BooxBox.Data
 
         }
 
+        //Book-methodes
         public async Task<List<Book>> GetAllBooksAsync()
         {
             await Init();
             return await _database.Table<Book>().ToListAsync();
+        }
+
+        public async Task<Book> GetBookById(int id)
+        {
+            await Init();
+            Book foundBook = await _database.Table<Book>().Where(b => b.Id == id).FirstOrDefaultAsync();
+
+            if (foundBook != null)
+            {
+                return foundBook;
+            }
+
+            else
+            {
+                throw new FileNotFoundException("Sorry, maar we konden dit boek niet vinden.");
+            }
         }
 
         public async Task<List<Models.Location>> GetAllLocationssAsync()
