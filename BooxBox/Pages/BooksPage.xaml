@@ -5,11 +5,16 @@
     Title="Mijn Boeken">
 
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto, Auto,*">
 
-        <SearchBar Placeholder="Zoek een boek..." Margin="10" />
+        <Grid ColumnDefinitions="*,*" Grid.Row="0" Margin="10">
+            <Button Grid.Column="0" Text="Filter Boeken" Clicked="FilterBooks" BackgroundColor="DarkBlue" TextColor="White" Margin="10" />
+            <Button Grid.Column="1" Text="Sorteer A-Z" Margin="10" Clicked="SortAlphabetically" BackgroundColor="DarkBlue" TextColor="White" />
+        </Grid>
 
-        <CollectionView Grid.Row="1" Margin="10" ItemsSource="{Binding Books}">
+        <SearchBar Grid.Row="1" Placeholder="Zoek een boek" Margin="10" />
+
+        <CollectionView Grid.Row="3" Margin="10" ItemsSource="{Binding Books}">
             
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="3" />
@@ -18,12 +23,16 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border BackgroundColor="MintCream" StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
-                        <Grid RowDefinitions="80,*" ColumnSpacing="10">
+                        <Grid RowDefinitions="80,*,50" ColumnSpacing="10">
                             <Image Grid.Row="0"  Source="missingcover.png" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Row="1">
                                 <Label Text="{Binding Title}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
                                 <Label Text="{Binding Author}" HorizontalTextAlignment="Center" TextColor="Gray" />
                             </VerticalStackLayout>
+                            <Grid Grid.Row="2" ColumnDefinitions="3*, *" Margin="2">
+                                <Button Grid.Column="0" Text="Details" Clicked="ToBookDetails" BackgroundColor="DarkBlue" TextColor="White" Margin="1" />
+                                <Button Grid.Column="1" Text="Verwijder" Clicked="DeleteBook" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                            </Grid>
                         </Grid>
                     </Border>
                 </DataTemplate>

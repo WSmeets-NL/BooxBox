@@ -16,4 +16,29 @@ public partial class BooksPage : ContentPage
 
 		BindingContext = this;
     }
+
+    public void SortAlphabetically(Object sendeer, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SearchBook(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ToBookDetails(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DeleteBook(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void FilterBooks(Object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }
