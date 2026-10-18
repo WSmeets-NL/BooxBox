@@ -3,21 +3,31 @@ using BooxBox.Data;
 using BooxBox.Models;
 using Microsoft.EntityFrameworkCore.Storage;
 
+[QueryProperty(nameof(BookId), "id")]
 public partial class BookDetailsPage : ContentPage
 {
 	private readonly BooxBoxDbWrapper _database;
-	public Book chosenBook;
 
-	public BookDetailsPage(BooxBoxDbWrapper database, int bookId)
+	public Book ChosenBook { get; private set; }
+	public int BookId
+	{
+
+		set 
+		{
+			GetChosenBook(value);
+		}
+		
+	}
+
+	public BookDetailsPage(BooxBoxDbWrapper database)
 	{
 		InitializeComponent();
 		_database = database;
-		GetChosenBook(bookId);
 	}
 
-	public async void GetChosenBook(int id)
+	public async Task GetChosenBook(int id)
 	{
-		chosenBook = await _database.GetBookById(id);
+		ChosenBook = await _database.GetBookById(id);
 	}
 
 }

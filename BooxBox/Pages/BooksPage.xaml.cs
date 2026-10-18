@@ -20,7 +20,7 @@ public partial class BooksPage : ContentPage
         BookView.ItemsSource = Books;
     }
 
-    public void SortAlphabetically(Object sendeer, EventArgs e)
+    public void SortAlphabetically(Object sender, EventArgs e)
     {
         throw new NotImplementedException();
     }
@@ -30,13 +30,15 @@ public partial class BooksPage : ContentPage
         throw new NotImplementedException();
     }
 
-    public void ToBookDetails(Object sender, EventArgs e)
+    public async void ToBookDetails(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Button button = (Button)sender;
+        int bookId = (int)button.BindingContext;
+        await Shell.Current.GoToAsync($"BookDetailsPage?id={bookId}");
     }
 
     public void DeleteBook(Object sender, EventArgs e)
-    {
+    { 
         throw new NotImplementedException();
     }
 
