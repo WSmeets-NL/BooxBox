@@ -7,14 +7,14 @@ namespace BooxBox.Interfaces
 {
     public interface IBookLocationRepository
     {
-        List<BookLocation> GetAllBookLocation();
+        Task<List<BookLocation>> GetAllBookLocations();
 
-        BookLocation AddBookLocation(BookLocation location);
+        Task AddBookLocation(BookLocation location);
 
-        BookLocation GetBookLocationById(int id);
+        Task<BookLocation>? GetBookLocationById(int id);
 
-        BookLocation UpdateBookLocation(BookLocation location);
+        Task UpdateBookLocation(BookLocation location);
 
-        void DeleteBookLocationById(int id);
+        Task DeleteBookLocationById(int id);
     }
 }
