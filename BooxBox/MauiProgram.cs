@@ -28,6 +28,9 @@ namespace BooxBox
             builder.Services.AddSingleton<AuthorRepository>();
             builder.Services.AddSingleton<AuthorService>();
 
+            builder.Services.AddSingleton<LanguageRepository>();
+            builder.Services.AddSingleton<LanguageService>();
+
 
             builder.Services.AddTransient<ManualAddPage>();
 

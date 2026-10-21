@@ -10,19 +10,21 @@ public partial class ManualAddPage : ContentPage
 {
 	public readonly BooxBoxDbWrapper _database;
 	public readonly AuthorService _authorService;
+	public readonly LanguageService _languageService;
 
 	public List<Language> languages;
-	public ManualAddPage(BooxBoxDbWrapper database, AuthorService authorService)
+	public ManualAddPage(BooxBoxDbWrapper database, AuthorService authorService, LanguageService languageService)
 	{
 		InitializeComponent();
 		_database = database;
 		_authorService = authorService;
+		_languageService = languageService;
 		getLanguages();
     }
 
 	private async void getLanguages()
 	{
-		languages = await _database.GetAllLanguagesAsync();
+		languages = await _languageService.GetAllLanguages();
 		Debug.WriteLine($"Aantal talen = {languages.Count}");
         LanguagePicker.ItemsSource = languages;
     }
@@ -40,7 +42,7 @@ public partial class ManualAddPage : ContentPage
 			author = await _authorService.GetAuthorByName(TitleEntry.Text);
 		}
 
-		Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text);
+		Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text); //No services, rpos and interfaces are created yet,
 		Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
 
 
