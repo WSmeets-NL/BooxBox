@@ -38,6 +38,7 @@ namespace BooxBox
 
             builder.Services.AddTransient<ManualAddPage>();
             builder.Services.AddTransient<BookDetailsPage>();
+            builder.Services.AddTransient<BookLocationPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

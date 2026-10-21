@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BooxBox.Pages.LocationPage"
-             Title="LocationPage">
+             x:Class="BooxBox.Pages.BookLocationPage"
+             Title="BookLocationPage">
 
     <Grid RowDefinitions="Auto, Auto, *">
 
 
         <Grid ColumnDefinitions="*,*" Grid.Row="0" Margin="10">
-            <Button Grid.Column="0" Text="+ Nieuwe locatie aanmaken" Clicked="AddLocation" BackgroundColor="DarkBlue" TextColor="White" Margin="10" />
+            <Button Grid.Column="0" Text="+ Nieuwe locatie aanmaken" Clicked="AddBookLocation" BackgroundColor="DarkBlue" TextColor="White" Margin="10" />
             <Button Grid.Column="1" Text="Sorteer A-Z" Margin="10" Clicked="SortAlphabetically" BackgroundColor="DarkBlue" TextColor="White" />
         </Grid>
 
