@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BooxBox.Models
 {
-    public class Location
+    public class BookLocation
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; } = 0;
@@ -13,11 +13,11 @@ namespace BooxBox.Models
         public string Description { get; set; }
         //public List<Book> ContainedBooks { get; set; } = new List<Book>();
 
-        public Location()
+        public BookLocation()
         { 
         }
 
-        public Location(string name, string description)
+        public BookLocation(string name, string description)
         {
             Name = name;
             Description = description;

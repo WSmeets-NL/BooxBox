@@ -1,16 +1,16 @@
 namespace BooxBox.Pages;
 using BooxBox.Models;
-public partial class LocationPage : ContentPage
+public partial class BookLocationPage : ContentPage
 {
-    public IEnumerable<Models.Location> Locations { get; set; }
-    public LocationPage()
+    public IEnumerable<BookLocation> Locations { get; set; }
+    public BookLocationPage()
     {
         InitializeComponent();
-        Locations = new List<Models.Location>
+        Locations = new List<BookLocation>
             {
-            new Location("Eikenhouten kast 1", "Woonkamer links van de TV-meubel"),
-            new Location("Eikenhouten kast 2", "Woonkamer rechts van de TV-meubel"),
-            new Location("Kunststof IKEA doos met het cijfer 1 geschreven op de zijkant", "Zolder")
+            new BookLocation("Eikenhouten kast 1", "Woonkamer links van de TV-meubel"),
+            new BookLocation("Eikenhouten kast 2", "Woonkamer rechts van de TV-meubel"),
+            new BookLocation("Kunststof IKEA doos met het cijfer 1 geschreven op de zijkant", "Zolder")
 
             };
 

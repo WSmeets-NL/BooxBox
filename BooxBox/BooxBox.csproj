@@ -86,8 +86,8 @@
 	  <Compile Update="IndexPage.xaml.cs">
 	    <DependentUpon>IndexPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\LocationPage.xaml.cs">
-	    <DependentUpon>LocationPage.xaml</DependentUpon>
+	  <Compile Update="Pages\BookLocationPage.xaml.cs">
+	    <DependentUpon>BookLocationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\CollectionsPage.xaml.cs">
 	    <DependentUpon>CollectionsPage.xaml</DependentUpon>
