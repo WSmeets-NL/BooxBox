@@ -30,7 +30,7 @@ namespace BooxBox.Services
         public async Task<Author>? GetAuthorByName(string name)
         {
             Author? author = await _Repo.GetAuthorByName(name);
-            return author;
+            return author;            
         }
 
         public async Task<string>? GetAuthorName(int id)

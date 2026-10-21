@@ -14,7 +14,6 @@ namespace BooxBox.Interfaces
         Task<String>? GetAuthorName(int id);
         Task<List<Author>> GetAllAuthors();
         Task UpdateAuthor (Author author);
-
         Task DeleteAuthorById (int id);
     }
 }

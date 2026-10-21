@@ -65,11 +65,6 @@ namespace BooxBox.Data
             return await _database.Table<BookCollection>().ToListAsync();
         }
 
-        public async Task<List<Language>> GetAllLanguagesAsync()
-        {
-            await Init();
-            return await _database.Table<Language>().ToListAsync();
-        }
 
         //Create-methods
         public async Task AddBookAsync(Book book)
@@ -78,11 +73,6 @@ namespace BooxBox.Data
             await _database.InsertAsync(book); 
         }
 
-        public async Task AddAuthorAsync(Author author)
-        {
-            await Init();
-            await _database.InsertAsync(author);
-        }
 
         public async Task AddPublisherAsync(Publisher publisher)
         {
@@ -96,25 +86,7 @@ namespace BooxBox.Data
             await _database.InsertAsync(illustrator);
         }
         //Manual-add methodes voor het ophalen van items o.b.v. de ingegeven naam
-        public async Task<Author> GetAuthorByName(string name)
-        {
-            await Init();
 
-            Author? author = await _database.Table<Author>().Where(a  => a.Name == name).FirstOrDefaultAsync();
-
-            if (author != null)
-            {
-                return author;
-            }
-
-            else
-            {
-                Author newAuthor = new Author(name);
-                await AddAuthorAsync(newAuthor);
-                return newAuthor;
-            }
-
-        }
 
         public async Task<Publisher> GetPublisherByName(string name)
         {

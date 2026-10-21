@@ -1,14 +1,17 @@
 namespace BooxBox.Pages;
 using BooxBox.Data;
 using BooxBox.Models;
-using Microsoft.EntityFrameworkCore.Storage;
+using BooxBox.Services;
+
 
 [QueryProperty(nameof(BookId), "id")]
 public partial class BookDetailsPage : ContentPage
 {
-	private readonly BooxBoxDbWrapper _database;
+	private readonly BooxBoxDbWrapper _wrapper;
+    private readonly AuthorService _authorService;
 
-	public Book ChosenBook { get; set; }
+
+    public Book ChosenBook { get; set; }
 	public int BookId
 	{
 
@@ -23,20 +26,19 @@ public partial class BookDetailsPage : ContentPage
 	public String? BookIllustrator { get; set; }
 	public String BookLanguage { get; set; }
 
-	public BookDetailsPage(BooxBoxDbWrapper database)
+	public BookDetailsPage(BooxBoxDbWrapper wrapper, AuthorService authorService)
 	{
-		InitializeComponent();
-		_database = database;
+        InitializeComponent();
+		_wrapper = wrapper;
+		_authorService = authorService;
 	}
 
 	public async Task GetChosenBook(int id)
 	{
-		ChosenBook = await _database.GetBookById(id);
-		BookAuthor = await _database.GetAuthorName(ChosenBook.AuthorId);
-		BookIllustrator = await _database.GetIllustratorName(ChosenBook.IllustratorId);
-		BookLanguage = await _database.GetLanguageName(ChosenBook.LanguageId);
+		ChosenBook = await _wrapper.GetBookById(id);
+		BookAuthor = await _authorService.GetAuthorName(ChosenBook.AuthorId);
 		BindingContext = ChosenBook;
 
 	}
 
-}S
+}
