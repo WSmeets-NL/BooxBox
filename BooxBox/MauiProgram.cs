@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using BooxBox.Pages;
+using BooxBox.Services;
+using BooxBox.Repos;
 
 namespace BooxBox
 {
@@ -22,7 +24,13 @@ namespace BooxBox
 
 
             builder.Services.AddSingleton<BooxBoxDbWrapper>();
+
+            builder.Services.AddSingleton<AuthorRepository>();
+            builder.Services.AddSingleton<AuthorService>();
+
+
             builder.Services.AddTransient<ManualAddPage>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

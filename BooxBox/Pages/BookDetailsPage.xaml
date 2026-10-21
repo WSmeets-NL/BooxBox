@@ -5,8 +5,18 @@
              Title="BookDetailsPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="{Binding Title}"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            FontSize="48"/>
+        <Grid RowDefinitions="*, 3*">
+            <Image Grid.Row="0" Source="missingcover.png" VerticalOptions="Center"/>
+            <Grid Grid.Row="1" RowDefinitions="3">
+                <VerticalStackLayout Grid.Row="1">
+                    <Label Text="Auteur:" FontSize="24"/>
+                    <Label Text=""
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
