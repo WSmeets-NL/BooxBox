@@ -4,17 +4,32 @@
              x:Class="BooxBox.Pages.BookDetailsPage"
              Title="BookDetailsPage">
     <VerticalStackLayout>
-        <Label 
-            Text="{Binding Title}"
+        <Border Background="LightCoral">
+            <Label 
+            Text="{Binding ChosenBook.Title}"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
-            FontSize="48"/>
-        <Grid RowDefinitions="*, 3*">
-            <Image Grid.Row="0" Source="missingcover.png" VerticalOptions="Center"/>
-            <Grid Grid.Row="1" RowDefinitions="3">
+            FontSize="48"
+            TextColor="Black"
+            Padding="24"/>
+        </Border>
+        <Grid ColumnDefinitions="*, 2*" Padding="24">
+
+
+            <Image Grid.Column="0" Source="missingcover.png" VerticalOptions="Center"/>
+            <Grid Grid.Column="1" RowDefinitions="*, *, *">
+                <VerticalStackLayout Grid.Row="0">
+                    <Grid ColumnDefinitions="*, 3*" >
+                        <Label Grid.Column="0" Text="Auteur:" FontSize="24" HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="1" Text="{Binding BookAuthor}" FontSize="24" HorizontalTextAlignment="Start"/>
+                    </Grid>
+                </VerticalStackLayout>
+
                 <VerticalStackLayout Grid.Row="1">
-                    <Label Text="Auteur:" FontSize="24"/>
-                    <Label Text=""
+                    <Grid ColumnDefinitions="*, 3*" >
+                        <Label Grid.Column="0" Text="Taal:" FontSize="24" HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="1" Text="{Binding BookLanguage}" FontSize="24" HorizontalTextAlignment="Start"/>
+                    </Grid>
                 </VerticalStackLayout>
             </Grid>
         </Grid>

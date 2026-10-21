@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using BooxBox.Pages;
 using BooxBox.Services;
 using BooxBox.Repos;
+using BooxBox.Interfaces;
 
 namespace BooxBox
 {
@@ -25,14 +26,15 @@ namespace BooxBox
 
             builder.Services.AddSingleton<BooxBoxDbWrapper>();
 
-            builder.Services.AddSingleton<AuthorRepository>();
+            builder.Services.AddSingleton<IAuthorRepository, AuthorRepository>();
             builder.Services.AddSingleton<AuthorService>();
 
-            builder.Services.AddSingleton<LanguageRepository>();
+            builder.Services.AddSingleton<ILanguageRepository, LanguageRepository>();
             builder.Services.AddSingleton<LanguageService>();
 
 
             builder.Services.AddTransient<ManualAddPage>();
+            builder.Services.AddTransient<BookDetailsPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

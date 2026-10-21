@@ -9,12 +9,12 @@ public partial class BookDetailsPage : ContentPage
 {
 	private readonly BooxBoxDbWrapper _wrapper;
     private readonly AuthorService _authorService;
+	private readonly LanguageService _languageService;
 
 
     public Book ChosenBook { get; set; }
 	public int BookId
-	{
-
+	{ 
 		set 
 		{
 			GetChosenBook(value);
@@ -26,19 +26,20 @@ public partial class BookDetailsPage : ContentPage
 	public String? BookIllustrator { get; set; }
 	public String BookLanguage { get; set; }
 
-	public BookDetailsPage(BooxBoxDbWrapper wrapper, AuthorService authorService)
+	public BookDetailsPage(BooxBoxDbWrapper wrapper, AuthorService authorService, LanguageService languageService)
 	{
         InitializeComponent();
 		_wrapper = wrapper;
 		_authorService = authorService;
+		_languageService = languageService;
 	}
 
 	public async Task GetChosenBook(int id)
 	{
 		ChosenBook = await _wrapper.GetBookById(id);
 		BookAuthor = await _authorService.GetAuthorName(ChosenBook.AuthorId);
-		BindingContext = ChosenBook;
-
+		BookLanguage = await _languageService.GetLanguageDescription(ChosenBook.LanguageId);
+		BindingContext = this;
 	}
 
 }

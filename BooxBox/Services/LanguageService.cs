@@ -24,5 +24,12 @@ namespace BooxBox.Services
         {
             return await _Repo.GetLanguageById(id);
         }
+
+        public async Task<String> GetLanguageDescription(int id)
+        {
+            Language language = await _Repo.GetLanguageById(id);
+            return language.Description;
+        }
+           
     }
 }
