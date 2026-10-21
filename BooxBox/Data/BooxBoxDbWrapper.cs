@@ -53,11 +53,6 @@ namespace BooxBox.Data
             }
         }
 
-        public async Task<List<Models.Location>> GetAllLocationssAsync()
-        {
-            await Init();
-            return await _database.Table<Models.Location>().ToListAsync();
-        }
 
         public async Task<List<BookCollection>> GetAllBookCollectionsAsync()
         {

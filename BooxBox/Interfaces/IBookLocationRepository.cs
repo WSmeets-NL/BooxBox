@@ -10,5 +10,11 @@ namespace BooxBox.Interfaces
         List<BookLocation> GetAllBookLocation();
 
         BookLocation AddBookLocation(BookLocation location);
+
+        BookLocation GetBookLocationById(int id);
+
+        BookLocation UpdateBookLocation(BookLocation location);
+
+        void DeleteBookLocationById(int id);
     }
 }
