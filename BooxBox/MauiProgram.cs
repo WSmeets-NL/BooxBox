@@ -31,6 +31,9 @@ namespace BooxBox
 
             builder.Services.AddSingleton<ILanguageRepository, LanguageRepository>();
             builder.Services.AddSingleton<LanguageService>();
+           
+            builder.Services.AddSingleton<IBookLocationRepository, BookLocationRepository>();
+            builder.Services.AddSingleton<BookLocationService>();
 
 
             builder.Services.AddTransient<ManualAddPage>();
