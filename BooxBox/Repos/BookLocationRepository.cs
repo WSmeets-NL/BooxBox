@@ -16,17 +16,17 @@ namespace BooxBox.Repos
             _wrapper = wrapper;
         }
 
-        public async Task<List<BookLocation>> GetAllBookLocations()
+        public async Task<List<BookLocation>> GetAllBookLocationsAsync()
         {
             return await _wrapper._database.Table<BookLocation>().ToListAsync();
         }
 
-        public async Task AddBookLocation(BookLocation location)
+        public async Task AddBookLocationAsync(BookLocation location)
         {
             await _wrapper._database.InsertAsync(location);   
         }
 
-        public async Task<BookLocation>? GetBookLocationById(int id)
+        public async Task<BookLocation>? GetBookLocationByIdAsync(int id)
         {
             BookLocation location = await _wrapper._database.Table<BookLocation>().Where(b => b.Id == id).FirstOrDefaultAsync();
             if (location != null)
@@ -41,9 +41,9 @@ namespace BooxBox.Repos
 
         }
 
-        public async Task UpdateBookLocation(BookLocation location)
+        public async Task UpdateBookLocationAsync(BookLocation location)
         {
-            BookLocation foundLocation = await GetBookLocationById(location.Id);
+            BookLocation foundLocation = await GetBookLocationByIdAsync(location.Id);
             if (foundLocation != null)
             {
                 foundLocation = location;
@@ -57,10 +57,10 @@ namespace BooxBox.Repos
             }
         }
 
-        public async Task DeleteBookLocationById(int id)
+        public async Task DeleteBookLocationByIdAsync(int id)
         {
             {
-                BookLocation? foundLocation = await GetBookLocationById(id);
+                BookLocation? foundLocation = await GetBookLocationByIdAsync(id);
                 if (foundLocation != null)
                 {
                     await _wrapper._database.DeleteAsync(foundLocation);
