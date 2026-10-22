@@ -30,7 +30,7 @@
                             </VerticalStackLayout>
                             <Grid Grid.Row="2" ColumnDefinitions="3*, *" Margin="2">
                                 <Button Grid.Column="0" Text="Details" Clicked="ToLocationDetails" BackgroundColor="DarkBlue" TextColor="White" Margin="1" />
-                                <Button Grid.Column="1" Text="Verwijder" Clicked="DeleteLocation" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                                <Button Grid.Column="1" Text="Verwijder" BindingContext="{Binding Id}" Clicked="DeleteLocation" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
                             </Grid>
                         </Grid>
                     </Border>
