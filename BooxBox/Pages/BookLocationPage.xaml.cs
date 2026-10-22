@@ -5,23 +5,19 @@ using BooxBox.Services;
 public partial class BookLocationPage : ContentPage
 {
     private readonly BookLocationService _locationService;
-    public IEnumerable<BookLocation> Locations { get; set; }
+    public List<BookLocation> Locations { get; set; }
     public BookLocationPage(BookLocationService locationService)
     {
         InitializeComponent();
         _locationService = locationService;
-        Locations = new List<BookLocation>
-            {
-            new BookLocation("Eikenhouten kast 1", "Woonkamer links van de TV-meubel"),
-            new BookLocation("Eikenhouten kast 2", "Woonkamer rechts van de TV-meubel"),
-            new BookLocation("Kunststof IKEA doos met het cijfer 1 geschreven op de zijkant", "Zolder")
-
-            };
-
-        BindingContext = this;
-
+        GetAllLocations();
     }
 
+    public async void GetAllLocations()
+    {
+        Locations = await _locationService.GetAllBookLocationsAsync();
+        BookLocationView.ItemsSource = Locations;
+    }
     public async void AddBookLocation(Object sender, EventArgs e)
     {
         String locationName = await DisplayPromptAsync("Maak een nieuwe locatie aan:", "Vul hieronder de naam van je locatie in:", "Locatie Aanmaken", "Annuleren", "nieuwe locatie");

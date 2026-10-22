@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BooxBox.Pages.BookLocationPage"
-             Title="BookLocationPage">
+             Title="Mijn Locaties">
 
     <Grid RowDefinitions="Auto, Auto, *">
 
@@ -15,12 +15,11 @@
         <SearchBar Grid.Row="1" Placeholder="Zoek een Locatie" Margin="10" TextChanged="SearchLocation" />
 
 
-        <CollectionView Grid.Row="2" Margin="10" ItemsSource="{Binding Locations}">
+        <CollectionView x:Name="BookLocationView" Grid.Row="2" Margin="10">
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="3" />
             </CollectionView.ItemsLayout>
-
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border BackgroundColor="MintCream" StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
@@ -28,7 +27,6 @@
                             <Image Grid.Row="0"  Source="genericbookcase.png" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Row="1">
                                 <Label Text="{Binding Name}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Text="{Binding Description}" HorizontalTextAlignment="Center" TextColor="Gray" />
                             </VerticalStackLayout>
                             <Grid Grid.Row="2" ColumnDefinitions="3*, *" Margin="2">
                                 <Button Grid.Column="0" Text="Details" Clicked="ToLocationDetails" BackgroundColor="DarkBlue" TextColor="White" Margin="1" />
