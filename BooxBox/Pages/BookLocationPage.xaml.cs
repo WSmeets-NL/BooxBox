@@ -53,8 +53,20 @@ public partial class BookLocationPage : ContentPage
         throw new NotImplementedException();
     }
 
-    public void DeleteLocation(Object sender, EventArgs e)
+    public async void DeleteLocation(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Button button = (Button)sender;
+        int LocationId = (int)button.BindingContext;
+        string deletePrompt = await DisplayPromptAsync("Weet je zeker dat je deze locatie wil verwijderen?", "Typ \'verwijder\' om deze locatie te verwijderen", "verwijder", "annuleer");
+        if (deletePrompt == "verwijder")
+        {
+            await DisplayAlertAsync("Verwijderd", "We hebben deze locatie verwijderd", "Terug");
+            await _locationService.DeleteBookLocationById(LocationId);
+        }
+
+        else
+        {
+            await DisplayAlertAsync("Locatie behouden", "De locatie blijft behouden", "Terug");
+        }
     }
 }
