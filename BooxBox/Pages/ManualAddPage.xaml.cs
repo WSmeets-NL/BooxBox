@@ -8,16 +8,14 @@ using System.Reflection.Metadata.Ecma335;
 
 public partial class ManualAddPage : ContentPage
 {
-	private readonly BooxBoxDbWrapper _database;
 	private readonly AuthorService _authorService;
 	private readonly LanguageService _languageService;
 	private readonly BookService _bookService;
 
 	public List<Language> languages;
-	public ManualAddPage(BooxBoxDbWrapper database, AuthorService authorService, BookService bookservice, LanguageService languageService)
+	public ManualAddPage(AuthorService authorService, BookService bookservice, LanguageService languageService)
 	{
 		InitializeComponent();
-		_database = database;
 		_authorService = authorService;
 		_bookService = bookservice;
 		_languageService = languageService;
