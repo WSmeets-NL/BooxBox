@@ -8,16 +8,18 @@ using System.Reflection.Metadata.Ecma335;
 
 public partial class ManualAddPage : ContentPage
 {
-	public readonly BooxBoxDbWrapper _database;
-	public readonly AuthorService _authorService;
-	public readonly LanguageService _languageService;
+	private readonly BooxBoxDbWrapper _database;
+	private readonly AuthorService _authorService;
+	private readonly LanguageService _languageService;
+	private readonly BookService _bookService;
 
 	public List<Language> languages;
-	public ManualAddPage(BooxBoxDbWrapper database, AuthorService authorService, LanguageService languageService)
+	public ManualAddPage(BooxBoxDbWrapper database, AuthorService authorService, BookService bookservice, LanguageService languageService)
 	{
 		InitializeComponent();
 		_database = database;
 		_authorService = authorService;
+		_bookService = bookservice;
 		_languageService = languageService;
 		getLanguages();
     }
@@ -42,7 +44,7 @@ public partial class ManualAddPage : ContentPage
 			author = await _authorService.GetAuthorByName(TitleEntry.Text);
 		}
 
-		Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text); //No services, rpos and interfaces are created yet,
+		//Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text); //No services, rpos and interfaces are created yet,
 		Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
 
 
@@ -50,17 +52,17 @@ public partial class ManualAddPage : ContentPage
 		{
 			Title = TitleEntry.Text,
 			AuthorId = author.Id,
-			IllustratorId = illustrator.Id,
+			//IllustratorId = illustrator.Id,
             LanguageId = selectedLanguage.Id,
 		};
 
-        if (IllustratorEntry != null)
-        {
-            illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text);
-			NewBook.IllustratorId = illustrator.Id;
-        }
+   //     if (IllustratorEntry != null)
+   //     {
+   //         illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text);
+			//NewBook.IllustratorId = illustrator.Id;
+   //     }
 
-        await _database.AddBookAsync(NewBook);
+        _bookService.AddBook(NewBook);
         await Shell.Current.GoToAsync(nameof(BooksPage));
     }
 
