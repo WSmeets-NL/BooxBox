@@ -9,9 +9,9 @@ public partial class BookCollectionPage : ContentPage
     private readonly BookCollectionService _collectionService;
 
     public List<BookCollection> BookCollections { get; set; }
-	public BookCollectionPage(BookCollectionService collectionService)
-	{
-		InitializeComponent();
+    public BookCollectionPage(BookCollectionService collectionService)
+    {
+        InitializeComponent();
         _collectionService = collectionService;
         GetAllCollections();
     }
@@ -32,7 +32,7 @@ public partial class BookCollectionPage : ContentPage
                 Name = collectionName,
             };
             await _collectionService.AddBookCollection(newCollection);
-            DisplayAlertAsync("Succes", $"Locatie \"{newCollection.Name}\" is toegevoegd.", "Sluit");
+            DisplayAlertAsync("Succes", $"Verzameling \"{newCollection.Name}\" is toegevoegd.", "Sluit");
             GetAllCollections();
         }
 
@@ -58,8 +58,21 @@ public partial class BookCollectionPage : ContentPage
         throw new NotImplementedException();
     }
 
-    public void DeleteCollection(Object sender, EventArgs e)
+    public async void DeleteCollection(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Button button = (Button)sender;
+        int collectionId = (int)button.BindingContext;
+        string deletePrompt = await DisplayPromptAsync("Weet je zeker dat je deze verzameling wil verwijderen?", "Typ \'verwijder\' om deze verzameling te verwijderen", "verwijder", "annuleer");
+        if (deletePrompt == "verwijder")
+        {
+            await DisplayAlertAsync("Verwijderd", "We hebben deze verzameling verwijderd", "Terug");
+            await _collectionService.DeleteBookCollectionById(collectionId);
+            GetAllCollections ();
+        }
+
+        else
+        {
+            await DisplayAlertAsync("Verzameling behouden", "De verzamelinge blijft behouden", "Terug");
+        }
     }
 }
