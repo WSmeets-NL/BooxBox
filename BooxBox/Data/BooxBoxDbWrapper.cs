@@ -20,8 +20,9 @@ namespace BooxBox.Data
             _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
             await _database.CreateTableAsync<Author>();
             await _database.CreateTableAsync<Book>();
-            await _database.CreateTableAsync<BookGenre>();
+            await _database.CreateTableAsync<BookBookCollection>();
             await _database.CreateTableAsync<BookCollection>();
+            await _database.CreateTableAsync<BookGenre>();
             await _database.CreateTableAsync<Genre>();
             await _database.CreateTableAsync<Illustrator>();
             await _database.CreateTableAsync<Language>();
@@ -31,11 +32,6 @@ namespace BooxBox.Data
         }
 
         //Book-methodes
-        public async Task<List<Book>> GetAllBooksAsync()
-        {
-            await Init();
-            return await _database.Table<Book>().ToListAsync();
-        }
 
         public async Task<Book> GetBookById(int id)
         {

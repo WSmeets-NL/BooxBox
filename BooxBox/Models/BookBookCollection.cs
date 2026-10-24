@@ -5,12 +5,17 @@ using System.Text;
 
 namespace BooxBox.Models
 {
-    internal class BookBookCollection
+    public class BookBookCollection
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public int BookId { get; set; }
         public int BookCollectionId { get; set; }
+
+        public BookBookCollection()
+        {
+
+        }
 
         public BookBookCollection(int bookId, int bookCollectionId)
         {
