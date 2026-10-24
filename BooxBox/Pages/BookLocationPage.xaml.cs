@@ -1,6 +1,7 @@
 namespace BooxBox.Pages;
 using BooxBox.Models;
 using BooxBox.Services;
+using System.Net;
 
 public partial class BookLocationPage : ContentPage
 {
@@ -29,6 +30,7 @@ public partial class BookLocationPage : ContentPage
             };
             await _locationService.AddBookLocation(newLocation);
             DisplayAlertAsync("Succes", $"Locatie \"{newLocation.Name}\" is toegevoegd.", "Sluit");
+            GetAllLocations();
         }
 
         else
@@ -38,7 +40,7 @@ public partial class BookLocationPage : ContentPage
         
     }
 
-    public void SortAlphabetically(Object sendeer, EventArgs e)
+    public void SortAlphabetically(Object sender, EventArgs e)
     {
         throw new NotImplementedException();
     }
@@ -62,6 +64,7 @@ public partial class BookLocationPage : ContentPage
         {
             await DisplayAlertAsync("Verwijderd", "We hebben deze locatie verwijderd", "Terug");
             await _locationService.DeleteBookLocationById(LocationId);
+            GetAllLocations();
         }
 
         else
@@ -69,4 +72,6 @@ public partial class BookLocationPage : ContentPage
             await DisplayAlertAsync("Locatie behouden", "De locatie blijft behouden", "Terug");
         }
     }
+
+    
 }
