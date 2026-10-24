@@ -29,6 +29,9 @@ namespace BooxBox
             builder.Services.AddSingleton<IAuthorRepository, AuthorRepository>();
             builder.Services.AddSingleton<AuthorService>();
 
+            builder.Services.AddSingleton<IBookRepository, BookRepository>();
+            builder.Services.AddSingleton<BookService>();
+
             builder.Services.AddSingleton<IBookCollectionRepository, BookCollectionRepository>();
             builder.Services.AddSingleton<BookCollectionService>();
 

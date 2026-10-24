@@ -10,6 +10,7 @@ namespace BooxBox
             Routing.RegisterRoute(nameof(ManualAddPage), typeof(ManualAddPage));
             Routing.RegisterRoute(nameof(FindBook), typeof(FindBook));
             Routing.RegisterRoute(nameof(ScanBook), typeof(ScanBook));
+            Routing.RegisterRoute(nameof(BooksPage), typeof(BooksPage));
             Routing.RegisterRoute(nameof(BookDetailsPage), typeof(BookDetailsPage));
             Routing.RegisterRoute(nameof(BookCollectionPage), typeof(BookCollectionPage));
             Routing.RegisterRoute(nameof(BookLocationPage), typeof(BookLocationPage));
