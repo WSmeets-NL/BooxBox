@@ -9,11 +9,11 @@ namespace BooxBox.Interfaces
     {
         Task<List<BookCollection>> GetAllBookCollectionsAsync();
 
-        Task AddBookCollectionAsync(BookLocation location);
+        Task AddBookCollectionAsync(BookCollection collection);
 
-        Task<BookLocation>? GetBookCollectionByIdAsync(int id);
+        Task<BookCollection>? GetBookCollectionByIdAsync(int id);
 
-        Task UpdateBookCollectionAsync(BookLocation location);
+        Task UpdateBookCollectionAsync(BookCollection collection);
 
         Task DeleteBookCollectionByIdAsync(int id);
     }
