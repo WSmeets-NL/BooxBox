@@ -19,7 +19,7 @@ public partial class BookCollectionPage : ContentPage
     public async void GetAllCollections()
     {
         BookCollections = await _collectionService.GetAllBookCollectionsAsync();
-        BookCollectionView.ItemsSource = this;
+        BookCollectionView.ItemsSource = BookCollections;
     }
 
     public async void AddCollection(Object sender, EventArgs e)

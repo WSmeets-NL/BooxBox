@@ -18,8 +18,8 @@
         <Tab Title="Mijn Verzamelingen">
             <ShellContent
                 Title="Mijn Verzamelingen"
-                ContentTemplate="{DataTemplate local:CollectionsPage}"
-                Route="CollectionsPage" />
+                ContentTemplate="{DataTemplate local:BookCollectionPage}"
+                Route="BookCollectionPage" />
         </Tab>
 
         <Tab Title="Mijn Locaties">

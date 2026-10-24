@@ -14,7 +14,7 @@ namespace BooxBox.Repos
         public BookCollectionRepository(BooxBoxDbWrapper wrapper)
         {
             _wrapper = wrapper;
-        };
+        }
 
 
         public async Task<List<BookCollection>> GetAllBookCollectionsAsync()
