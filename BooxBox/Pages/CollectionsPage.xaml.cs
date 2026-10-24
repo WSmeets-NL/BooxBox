@@ -3,7 +3,6 @@ using BooxBox.Models;
 
 public partial class CollectionsPage : ContentPage
 {
-	public IEnumerable<BookCollection> BookCollections { get; set; }
 
 	public CollectionsPage()
 	{
@@ -18,9 +17,25 @@ public partial class CollectionsPage : ContentPage
         BindingContext = this;
     }
 
-    public void AddCollection(Object sender, EventArgs e)
+    public async void AddCollection(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        String collectionName = await DisplayPromptAsync("Maak een nieuwe verzameling aan:", "Vul hieronder de naam van je verzameling in:", "Verzameling Aanmaken", "Annuleren", "nieuwe verzameling");
+        if (String.IsNullOrWhiteSpace(collectionName) == false)
+        {
+            BookLocation newCollection = new BookLocation()
+            {
+                Name = collectionName,
+            };
+            await _collectionService.AddBookCollection(newCollection);
+            DisplayAlertAsync("Succes", $"Locatie \"{newCollectoin.Name}\" is toegevoegd.", "Sluit");
+            GetAllCollections();
+        }
+
+        else
+        {
+            DisplayAlertAsync("Foutmelding", "Je hebt geen naam ingegeven.", "Terug");
+        }
+
     }
 
     public void SortAlphabetically(Object sendeer, EventArgs e)
