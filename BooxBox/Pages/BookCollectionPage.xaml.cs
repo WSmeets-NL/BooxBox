@@ -1,20 +1,25 @@
 namespace BooxBox.Pages;
+
+using BooxBox.Interfaces;
 using BooxBox.Models;
+using BooxBox.Services;
 
-public partial class CollectionsPage : ContentPage
+public partial class BookCollectionPage : ContentPage
 {
+    private readonly BookCollectionService _collectionService;
 
-	public CollectionsPage()
+    public List<BookCollection> BookCollections { get; set; }
+	public BookCollectionPage(BookCollectionService collectionService)
 	{
 		InitializeComponent();
-        BookCollections = new List<BookCollection>
-            {
-            new BookCollection("Geleende boeken", "Boeken die ik momenteel geleend heb van iemand anders."),
-            new BookCollection("Kijk naar links", "Boeken waarbij het personage op de kaft naar links kijkt."),
-            new BookCollection("In Uganda", "Boeken waarbij het verhaal zich afspeelt in Uganda")
-            };
+        _collectionService = collectionService;
+        GetAllCollections();
+    }
 
-        BindingContext = this;
+    public async void GetAllCollections()
+    {
+        BookCollections = await _collectionService.GetAllBookCollectionsAsync();
+        BookCollectionView.ItemsSource = this;
     }
 
     public async void AddCollection(Object sender, EventArgs e)
@@ -22,12 +27,12 @@ public partial class CollectionsPage : ContentPage
         String collectionName = await DisplayPromptAsync("Maak een nieuwe verzameling aan:", "Vul hieronder de naam van je verzameling in:", "Verzameling Aanmaken", "Annuleren", "nieuwe verzameling");
         if (String.IsNullOrWhiteSpace(collectionName) == false)
         {
-            BookLocation newCollection = new BookLocation()
+            BookCollection newCollection = new BookCollection()
             {
                 Name = collectionName,
             };
             await _collectionService.AddBookCollection(newCollection);
-            DisplayAlertAsync("Succes", $"Locatie \"{newCollectoin.Name}\" is toegevoegd.", "Sluit");
+            DisplayAlertAsync("Succes", $"Locatie \"{newCollection.Name}\" is toegevoegd.", "Sluit");
             GetAllCollections();
         }
 

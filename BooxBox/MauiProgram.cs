@@ -29,6 +29,12 @@ namespace BooxBox
             builder.Services.AddSingleton<IAuthorRepository, AuthorRepository>();
             builder.Services.AddSingleton<AuthorService>();
 
+            builder.Services.AddSingleton<IBookCollectionRepository, BookCollectionRepository>();
+            builder.Services.AddSingleton<BookCollectionService>();
+
+            builder.Services.AddSingleton<IBookLocationRepository, BookLocationRepository>();
+            builder.Services.AddSingleton<BookLocationService>();
+
             builder.Services.AddSingleton<ILanguageRepository, LanguageRepository>();
             builder.Services.AddSingleton<LanguageService>();
            
@@ -37,6 +43,7 @@ namespace BooxBox
 
 
             builder.Services.AddTransient<ManualAddPage>();
+            builder.Services.AddTransient<BookCollectionPage>();
             builder.Services.AddTransient<BookDetailsPage>();
             builder.Services.AddTransient<BookLocationPage>();
 
