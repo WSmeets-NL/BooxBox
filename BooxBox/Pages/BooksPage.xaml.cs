@@ -1,22 +1,22 @@
-using BooxBox.Data;
 using BooxBox.Models;
+using BooxBox.Services;
 using System.Diagnostics;
 namespace BooxBox.Pages;
 public partial class BooksPage : ContentPage
 {
-    public readonly BooxBoxDbWrapper _database;
+    public readonly BookService _bookService;
 	public List<Book> Books { get; set;  }
 
-	public BooksPage(BooxBoxDbWrapper database)
+	public BooksPage(BookService bookService)
 	{
         InitializeComponent();
-        _database = database;
+        _bookService = bookService;
         GetAllBooks();
     }
 
     public async void GetAllBooks()
     {
-        Books = await _database.GetAllBooksAsync();
+        Books = await _bookService.GetAllBooks();
         BookView.ItemsSource = Books;
     }
 

@@ -31,6 +31,7 @@ public partial class ManualAddPage : ContentPage
 
 	public async void OnClickSubmit(object sender, EventArgs e)
 	{
+		//Confirms if the author is alrady in the database and create a new one if this is not the case
 		Author author = await _authorService.GetAuthorByName(AuthorEntry.Text);
 		if(author ==null)
 		{
@@ -43,9 +44,8 @@ public partial class ManualAddPage : ContentPage
 		}
 
 		//Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text); //No services, rpos and interfaces are created yet,
+
 		Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
-
-
 		Book NewBook = new Book()
 		{
 			Title = TitleEntry.Text,

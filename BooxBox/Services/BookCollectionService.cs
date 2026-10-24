@@ -35,7 +35,7 @@ namespace BooxBox.Services
             await _collectionRepo.UpdateBookCollectionAsync(collection);
         }
 
-        public async Task DeleteBookByIdAsync(int id)
+        public async Task DeleteBookCollectionByIdAsync(int id)
         {
             await _collectionRepo.DeleteBookCollectionByIdAsync(id);
         }

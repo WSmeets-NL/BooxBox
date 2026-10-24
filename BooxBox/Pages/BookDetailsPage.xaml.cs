@@ -7,8 +7,8 @@ using BooxBox.Services;
 [QueryProperty(nameof(BookId), "id")]
 public partial class BookDetailsPage : ContentPage
 {
-	private readonly BooxBoxDbWrapper _wrapper;
     private readonly AuthorService _authorService;
+	private readonly BookService _bookService;
 	private readonly BookLocationService _locationService;
 	private readonly LanguageService _languageService;
 
@@ -28,18 +28,18 @@ public partial class BookDetailsPage : ContentPage
 	public String BookLocation { get; set; } = "Geen locatie toegewezen.";
 	public String BookLanguage { get; set; }
 
-	public BookDetailsPage(BooxBoxDbWrapper wrapper, AuthorService authorService, BookLocationService locationService, LanguageService languageService)
+	public BookDetailsPage(AuthorService authorService, BookService bookService, BookLocationService locationService, LanguageService languageService)
 	{
         InitializeComponent();
-		_wrapper = wrapper;
 		_authorService = authorService;
+		_bookService = bookService;
 		_locationService = locationService;
 		_languageService = languageService;
 	}
 
 	public async Task GetChosenBook(int id)
 	{
-		ChosenBook = await _wrapper.GetBookById(id);
+		ChosenBook = await _bookService.GetBookById(id);
 		BookAuthor = await _authorService.GetAuthorName(ChosenBook.AuthorId);
 		BookLanguage = await _languageService.GetLanguageDescription(ChosenBook.LanguageId);
 		BindingContext = this;

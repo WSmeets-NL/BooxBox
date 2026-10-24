@@ -24,11 +24,11 @@ namespace BooxBox.Repos
 
         public async Task<List<Book>>? GetBooksInCollectionAsync(int collectionId)
         {
-            List<Book> matchingBooks;
+            List<Book> matchingBooks = new List<Book>();
             List<BookBookCollection> matchingBookIds = await _wrapper._database.Table<BookBookCollection>().Where(b => b.BookCollectionId == collectionId).ToListAsync();
             foreach (BookBookCollection matchingId in matchingBookIds)
             {
-                Book matchingBook = GetBookByIdAsync(matchingId.BookId);
+                Book matchingBook = await GetBookByIdAsync(matchingId.BookId);
                 matchingBooks.Append(matchingBook);
             }
             return matchingBooks;
@@ -44,12 +44,12 @@ namespace BooxBox.Repos
             return await _wrapper._database.Table<Book>().Where(b => b.Id == id).FirstOrDefaultAsync();
         }
 
-        public async void AddBookAsync(Book book)
+        public async Task AddBookAsync(Book book)
         {
             await _wrapper._database.InsertAsync(book);
         }
 
-        public async void UpdateBookAsync(Book book)
+        public async Task UpdateBookAsync(Book book)
         {
             Book? foundBook = await GetBookByIdAsync(book.Id);
             if (foundBook != null)
@@ -65,7 +65,7 @@ namespace BooxBox.Repos
             }
         }
 
-        public async void DeleteBookByIdAsync(int id)
+        public async Task DeleteBookByIdAsync(int id)
         {
             Book? foundBook = await GetBookByIdAsync(id);
             if (foundBook != null)
