@@ -6,7 +6,7 @@ using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static Java.Util.Jar.Attributes;
+
 
 namespace BooxBox.Repos
 {
@@ -25,6 +25,10 @@ namespace BooxBox.Repos
             await _wrapper._database.InsertAsync(illustrator);
         }
 
+        public async Task<List<Illustrator>> GetAllIllustrators()
+        {
+            return await _wrapper._database.Table<Illustrator>().ToListAsync();
+        }
         public async Task<Illustrator>? GetIllustratorById(int id)
         { 
             Illustrator illustrator = await _wrapper._database.Table<Illustrator>().Where(i => i.Id == id).FirstOrDefaultAsync();

@@ -96,4 +96,3 @@ public partial class ManualAddPage : ContentPage
         await Shell.Current.GoToAsync(nameof(BooksPage));
     }
 }
-}
