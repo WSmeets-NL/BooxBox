@@ -38,7 +38,7 @@ public partial class ManualAddPage : ContentPage
 			if (allFieldsFilled)
 			{
 				CreateNewBook();
-			}
+            }
 			else
 			{
 				DisplayAlertAsync("Foutmelding", "Niet alle velden zijn ingevuld.\nProbeer alstublieft opnieuw", "Bevestig");
@@ -50,7 +50,7 @@ public partial class ManualAddPage : ContentPage
 
 	public bool ConfirmInputs()
 	{
-		if (String.IsNullOrEmpty(TitleEntry.Text) == false && String.IsNullOrEmpty(AuthorEntry.Text) == false && LanguagePicker.SelectedItem == null)
+		if (String.IsNullOrEmpty(TitleEntry.Text) != true || String.IsNullOrEmpty(AuthorEntry.Text) != true || LanguagePicker.SelectedItem != null)
 		{
 			return true;
 		}
@@ -60,9 +60,9 @@ public partial class ManualAddPage : ContentPage
 		}
 	}
 
-	public async void CreateNewBook()
+	public async Task<Author> FetchAuthor()
 	{
-        Author author = await _authorService.GetAuthorByName(AuthorEntry.Text);
+        Author? author = await _authorService.GetAuthorByName(AuthorEntry.Text);
         if (author == null)
         {
             Author newAuthor = new Author()
@@ -70,18 +70,47 @@ public partial class ManualAddPage : ContentPage
                 Name = AuthorEntry.Text,
             };
             _authorService.AddAuthor(newAuthor);
-            author = await _authorService.GetAuthorByName(newAuthor.Name);
+            return author = await _authorService.GetAuthorByName(newAuthor.Name);
         }
+		else
+		{
+			return author;
+		}
+    }
 
-        Illustrator illustrator = null;
-        if (IllustratorEntry != null)
+    public async Task<Illustrator> FetchIllustrator()
+    {
         {
+            Illustrator? illustrator = await _illustratorService.GetIllustratorByName(IllustratorEntry.Text);
+            if (illustrator == null)
+            {
+                Illustrator newIllustrator = new Illustrator()
+                {
+                    Name = IllustratorEntry.Text
+                };
+				await _illustratorService.AddIllustrator(newIllustrator);
 
-            illustrator = await _illustratorService.GetIllustratorByName(IllustratorEntry.Text);
+                return illustrator = await _illustratorService.GetIllustratorByName(newIllustrator.Name);
+            }
+			else
+			{
+				return illustrator;
+			}
         }
+    }
 
+    public async void CreateNewBook()
+	{
+		Author author = await FetchAuthor();
+
+		Illustrator illustrator = null;
+        if (IllustratorEntry.Text != null)
+		{
+			illustrator = await FetchIllustrator();
+		}
         Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
-        Book NewBook = new Book()
+
+        Book newBook = new Book()
         {
             Title = TitleEntry.Text,
             AuthorId = author.Id,
@@ -90,9 +119,10 @@ public partial class ManualAddPage : ContentPage
 
         if (illustrator != null)
         {
-            NewBook.IllustratorId = illustrator.Id;
+            newBook.IllustratorId = illustrator.Id;
         }
-        _bookService.AddBook(NewBook);
+        _bookService.AddBook(newBook);
+		DisplayAlert("Succes", $"\"{newBook.Title}\" is toegevoegd", "Terug naar 'Mijn boeken'");
         await Shell.Current.GoToAsync(nameof(BooksPage));
     }
 }

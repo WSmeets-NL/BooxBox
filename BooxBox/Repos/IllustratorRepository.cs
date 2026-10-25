@@ -47,15 +47,7 @@ namespace BooxBox.Repos
         public async Task<Illustrator>? GetIllustratorByName(string name)
         {
             Illustrator illustrator = await _wrapper._database.Table<Illustrator>().Where(i => i.Name == name).FirstOrDefaultAsync();
-            if (illustrator != null)
-            {
-                return illustrator;
-            }
-
-            else
-            {
-                throw new FileNotFoundException();
-            }
+            return illustrator;
         }
 
         public async Task<String>? GetIllustratorName(int id)
