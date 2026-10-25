@@ -21,20 +21,20 @@ namespace BooxBox.Services
             _Repo.AddIllustrator(illustrator);
         }
 
-        public async Task<Illustrator>? GetIllustratorrById(int id)
+        public async Task<Illustrator?> GetIllustratorById(int id)
         {
             Illustrator? illustrator = await _Repo.GetIllustratorById(id);
             return illustrator;
         }
 
-        public async Task<Illustrator>? GetIllustratorByName(string name)
+        public async Task<Illustrator?> GetIllustratorByName(string name)
         {
 
             Illustrator? illustrator = await _Repo.GetIllustratorByName(name);
             return illustrator;            
         }
 
-        public async Task<string>? GetIllustratorName(int id)
+        public async Task<string> GetIllustratorName(int id)
         {
             string illustratorName = await _Repo.GetIllustratorName(id);
             return illustratorName;
