@@ -38,6 +38,9 @@ namespace BooxBox
             builder.Services.AddSingleton<IBookLocationRepository, BookLocationRepository>();
             builder.Services.AddSingleton<BookLocationService>();
 
+            builder.Services.AddSingleton<IIllustratorRepository, IllustratorRepository>();
+            builder.Services.AddSingleton<IllustratorService>();
+
             builder.Services.AddSingleton<ILanguageRepository, LanguageRepository>();
             builder.Services.AddSingleton<LanguageService>();
            
