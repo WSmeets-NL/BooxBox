@@ -39,5 +39,11 @@ namespace BooxBox.Services
         {
             await _locationRepo.DeleteBookLocationByIdAsync(id);
         }
+
+        public async Task<string> GetLocationName(int id)
+        {
+            string locationName = await _locationRepo.GetBookLocationNameAsync(id);
+            return locationName;
+        }
     }
 }

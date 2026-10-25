@@ -72,5 +72,11 @@ namespace BooxBox.Repos
                 }
             }
         }
+
+        public async Task<String> GetBookLocationNameAsync(int id)
+        {
+            BookLocation location = await GetBookLocationByIdAsync(id);
+            return location.Name;
+        }
     }
 }

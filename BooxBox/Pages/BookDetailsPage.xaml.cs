@@ -48,7 +48,23 @@ public partial class BookDetailsPage : ContentPage
 			BookIllustrator = await _illustratorService.GetIllustratorName(ChosenBook.IllustratorId.Value);
 		}
 		BookLanguage = await _languageService.GetLanguageDescription(ChosenBook.LanguageId);
+		BookLocation = await _locationService.GetLocationName(ChosenBook.BookLocationId);
 		BindingContext = this;
+	}
+
+	public async void ChangeBookLocation(Object sender, EventArgs e)
+	{
+		List<BookLocation> allLocations = await _locationService.GetAllBookLocationsAsync();
+		string chosenLocationName = await DisplayActionSheetAsync("Kies een locatie", "Annuleer", null, allLocations.Select(l => l.Name).ToArray());
+		
+		if (chosenLocationName != "Annuleer")
+		{
+            BookLocation chosenLocation = allLocations.Find(b => b.Name == chosenLocationName);
+            ChosenBook.BookLocationId = chosenLocation.Id;
+            _bookService.UpdateBook(ChosenBook);
+            await DisplayAlertAsync("Succes", "Locatie gewijzigd", "ok");
+        }
+
 	}
 
 }

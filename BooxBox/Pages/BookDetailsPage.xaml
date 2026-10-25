@@ -28,7 +28,7 @@
 
                 <VerticalStackLayout Grid.Row="1">
                     <Grid ColumnDefinitions="*, 3*, *" >
-                        <Label Grid.Column="0" Text="Auteur:" FontSize="24" HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="0" Text="Illustrator:" FontSize="24" HorizontalTextAlignment="Center"/>
                         <Label Grid.Column="1" Text="{Binding BookIllustrator}" FontSize="24" HorizontalTextAlignment="Start"/>
                         <Button Grid.Column="2" Text="wijzig" />
                     </Grid>
@@ -46,7 +46,7 @@
                     <Grid ColumnDefinitions="*, 3*, *" >
                         <Label Grid.Column="0" Text="Locatie:" FontSize="24" HorizontalTextAlignment="Center"/>
                         <Label Grid.Column="1" Text="{Binding BookLocation}" FontSize="24" HorizontalTextAlignment="Start"/>
-                        <Button Grid.Column="2" Text="wijzig" />
+                        <Button Grid.Column="2" Text="wijzig" Clicked="ChangeBookLocation"/>
                     </Grid>
                 </VerticalStackLayout>
             </Grid>
