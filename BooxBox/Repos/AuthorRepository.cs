@@ -16,6 +16,7 @@ namespace BooxBox.Repos
         public AuthorRepository(BooxBoxDbWrapper wrapper)
         {
             _wrapper = wrapper;
+            _wrapper.GetConnectionAsync();
         }
 
         public async Task AddAuthor(Author author)
@@ -84,7 +85,6 @@ namespace BooxBox.Repos
                 return;
             }
         }
-
 
     }
 }

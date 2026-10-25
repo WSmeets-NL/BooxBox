@@ -40,7 +40,7 @@ public partial class ManualAddPage : ContentPage
 				Name = AuthorEntry.Text,
 			};
 			_authorService.AddAuthor(newAuthor);
-			author = await _authorService.GetAuthorByName(TitleEntry.Text);
+			author = await _authorService.GetAuthorByName(newAuthor.Name);
 		}
 
 		//Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text); //No services, rpos and interfaces are created yet,

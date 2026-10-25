@@ -12,22 +12,26 @@ namespace BooxBox.Data
     {
         public SQLiteAsyncConnection _database { get; private set; }
 
-        async Task Init()
+
+        public async Task<SQLiteAsyncConnection> GetConnectionAsync()
         {
             if (_database is not null)
-                return;
-
-            _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            await _database.CreateTableAsync<Author>();
-            await _database.CreateTableAsync<Book>();
-            await _database.CreateTableAsync<BookBookCollection>();
-            await _database.CreateTableAsync<BookCollection>();
-            await _database.CreateTableAsync<BookGenre>();
-            await _database.CreateTableAsync<Genre>();
-            await _database.CreateTableAsync<Illustrator>();
-            await _database.CreateTableAsync<Language>();
-            await _database.CreateTableAsync<BookLocation>();
-            await _database.CreateTableAsync<Publisher>();
+                return _database;
+            else
+            {
+                _database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+                await _database.CreateTableAsync<Author>();
+                await _database.CreateTableAsync<Book>();
+                await _database.CreateTableAsync<BookBookCollection>();
+                await _database.CreateTableAsync<BookCollection>();
+                await _database.CreateTableAsync<BookGenre>();
+                await _database.CreateTableAsync<Genre>();
+                await _database.CreateTableAsync<Illustrator>();
+                await _database.CreateTableAsync<Language>();
+                await _database.CreateTableAsync<BookLocation>();
+                await _database.CreateTableAsync<Publisher>();
+                return _database;
+            }
 
         }
 

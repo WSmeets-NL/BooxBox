@@ -66,8 +66,8 @@ public partial class BookCollectionPage : ContentPage
         if (deletePrompt == "verwijder")
         {
             await DisplayAlertAsync("Verwijderd", "We hebben deze verzameling verwijderd", "Terug");
-            await _collectionService.DeleteBookCollectionById(collectionId);
-            GetAllCollections ();
+            await _collectionService.DeleteBookCollectionByIdAsync(collectionId);
+            GetAllCollections();
         }
 
         else

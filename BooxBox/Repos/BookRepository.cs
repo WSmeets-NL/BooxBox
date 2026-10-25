@@ -19,6 +19,7 @@ namespace BooxBox.Repos
 
         public async Task<List<Book>> GetAllBooksAsync()
         {
+            await _wrapper.GetConnectionAsync();
             return await _wrapper._database.Table<Book>().ToListAsync();
         }
 
