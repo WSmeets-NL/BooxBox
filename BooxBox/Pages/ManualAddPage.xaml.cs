@@ -9,15 +9,17 @@ using System.Reflection.Metadata.Ecma335;
 public partial class ManualAddPage : ContentPage
 {
 	private readonly AuthorService _authorService;
+	private readonly IllustratorService _illustratorService;
 	private readonly LanguageService _languageService;
 	private readonly BookService _bookService;
 
 	public List<Language> languages;
-	public ManualAddPage(AuthorService authorService, BookService bookservice, LanguageService languageService)
+	public ManualAddPage(AuthorService authorService, BookService bookservice, IllustratorService illustratorService, LanguageService languageService)
 	{
 		InitializeComponent();
 		_authorService = authorService;
 		_bookService = bookservice;
+		_illustratorService = illustratorService;
 		_languageService = languageService;
 		getLanguages();
     }
@@ -31,37 +33,67 @@ public partial class ManualAddPage : ContentPage
 
 	public async void OnClickSubmit(object sender, EventArgs e)
 	{
-		//Confirms if the author is alrady in the database and create a new one if this is not the case
-		Author author = await _authorService.GetAuthorByName(AuthorEntry.Text);
-		if(author ==null)
+		bool allFieldsFilled = ConfirmInputs();
 		{
-			Author newAuthor = new Author()
+			if (allFieldsFilled)
 			{
-				Name = AuthorEntry.Text,
-			};
-			_authorService.AddAuthor(newAuthor);
-			author = await _authorService.GetAuthorByName(newAuthor.Name);
+				CreateNewBook();
+			}
+			else
+			{
+				DisplayAlertAsync("Foutmelding", "Niet alle velden zijn ingevuld.\nProbeer alstublieft opnieuw", "Bevestig");
+			}
 		}
+	}
+		
 
-		//Illustrator illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text); //No services, rpos and interfaces are created yet,
 
-		Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
-		Book NewBook = new Book()
+	public bool ConfirmInputs()
+	{
+		if (String.IsNullOrEmpty(TitleEntry.Text) == false && String.IsNullOrEmpty(AuthorEntry.Text) == false && LanguagePicker.SelectedItem == null)
 		{
-			Title = TitleEntry.Text,
-			AuthorId = author.Id,
-			//IllustratorId = illustrator.Id,
-            LanguageId = selectedLanguage.Id,
-		};
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
-   //     if (IllustratorEntry != null)
-   //     {
-   //         illustrator = await _database.GetIllustratorByName(IllustratorEntry.Text);
-			//NewBook.IllustratorId = illustrator.Id;
-   //     }
+	public async void CreateNewBook()
+	{
+        Author author = await _authorService.GetAuthorByName(AuthorEntry.Text);
+        if (author == null)
+        {
+            Author newAuthor = new Author()
+            {
+                Name = AuthorEntry.Text,
+            };
+            _authorService.AddAuthor(newAuthor);
+            author = await _authorService.GetAuthorByName(newAuthor.Name);
+        }
 
+        Illustrator illustrator = null;
+        if (IllustratorEntry != null)
+        {
+
+            illustrator = await _illustratorService.GetIllustratorByName(IllustratorEntry.Text);
+        }
+
+        Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
+        Book NewBook = new Book()
+        {
+            Title = TitleEntry.Text,
+            AuthorId = author.Id,
+            LanguageId = selectedLanguage.Id
+        };
+
+        if (illustrator != null)
+        {
+            NewBook.IllustratorId = illustrator.Id;
+        }
         _bookService.AddBook(NewBook);
         await Shell.Current.GoToAsync(nameof(BooksPage));
     }
-
+}
 }
