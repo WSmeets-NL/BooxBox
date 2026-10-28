@@ -51,7 +51,7 @@ namespace BooxBox.Repos
             return author.Name;
         }
 
-        public async Task<List<Author>> GetAllAuthors()
+        public async Task<List<Author>> GetAllAuthorsAsync()
         {
             return await _wrapper._database.Table<Author>().ToListAsync();
         }

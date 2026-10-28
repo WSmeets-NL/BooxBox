@@ -12,7 +12,7 @@ namespace BooxBox.Interfaces
         Task<Author>? GetAuthorById(int id);
         Task<Author>? GetAuthorByName(string name);
         Task<String>? GetAuthorName(int id);
-        Task<List<Author>> GetAllAuthors();
+        Task<List<Author>> GetAllAuthorsAsync();
         Task UpdateAuthor (Author author);
         Task DeleteAuthorById (int id);
     }

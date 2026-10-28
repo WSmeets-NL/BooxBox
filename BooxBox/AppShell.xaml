@@ -15,7 +15,7 @@
                 Route="BooksPage" />
         </Tab>
 
-        <Tab Title="Mijn Verzamelingen">
+        <Tab Title="Verzamelingen">
             <ShellContent
                 Title="Mijn Verzamelingen"
                 ContentTemplate="{DataTemplate local:BookCollectionPage}"

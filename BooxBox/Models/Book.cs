@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SQLite;
+﻿using SQLite;
 using System.ComponentModel.DataAnnotations;
 using PrimaryKeyAttribute = SQLite.PrimaryKeyAttribute;
 

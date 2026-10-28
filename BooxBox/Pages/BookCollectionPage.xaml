@@ -17,7 +17,7 @@
         <CollectionView Grid.Row="2" Margin="10" x:Name="BookCollectionView">
 
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="3" />
+                <GridItemsLayout Orientation="Vertical" Span="1" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
@@ -29,7 +29,7 @@
                                 <Label Text="{Binding Name}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="Black" />
                                 <Label Text="{Binding Description}" HorizontalTextAlignment="Center" TextColor="Gray" />
                             </VerticalStackLayout>
-                            <Grid Grid.Row="2" ColumnDefinitions="3*, *" Margin="2">
+                            <Grid Grid.Row="2" ColumnDefinitions="5*, 2*" Margin="2">
                                 <Button Grid.Column="0" Text="Details" Clicked="ToCollectionDetails" BackgroundColor="DarkBlue" TextColor="White" Margin="1" />
                                 <Button Grid.Column="1" Text="Verwijder" BindingContext="{Binding Id}" Clicked="DeleteCollection" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
                             </Grid>
