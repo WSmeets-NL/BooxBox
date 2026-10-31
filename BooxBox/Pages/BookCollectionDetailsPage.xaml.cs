@@ -7,7 +7,6 @@ public partial class BookCollectionDetailsPage : ContentPage
 {
     private readonly BookService _bookService;
     private readonly BookCollectionService _collectionService;
-    private readonly BookLocationService _locationService;
 
 
     public BookCollection ChosenCollection { get; set; }
@@ -20,14 +19,12 @@ public partial class BookCollectionDetailsPage : ContentPage
 
     }
     public List<Book> IncludedBooks{ get; set; }
-    public List<BookLocation> BookLocations { get; set; } = new List<BookLocation>();
 
-    public BookCollectionDetailsPage(AuthorService authorService, BookService bookService, BookCollectionService collectionService, BookLocationService locationService)
+    public BookCollectionDetailsPage(AuthorService authorService, BookService bookService, BookCollectionService collectionService)
     {
         InitializeComponent();
         _bookService = bookService;
         _collectionService = collectionService;
-        _locationService = locationService;
     }
 
     public async Task GetCollection(int collectionId)
@@ -35,11 +32,21 @@ public partial class BookCollectionDetailsPage : ContentPage
         ChosenCollection = await _collectionService.GetBookCollectionById(collectionId);
         IncludedBooks = await _bookService.GetAllBooksInCollection(collectionId);
 
-        foreach(Book book in IncludedBooks)
-        {
-            BookLocations.Add(await _locationService.GetBookLocationById(book.BookLocationId));
-        }
-
         BooksInCollection.ItemsSource = IncludedBooks;
+    }
+
+    public async void ToBookDetails(object sender, EventArgs e)
+    {
+        Button button = (Button)sender;
+        int chosenBookId = (int)button.BindingContext;
+        await Shell.Current.GoToAsync($"BookDetailsPage?id={chosenBookId}");
+    }
+
+    public async void RemoveBook(object sender, EventArgs e)
+    {
+        Button button = (Button)sender;
+        int chosenBookId = (int)button.BindingContext;
+        await _collectionService.RemoveBookFromCollection(chosenBookId, ChosenCollection.Id);
+        await GetCollection(ChosenCollection.Id);
     }
 }
