@@ -18,7 +18,7 @@ namespace BooxBox.Services
 
         public async Task AddIllustrator(Illustrator illustrator)
         {
-            await S_Repo.AddIllustrator(illustrator);
+            await _Repo.AddIllustrator(illustrator);
         }
 
         public async Task<List<Illustrator>> GetAllIllustratorsAsync()

@@ -15,24 +15,30 @@
 
             <Label Text="Wie is de auteur? *" FontSize="18"/>
             <Grid ColumnDefinitions="4*, *">
-                <Picker x:Name="AuthorPicker" ItemDisplayBinding="{Binding Name}"/>
-                <Button Clicked="AddNewAuthor" Text="+" BackgroundColor="DarkBlue" />
+                <Picker Grid.Column="0" x:Name="AuthorPicker" ItemDisplayBinding="{Binding Name}"/>
+                <Button Grid.Column="1" Clicked="AddNewAuthor" Text="Nieuwe Auteur" BackgroundColor="LightBlue" />
             </Grid>
             
             <Label Text="Wie is de illustrator?" FontSize="18"/>
             <Label Text="Is er geen illustrator, laat dit veld dan leeg." FontSize="12" />
             <Grid ColumnDefinitions="4*, *">
-                <Picker x:Name="IllustratorPicker" ItemDisplayBinding="{Binding Name}"/>
-                <Button Clicked="AddNewIllustrator" Text="+" BackgroundColor="DarkBlue" />
+                <Picker Grid.Column="0" x:Name="IllustratorPicker" ItemDisplayBinding="{Binding Name}"/>
+                <Button Grid.Column="1" Clicked="AddNewIllustrator" Text="Nieuwe Illustrator" BackgroundColor="LightBlue"  />
             </Grid>
 
             <Label Text="In welke taal is het boek geschreven? *" FontSize="18"/>
             <Grid ColumnDefinitions="4*, *">
-                <Picker x:Name="LanguagePicker" ItemDisplayBinding="{Binding Description}" />
-                <Button Clicked="AddNewLanguage" Text="+" BackgroundColor="DarkBlue" />
+                <Picker Grid.Column="0" x:Name="LanguagePicker" ItemDisplayBinding="{Binding Description}" />
+                <Button Grid.Column="1" Clicked="AddNewLanguage" Text="Nieuwe Taal" BackgroundColor="LightBlue"  />
             </Grid>
 
-            <Button Text="Boek toevoegen" Clicked="OnClickSubmit" BackgroundColor="DarkBlue" TextColor="White" />
+            <Label Text="In welke locatie wil je dit boek bewaren?" FontSize="18"/>
+            <Grid ColumnDefinitions="4*, *">
+                <Picker Grid.Column="0" x:Name="LocationPicker" ItemDisplayBinding="{Binding Name}" />
+                <Button Grid.Column="1" Clicked="AddNewLocation" Text="Nieuwe Locatie" BackgroundColor="LightBlue"  />
+            </Grid>
+
+            <Button Text="Boek toevoegen" Clicked="OnClickSubmit"  BackgroundColor="LightBlue"  />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

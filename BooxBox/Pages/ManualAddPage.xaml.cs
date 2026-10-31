@@ -9,14 +9,17 @@ using System.Reflection.Metadata.Ecma335;
 public partial class ManualAddPage : ContentPage
 {
 	private readonly AuthorService _authorService;
+
 	private readonly IllustratorService _illustratorService;
 	private readonly LanguageService _languageService;
+    private readonly BookLocationService _locationService;
 	private readonly BookService _bookService;
 
 	public List<Author> Authors;
 	public List<Illustrator> Illustrators;
 	public List<Language> Languages;
-	public ManualAddPage(AuthorService authorService, BookService bookservice, IllustratorService illustratorService, LanguageService languageService)
+    public List<BookLocation> Locations;
+	public ManualAddPage(AuthorService authorService, BookService bookservice, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService)
 	{
 		InitializeComponent();
 		_authorService = authorService;
@@ -47,38 +50,54 @@ public partial class ManualAddPage : ContentPage
         LanguagePicker.ItemsSource = Languages;
     }
 
+    private async void getLocations()
+    {
+        Locations = await _locationService.GetAllBookLocationsAsync();
+        LocationPicker.ItemsSource = Locations;
+    }
 
 
-	public async void AddNewAuthor(Object sender, EventArgs e)
+	public async Task AddNewAuthor(Object sender, EventArgs e)
 	{
 		string authorName = await DisplayPromptAsync("Nieuwe auteur", "Voeg hieronder de naam van de auteur in.", "Auteur toevoegen", "Annuleer");
 		Author newAuthor = new Author
 		{
 			Name = authorName,
 		};
-		_authorService.AddAuthor(newAuthor);
+		await _authorService.AddAuthor(newAuthor);
 		getAuthors();
 	}
 
-    public async void AddNewIllustrator(Object sender, EventArgs e)
+    public async Task AddNewIllustrator(Object sender, EventArgs e)
     {
         string illustratorName = await DisplayPromptAsync("Nieuwe Illustrator", "Voeg hieronder de naam van de illustrator in.", "Illustrator toevoegen", "Annuleer");
         Illustrator newIllustrator = new Illustrator
         {
             Name = illustratorName,
         };
-        _illustratorService.AddIllustrator(newIllustrator);
+        await _illustratorService.AddIllustrator(newIllustrator);
         getIllustrators();
     }
 
-    public async void AddNewLanguage(Object sender, EventArgs e)
+    public async Task AddNewLanguage(Object sender, EventArgs e)
     {
         string languageName = await DisplayPromptAsync("Nieuwe Taal", "Voeg hieronder de taal in.", "Taal toevoegen", "Annuleer");
         Language newLanguage = new Language
         {
             Description = languageName,
         };
-        _languageService.AddLanguage(newLanguage);
+        await _languageService.AddLanguage(newLanguage);
+        getLanguages();
+    }
+
+    public async Task AddNewLocation(Object sender, EventArgs e)
+    {
+        string locationName = await DisplayPromptAsync("Nieuwe Locatie", "Voeg hieronder de naam van de locatie in.", "Locatie toevoegen", "Annuleer");
+        BookLocation newLocation = new BookLocation
+        {
+            Name = locationName,
+        };
+        await _locationService.AddBookLocation(newLocation);
         getLanguages();
     }
 
@@ -125,6 +144,14 @@ public partial class ManualAddPage : ContentPage
             Illustrator selectedIllustrator = (Illustrator)IllustratorPicker.SelectedItem;
             newBook.IllustratorId = selectedIllustrator.Id;
         }
+
+
+        if (LocationPicker.SelectedItem != null)
+        {
+            Location selectedLocation = (BookLocation)LocationPicker.SelectedItem;
+            newBook.BookLocationId = selectedLocation.Id;
+        }
+
         await _bookService.AddBook(newBook);
 		await DisplayAlertAsync("Succes", $"\"{newBook.Title}\" is toegevoegd", "Terug naar 'Mijn boeken'");
         await Shell.Current.GoToAsync(nameof(BooksPage));

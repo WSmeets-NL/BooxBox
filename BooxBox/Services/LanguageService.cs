@@ -31,7 +31,7 @@ namespace BooxBox.Services
             return language.Description;
         }
 
-        public async void AddLanguage(Language language)
+        public async Task AddLanguage(Language language)
         {
             await _Repo.AddLanguageAsync(language);
         }

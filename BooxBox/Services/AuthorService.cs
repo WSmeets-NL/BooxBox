@@ -16,9 +16,9 @@ namespace BooxBox.Services
             _Repo = authorRepository;
         }
 
-        public async void AddAuthor(Author author)
+        public async Task AddAuthor(Author author)
         {
-            _Repo.AddAuthor(author);
+            await _Repo.AddAuthor(author);
         }
 
         public async Task<List<Author>> GetAllAuthorsAsync()
