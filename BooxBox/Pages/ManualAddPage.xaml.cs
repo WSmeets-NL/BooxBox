@@ -209,8 +209,8 @@ public partial class ManualAddPage : ContentPage
 
         if (CollectionPicker.SelectedItem != null)
         {
-            BookCollection selectedCollection = (BookCollection))CollectionPicker.SelectedItem;
-            _collectionService.AddBook
+            BookCollection selectedCollection = (BookCollection)CollectionPicker.SelectedItem;
+            await _collectionService.AssignBookToCollection(newBook.Id, selectedCollection.Id);
         }
 
         await _bookService.AddBook(newBook);
