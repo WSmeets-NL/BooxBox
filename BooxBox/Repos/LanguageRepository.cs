@@ -27,5 +27,10 @@ namespace BooxBox.Repos
             Language language = await _wrapper._database.Table<Language>().Where(l => l.Id == id).FirstOrDefaultAsync();
             return language;
         }
+
+        public async Task AddLanguageAsync(Language language)
+        {
+            await _wrapper._database.InsertAsync(language);
+        }
     }
 }

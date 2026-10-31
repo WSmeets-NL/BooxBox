@@ -30,6 +30,11 @@ namespace BooxBox.Services
             Language language = await _Repo.GetLanguageById(id);
             return language.Description;
         }
+
+        public async void AddLanguage(Language language)
+        {
+            await _Repo.AddLanguageAsync(language);
+        }
            
     }
 }

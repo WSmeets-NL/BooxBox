@@ -35,17 +35,17 @@ namespace BooxBox.Services
             return await _bookRepo.GetBookByIdAsync(id);
         }
 
-        public async void AddBook(Book book)
+        public async Task AddBook(Book book)
         {
             await _bookRepo.AddBookAsync(book);
         }
 
-        public async void UpdateBook(Book book)
+        public async Task UpdateBook(Book book)
         {
             await _bookRepo.UpdateBookAsync(book);
         }
 
-        public async void DeleteBookById(int id)
+        public async Task DeleteBookById(int id)
         {
             await _bookRepo.DeleteBookByIdAsync(id);
         }

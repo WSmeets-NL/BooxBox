@@ -10,5 +10,7 @@ namespace BooxBox.Interfaces
         Task<List<Language>> GetAllLanguages();
 
         Task<Language> GetLanguageById(int id);
+
+        Task AddLanguageAsync(Language language);
     }
 }

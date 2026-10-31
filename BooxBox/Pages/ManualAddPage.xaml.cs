@@ -13,7 +13,9 @@ public partial class ManualAddPage : ContentPage
 	private readonly LanguageService _languageService;
 	private readonly BookService _bookService;
 
-	public List<Language> languages;
+	public List<Author> Authors;
+	public List<Illustrator> Illustrators;
+	public List<Language> Languages;
 	public ManualAddPage(AuthorService authorService, BookService bookservice, IllustratorService illustratorService, LanguageService languageService)
 	{
 		InitializeComponent();
@@ -21,108 +23,111 @@ public partial class ManualAddPage : ContentPage
 		_bookService = bookservice;
 		_illustratorService = illustratorService;
 		_languageService = languageService;
+		getAuthors();
+		getIllustrators();
 		getLanguages();
     }
 
-	private async void getLanguages()
+	private async void getAuthors()
 	{
-		languages = await _languageService.GetAllLanguages();
-		Debug.WriteLine($"Aantal talen = {languages.Count}");
-        LanguagePicker.ItemsSource = languages;
+        Authors = await _authorService.GetAllAuthorsAsync();
+        AuthorPicker.ItemsSource = Authors;
     }
 
-	public async void OnClickSubmit(object sender, EventArgs e)
-	{
-		bool allFieldsFilled = ConfirmInputs();
-		{
-			if (allFieldsFilled)
-			{
-				CreateNewBook();
-            }
-			else
-			{
-				DisplayAlertAsync("Foutmelding", "Niet alle velden zijn ingevuld.\nProbeer alstublieft opnieuw", "Bevestig");
-			}
-		}
-	}
-		
-
-
-	public bool ConfirmInputs()
-	{
-		if (String.IsNullOrEmpty(TitleEntry.Text) != true || String.IsNullOrEmpty(AuthorEntry.Text) != true || LanguagePicker.SelectedItem != null)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	public async Task<Author> FetchAuthor()
-	{
-        Author? author = await _authorService.GetAuthorByName(AuthorEntry.Text);
-        if (author == null)
-        {
-            Author newAuthor = new Author()
-            {
-                Name = AuthorEntry.Text,
-            };
-            _authorService.AddAuthor(newAuthor);
-            return author = await _authorService.GetAuthorByName(newAuthor.Name);
-        }
-		else
-		{
-			return author;
-		}
-    }
-
-    public async Task<Illustrator> FetchIllustrator()
+    private async void getIllustrators()
     {
-        {
-            Illustrator? illustrator = await _illustratorService.GetIllustratorByName(IllustratorEntry.Text);
-            if (illustrator == null)
-            {
-                Illustrator newIllustrator = new Illustrator()
-                {
-                    Name = IllustratorEntry.Text
-                };
-				await _illustratorService.AddIllustrator(newIllustrator);
+        Illustrators = await _illustratorService.GetAllIllustratorsAsync();
+		IllustratorPicker.ItemsSource = Illustrators;
+    }
 
-                return illustrator = await _illustratorService.GetIllustratorByName(newIllustrator.Name);
+
+    private async void getLanguages()
+	{
+		Languages = await _languageService.GetAllLanguages();
+        LanguagePicker.ItemsSource = Languages;
+    }
+
+
+
+	public async void AddNewAuthor(Object sender, EventArgs e)
+	{
+		string authorName = await DisplayPromptAsync("Nieuwe auteur", "Voeg hieronder de naam van de auteur in.", "Auteur toevoegen", "Annuleer");
+		Author newAuthor = new Author
+		{
+			Name = authorName,
+		};
+		_authorService.AddAuthor(newAuthor);
+		getAuthors();
+	}
+
+    public async void AddNewIllustrator(Object sender, EventArgs e)
+    {
+        string illustratorName = await DisplayPromptAsync("Nieuwe Illustrator", "Voeg hieronder de naam van de illustrator in.", "Illustrator toevoegen", "Annuleer");
+        Illustrator newIllustrator = new Illustrator
+        {
+            Name = illustratorName,
+        };
+        _illustratorService.AddIllustrator(newIllustrator);
+        getIllustrators();
+    }
+
+    public async void AddNewLanguage(Object sender, EventArgs e)
+    {
+        string languageName = await DisplayPromptAsync("Nieuwe Taal", "Voeg hieronder de taal in.", "Taal toevoegen", "Annuleer");
+        Language newLanguage = new Language
+        {
+            Description = languageName,
+        };
+        _languageService.AddLanguage(newLanguage);
+        getLanguages();
+    }
+
+    public async void OnClickSubmit(object sender, EventArgs e)
+    {
+        bool allFieldsFilled = ConfirmInputs();
+        {
+            if (allFieldsFilled)
+            {
+                await CreateNewBook();
             }
-			else
-			{
-				return illustrator;
-			}
+            else
+            {
+                DisplayAlertAsync("Foutmelding", "Niet alle velden zijn ingevuld.\nProbeer alstublieft opnieuw", "Bevestig");
+            }
         }
     }
 
-    public async void CreateNewBook()
+    public bool ConfirmInputs()
+    {
+        if(string.IsNullOrWhiteSpace(TitleEntry.Text) == true || AuthorPicker.SelectedItem == null || LanguagePicker.SelectedItem == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    public async Task CreateNewBook()
 	{
-		Author author = await FetchAuthor();
-
-		Illustrator illustrator = null;
-        if (IllustratorEntry.Text != null)
-		{
-			illustrator = await FetchIllustrator();
-		}
+        Author selectedAuthor = (Author)AuthorPicker.SelectedItem;
         Language selectedLanguage = (Language)LanguagePicker.SelectedItem;
 
         Book newBook = new Book()
         {
             Title = TitleEntry.Text,
-            AuthorId = author.Id,
+            AuthorId = selectedAuthor.Id,
             LanguageId = selectedLanguage.Id
         };
 
-        if (illustrator != null)
+        if (IllustratorPicker.SelectedItem != null)
         {
-            newBook.IllustratorId = illustrator.Id;
+            Illustrator selectedIllustrator = (Illustrator)IllustratorPicker.SelectedItem;
+            newBook.IllustratorId = selectedIllustrator.Id;
         }
-        _bookService.AddBook(newBook);
-		DisplayAlert("Succes", $"\"{newBook.Title}\" is toegevoegd", "Terug naar 'Mijn boeken'");
+        await _bookService.AddBook(newBook);
+		await DisplayAlertAsync("Succes", $"\"{newBook.Title}\" is toegevoegd", "Terug naar 'Mijn boeken'");
         await Shell.Current.GoToAsync(nameof(BooksPage));
     }
+
 }

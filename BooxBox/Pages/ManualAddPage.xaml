@@ -14,14 +14,23 @@
             <Entry Placeholder="Voer de titel in" x:Name="TitleEntry" />
 
             <Label Text="Wie is de auteur? *" FontSize="18"/>
-            <Entry Placeholder="Voer de auteur in" x:Name="AuthorEntry" />
-
+            <Grid ColumnDefinitions="4*, *">
+                <Picker x:Name="AuthorPicker" ItemDisplayBinding="{Binding Name}"/>
+                <Button Clicked="AddNewAuthor" Text="+" BackgroundColor="DarkBlue" />
+            </Grid>
+            
             <Label Text="Wie is de illustrator?" FontSize="18"/>
             <Label Text="Is er geen illustrator, laat dit veld dan leeg." FontSize="12" />
-            <Entry Placeholder="Voer de illustrator in." x:Name="IllustratorEntry"/>
+            <Grid ColumnDefinitions="4*, *">
+                <Picker x:Name="IllustratorPicker" ItemDisplayBinding="{Binding Name}"/>
+                <Button Clicked="AddNewIllustrator" Text="+" BackgroundColor="DarkBlue" />
+            </Grid>
 
             <Label Text="In welke taal is het boek geschreven? *" FontSize="18"/>
-            <Picker x:Name="LanguagePicker" ItemDisplayBinding="{Binding Description}" />
+            <Grid ColumnDefinitions="4*, *">
+                <Picker x:Name="LanguagePicker" ItemDisplayBinding="{Binding Description}" />
+                <Button Clicked="AddNewLanguage" Text="+" BackgroundColor="DarkBlue" />
+            </Grid>
 
             <Button Text="Boek toevoegen" Clicked="OnClickSubmit" BackgroundColor="DarkBlue" TextColor="White" />
         </VerticalStackLayout>
