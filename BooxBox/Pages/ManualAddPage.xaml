@@ -15,16 +15,18 @@
 
             <Label Text="Wie is de auteur? *" FontSize="18"/>
             <Grid ColumnDefinitions="4*, *">
-                <Picker Grid.Column="0" x:Name="AuthorPicker" ItemDisplayBinding="{Binding Name}"/>
+                <SearchBar Grid.Column="0" x:Name="AuthorSearch" Placeholder="Zoek een Auteur" TextChanged="FilterAuthors"/>
                 <Button Grid.Column="1" Clicked="AddNewAuthor" Text="Nieuwe Auteur" BackgroundColor="LightBlue" />
             </Grid>
-            
+            <Picker x:Name="AuthorPicker" ItemDisplayBinding="{Binding Name}"/>
+
             <Label Text="Wie is de illustrator?" FontSize="18"/>
             <Label Text="Is er geen illustrator, laat dit veld dan leeg." FontSize="12" />
             <Grid ColumnDefinitions="4*, *">
-                <Picker Grid.Column="0" x:Name="IllustratorPicker" ItemDisplayBinding="{Binding Name}"/>
+                <SearchBar Grid.Column="0" x:Name="IllustratorSearch" Placeholder="Zoek een Illustrator" TextChanged="FilterIllustrators"/>
                 <Button Grid.Column="1" Clicked="AddNewIllustrator" Text="Nieuwe Illustrator" BackgroundColor="LightBlue"  />
             </Grid>
+            <Picker x:Name="IllustratorPicker" ItemDisplayBinding="{Binding Name}"/>
 
             <Label Text="In welke taal is het boek geschreven? *" FontSize="18"/>
             <Grid ColumnDefinitions="4*, *">
@@ -34,15 +36,17 @@
 
             <Label Text="In welke locatie wil je dit boek bewaren?" FontSize="18"/>
             <Grid ColumnDefinitions="4*, *">
-                <Picker Grid.Column="0" x:Name="LocationPicker" ItemDisplayBinding="{Binding Name}" />
+                <SearchBar Grid.Column="0" x:Name="LocationSearch" Placeholder="Zoek een Locatie" TextChanged="FilterLocations"/>
                 <Button Grid.Column="1" Clicked="AddNewLocation" Text="Nieuwe Locatie" BackgroundColor="LightBlue"  />
             </Grid>
+            <Picker x:Name="LocationPicker" ItemDisplayBinding="{Binding Name}" />
 
             <Label Text="Wil je dit boek al toevoegen aan een verzameling?" FontSize="18"/>
             <Grid ColumnDefinitions="4*, *">
-                <Picker Grid.Column="0" x:Name="CollectionPicker" ItemDisplayBinding="{Binding Name}" />
+                <SearchBar Grid.Column="0" x:Name="CollectionSearch" Placeholder="Zoek een Verzameeling" TextChanged="FilterCollections"/>
                 <Button Grid.Column="1" Clicked="AddNewCollection" Text="Nieuwe Verzameling" BackgroundColor="LightBlue"  />
             </Grid>
+            <Picker x:Name="CollectionPicker" ItemDisplayBinding="{Binding Name}" />
 
             <Button Text="Boek toevoegen" Clicked="OnClickSubmit"  BackgroundColor="LightBlue"  />
         </VerticalStackLayout>
