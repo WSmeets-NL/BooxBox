@@ -9,11 +9,12 @@ using System.Reflection.Metadata.Ecma335;
 public partial class ManualAddPage : ContentPage
 {
 	private readonly AuthorService _authorService;
+    private readonly BookService _bookService;
     private readonly BookCollectionService _collectionService;
-	private readonly IllustratorService _illustratorService;
-	private readonly LanguageService _languageService;
     private readonly BookLocationService _locationService;
-	private readonly BookService _bookService;
+    private readonly IllustratorService _illustratorService;
+	private readonly LanguageService _languageService;
+
 
 	public List<Author> Authors;
     public List<BookCollection> Collections;
@@ -29,46 +30,53 @@ public partial class ManualAddPage : ContentPage
         _collectionService = collectionService;
 		_illustratorService = illustratorService;
 		_languageService = languageService;
-		getAuthors();
-        getCollections();
-		getIllustrators();
-		getLanguages();
-        getLocations();
+        _locationService = locationService;
     }
 
-	private async Task getAuthors()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await GetAuthors();
+        await GetCollections();
+        await GetIllustrators();
+        await GetLanguages();
+        await GetLocations();
+    }
+
+	private async Task GetAuthors()
 	{
         Authors = await _authorService.GetAllAuthorsAsync();
         AuthorPicker.ItemsSource = Authors;
     }
 
-    private async Task getCollections()
+    private async Task GetCollections()
     {
         Collections = await _collectionService.GetAllBookCollectionsAsync();
         CollectionPicker.ItemsSource = Collections;
     }
 
-    private async Task getIllustrators()
+    private async Task GetIllustrators()
     {
         Illustrators = await _illustratorService.GetAllIllustratorsAsync();
 		IllustratorPicker.ItemsSource = Illustrators;
     }
 
 
-    private async Task getLanguages()
+    private async Task GetLanguages()
 	{
 		Languages = await _languageService.GetAllLanguages();
         LanguagePicker.ItemsSource = Languages;
     }
 
-    private async Task getLocations()
+    private async Task GetLocations()
     {
         Locations = await _locationService.GetAllBookLocationsAsync();
         LocationPicker.ItemsSource = Locations;
     }
 
 
-	public async Task AddNewAuthor(Object sender, EventArgs e)
+	public async void AddNewAuthor(object sender, EventArgs e)
 	{
 		string authorName = await DisplayPromptAsync("Nieuwe Auteur", "Voeg hieronder de naam van de auteur in.", "Auteur toevoegen", "Annuleer");
 		Author newAuthor = new Author
@@ -76,10 +84,10 @@ public partial class ManualAddPage : ContentPage
 			Name = authorName,
 		};
 		await _authorService.AddAuthor(newAuthor);
-		await getAuthors();
+		await GetAuthors();
 	}
 
-    public async Task AddNewCollection(Object sender, EventArgs e)
+    public async void AddNewCollection(object sender, EventArgs e)
     {
         string collectionName = await DisplayPromptAsync("Nieuwe Verzameling", "Voeg hieronder de naam van de verzameling in.", "Verzameling toevoegen", "Annuleer");
         BookCollection newCollection = new BookCollection
@@ -87,10 +95,10 @@ public partial class ManualAddPage : ContentPage
             Name = collectionName,
         };
         await _collectionService.AddBookCollection(newCollection);
-        await getCollections();
+        await GetCollections();
     }
 
-    public async Task AddNewIllustrator(Object sender, EventArgs e)
+    public async void AddNewIllustrator(object sender, EventArgs e)
     {
         string illustratorName = await DisplayPromptAsync("Nieuwe Illustrator", "Voeg hieronder de naam van de illustrator in.", "Illustrator toevoegen", "Annuleer");
         Illustrator newIllustrator = new Illustrator
@@ -98,10 +106,10 @@ public partial class ManualAddPage : ContentPage
             Name = illustratorName,
         };
         await _illustratorService.AddIllustrator(newIllustrator);
-        await getIllustrators();
+        await GetIllustrators();
     }
 
-    public async Task AddNewLanguage(Object sender, EventArgs e)
+    public async void AddNewLanguage(object sender, EventArgs e)
     {
         string languageName = await DisplayPromptAsync("Nieuwe Taal", "Voeg hieronder de taal in.", "Taal toevoegen", "Annuleer");
         Language newLanguage = new Language
@@ -109,10 +117,10 @@ public partial class ManualAddPage : ContentPage
             Description = languageName,
         };
         await _languageService.AddLanguage(newLanguage);
-        await getLanguages();
+        await GetLanguages();
     }
 
-    public async Task AddNewLocation(Object sender, EventArgs e)
+    public async void AddNewLocation(object sender, EventArgs e)
     {
         string locationName = await DisplayPromptAsync("Nieuwe Locatie", "Voeg hieronder de naam van de locatie in.", "Locatie toevoegen", "Annuleer");
         BookLocation newLocation = new BookLocation
@@ -120,7 +128,7 @@ public partial class ManualAddPage : ContentPage
             Name = locationName,
         };
         await _locationService.AddBookLocation(newLocation);
-        await getLocations();
+        await GetLocations();
     }
 
     public async void OnClickSubmit(object sender, EventArgs e)
@@ -170,7 +178,7 @@ public partial class ManualAddPage : ContentPage
 
         if (LocationPicker.SelectedItem != null)
         {
-            Location selectedLocation = (BookLocation)LocationPicker.SelectedItem;
+            BookLocation selectedLocation = (BookLocation)LocationPicker.SelectedItem;
             newBook.BookLocationId = selectedLocation.Id;
         }
 
