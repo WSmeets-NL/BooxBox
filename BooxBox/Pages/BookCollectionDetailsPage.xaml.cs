@@ -1,8 +1,9 @@
 using BooxBox.Models;
 using BooxBox.Services;
-
+using System.Net;
 namespace BooxBox.Pages;
 
+[QueryProperty(nameof(CollectionId), "id")]
 public partial class BookCollectionDetailsPage : ContentPage
 {
     private readonly BookService _bookService;
@@ -31,8 +32,8 @@ public partial class BookCollectionDetailsPage : ContentPage
     {
         ChosenCollection = await _collectionService.GetBookCollectionById(collectionId);
         IncludedBooks = await _bookService.GetAllBooksInCollection(collectionId);
-
         BooksInCollection.ItemsSource = IncludedBooks;
+        BindingContext = this;
     }
 
     public async void ToBookDetails(object sender, EventArgs e)

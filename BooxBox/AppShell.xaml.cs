@@ -14,6 +14,7 @@ namespace BooxBox
             Routing.RegisterRoute(nameof(BookDetailsPage), typeof(BookDetailsPage));
             Routing.RegisterRoute(nameof(BookCollectionPage), typeof(BookCollectionPage));
             Routing.RegisterRoute(nameof(BookLocationPage), typeof(BookLocationPage));
+            Routing.RegisterRoute(nameof(BookCollectionDetailsPage), typeof(BookCollectionDetailsPage));
         }
     }
 }
