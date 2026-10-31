@@ -1,6 +1,4 @@
 namespace BooxBox.Pages;
-
-using Android.Renderscripts;
 using BooxBox.Data;
 using BooxBox.Models;
 using BooxBox.Services;
@@ -50,7 +48,7 @@ public partial class BookDetailsPage : ContentPage
 		BookAuthor = await _authorService.GetAuthorName(ChosenBook.AuthorId);
 
 		IncludedCollections = await _collectionService.GetCollectionsContainingBookAsync(id);
-		CollectionView.ItemsSource = IncludedCollections;
+		BookCollectionView.ItemsSource = IncludedCollections;
 
 		if (ChosenBook.IllustratorId != null)
 		{

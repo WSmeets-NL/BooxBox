@@ -53,7 +53,7 @@
                 <VerticalStackLayout Grid.Row="4">
                     <Grid ColumnDefinitions="*, 3*, *" >
                         <Label Grid.Column="0" Text="Verzamelingen:" FontSize="24" HorizontalTextAlignment="Center"/>
-                        <CollectionView x:Name="CollectionView" Grid.Column="1">
+                        <CollectionView x:Name="BookCollectionView" Grid.Column="1">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="3*, *">
