@@ -17,7 +17,7 @@
 
 
             <Image Grid.Column="0" Source="missingcover.png" VerticalOptions="Center"/>
-            <Grid Grid.Column="1" RowDefinitions="*, *, *, *">
+            <Grid Grid.Column="1" RowDefinitions="*, *, *, *, *">
                 <VerticalStackLayout Grid.Row="0">
                     <Grid ColumnDefinitions="*, 3*, *" >
                         <Label Grid.Column="0" Text="Auteur:" FontSize="24" HorizontalTextAlignment="Center"/>
@@ -47,6 +47,23 @@
                         <Label Grid.Column="0" Text="Locatie:" FontSize="24" HorizontalTextAlignment="Center"/>
                         <Label Grid.Column="1" Text="{Binding BookLocation}" FontSize="24" HorizontalTextAlignment="Start"/>
                         <Button Grid.Column="2" Text="wijzig" Clicked="ChangeBookLocation"/>
+                    </Grid>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Grid.Row="4">
+                    <Grid ColumnDefinitions="*, 3*, *" >
+                        <Label Grid.Column="0" Text="Verzamelingen:" FontSize="24" HorizontalTextAlignment="Center"/>
+                        <CollectionView x:Name="CollectionView" Grid.Column="1">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="3*, *">
+                                        <Label Grid.Column="0" Text="{Binding Name}" />
+                                        <Button Grid.Column="1" Text="Verwijder uit verzameling" Clicked="RemoveFromCollection" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Button Clicked="AddToCollection" Text="Verzameling toevoegen"/>
                     </Grid>
                 </VerticalStackLayout>
             </Grid>

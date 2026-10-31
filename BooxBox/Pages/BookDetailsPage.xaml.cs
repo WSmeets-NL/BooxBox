@@ -9,6 +9,7 @@ public partial class BookDetailsPage : ContentPage
 {
     private readonly AuthorService _authorService;
 	private readonly BookService _bookService;
+	private readonly BookCollectionService _collectionService;
 	private readonly BookLocationService _locationService;
 	private readonly IllustratorService _illustratorService;
 	private readonly LanguageService _languageService;
@@ -25,15 +26,17 @@ public partial class BookDetailsPage : ContentPage
 	}
 
 	public String BookAuthor { get; set; }
+	public List<BookCollection> IncludedCollections { get; set; }
 	public String? BookIllustrator { get; set; } = "Geen illustrator";
 	public String BookLocation { get; set; } = "Geen locatie toegewezen.";
 	public String BookLanguage { get; set; }
 
-	public BookDetailsPage(AuthorService authorService, BookService bookService, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService)
+	public BookDetailsPage(AuthorService authorService, BookService bookService, BookCollectionService collectionService, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService)
 	{
         InitializeComponent();
 		_authorService = authorService;
 		_bookService = bookService;
+		_collectionService = collectionService;
 		_illustratorService = illustratorService;
 		_locationService = locationService;
 		_languageService = languageService;
@@ -43,6 +46,8 @@ public partial class BookDetailsPage : ContentPage
 	{
 		ChosenBook = await _bookService.GetBookById(id);
 		BookAuthor = await _authorService.GetAuthorName(ChosenBook.AuthorId);
+
+
 		if (ChosenBook.IllustratorId != null)
 		{
 			BookIllustrator = await _illustratorService.GetIllustratorName(ChosenBook.IllustratorId.Value);
@@ -67,4 +72,8 @@ public partial class BookDetailsPage : ContentPage
 
 	}
 
+	public async void AddToCollection(object sender, EventArgs e)
+	{
+		List<BookCollection>
+	}
 }

@@ -16,7 +16,7 @@
                     <Entry Grid.Row="1" Placeholder="Voer de titel in" x:Name="TitleEntry" />
                 </Grid>
             </Border>
-            
+         
             <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
                     <Grid RowDefinitions="*,*,*">
                         <Label Grid.Row="0" Text="Wie is de auteur? *" FontSize="18"/>

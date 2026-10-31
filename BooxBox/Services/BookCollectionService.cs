@@ -44,5 +44,10 @@ namespace BooxBox.Services
         {
             await _collectionRepo.AssignBookToCollectionAsync(bookId, collectionId);
         }
+
+        public async Task<List<BookCollection>> GetCollectionsContainingBookAsync(int bookId)
+        {
+            return await _collectionRepo.GetCollectionsContainingBookAsync(bookId);
+        }
     }
 }

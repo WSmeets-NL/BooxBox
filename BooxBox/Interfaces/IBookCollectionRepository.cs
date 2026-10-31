@@ -19,5 +19,7 @@ namespace BooxBox.Interfaces
 
         Task AssignBookToCollectionAsync(int bookId, int collectionId);
 
+        Task<List<BookCollection>> GetCollectionsContainingBookAsync(int bookId);
+
     }
 }
