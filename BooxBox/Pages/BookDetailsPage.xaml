@@ -19,52 +19,67 @@
             <Image Grid.Column="0" Source="missingcover.png" VerticalOptions="Center"/>
             <Grid Grid.Column="1" RowDefinitions="*, *, *, *, *">
                 <VerticalStackLayout Grid.Row="0">
-                    <Grid ColumnDefinitions="*, 3*, *" >
-                        <Label Grid.Column="0" Text="Auteur:" FontSize="24" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="1" Text="{Binding BookAuthor}" FontSize="24" HorizontalTextAlignment="Start"/>
-                        <Button Grid.Column="2" Text="wijzig" />
-                    </Grid>
+                    <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="*, 3*, *" >
+                            <Label Grid.Column="0" Text="Auteur:" FontSize="24" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="1" Text="{Binding BookAuthor}" FontSize="24" HorizontalTextAlignment="Start"/>
+                            <Button Grid.Column="2" Text="wijzig" />
+                        </Grid>
+                    </Border>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Row="1">
-                    <Grid ColumnDefinitions="*, 3*, *" >
-                        <Label Grid.Column="0" Text="Illustrator:" FontSize="24" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="1" Text="{Binding BookIllustrator}" FontSize="24" HorizontalTextAlignment="Start"/>
-                        <Button Grid.Column="2" Text="wijzig" />
-                    </Grid>
+                    <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="*, 3*, *" >
+                            <Label Grid.Column="0" Text="Illustrator:" FontSize="24" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="1" Text="{Binding BookIllustrator}" FontSize="24" HorizontalTextAlignment="Start"/>
+                            <Button Grid.Column="2" Text="wijzig" />
+                        </Grid>
+                    </Border>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Row="2">
-                    <Grid ColumnDefinitions="*, 3*, *" >
-                        <Label Grid.Column="0" Text="Taal:" FontSize="24" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="1" Text="{Binding BookLanguage}" FontSize="24" HorizontalTextAlignment="Start"/>
-                        <Button Grid.Column="2" Text="wijzig" />
-                    </Grid>
+                    <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="*, 3*, *" >
+                            <Label Grid.Column="0" Text="Taal:" FontSize="24" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="1" Text="{Binding BookLanguage}" FontSize="24" HorizontalTextAlignment="Start"/>
+                            <Button Grid.Column="2" Text="wijzig" />
+                        </Grid>
+                    </Border>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Row="3">
-                    <Grid ColumnDefinitions="*, 3*, *" >
-                        <Label Grid.Column="0" Text="Locatie:" FontSize="24" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="1" Text="{Binding BookLocation}" FontSize="24" HorizontalTextAlignment="Start"/>
-                        <Button Grid.Column="2" Text="wijzig" Clicked="ChangeBookLocation"/>
-                    </Grid>
+                    <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="*, 3*, *" >
+                            <Label Grid.Column="0" Text="Locatie:" FontSize="24" HorizontalTextAlignment="Center"/>
+                            <Label Grid.Column="1" Text="{Binding BookLocation}" FontSize="24" HorizontalTextAlignment="Start"/>
+                            <Button Grid.Column="2" Text="wijzig" Clicked="ChangeBookLocation"/>
+                        </Grid>
+                    </Border>
                 </VerticalStackLayout>
-                
+
                 <VerticalStackLayout Grid.Row="4">
-                    <Grid ColumnDefinitions="*, 3*, *" >
-                        <Label Grid.Column="0" Text="Verzamelingen:" FontSize="24" HorizontalTextAlignment="Center"/>
-                        <CollectionView x:Name="BookCollectionView" Grid.Column="1">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid ColumnDefinitions="3*, *">
-                                        <Label Grid.Column="0" Text="{Binding Name}" />
-                                        <Button Grid.Column="1" Text="Verwijder uit verzameling" Clicked="RemoveFromCollection" BindingContext="{Binding Id}" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                        <Button Clicked="AddToCollection" Text="Boek toevoegen aan verzameling"/>
-                    </Grid>
+                    <Border Grid.Row="1" StrokeThickness="1"  Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                        <Grid RowDefinitions="*, 4*">
+                            <Grid Grid.Row="0" ColumnDefinitions="4*, *">
+                                <Label Grid.Column="0" Text="Verzamelingen:" FontSize="24" HorizontalTextAlignment="Start"/>
+                                <Button Grid.Column="1" Clicked="AddToCollection" Text="Verzameling Toevoegen"/>
+                            </Grid>
+
+                            <Grid Padding="10" Grid.Row="1">
+                                <CollectionView x:Name="BookCollectionView">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="4*, *">
+                                                <Label Grid.Column="0" Text="{Binding Name}" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10"/>
+                                                <Button Grid.Column="1" Text="Verwijder verzameling" Clicked="RemoveFromCollection" BindingContext="{Binding Id}" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Grid>
+                    </Border>
                 </VerticalStackLayout>
             </Grid>
         </Grid>

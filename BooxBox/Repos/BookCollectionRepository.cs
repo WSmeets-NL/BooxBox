@@ -1,7 +1,6 @@
 ﻿using BooxBox.Data;
 using BooxBox.Interfaces;
 using BooxBox.Models;
-using Java.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -92,7 +91,7 @@ namespace BooxBox.Repos
             foreach(BookBookCollection collection in coupledCollections)
             {
                 BookCollection foundCollection = await _wrapper._database.Table<BookCollection>().Where(c => c.Id == collection.BookCollectionId).FirstOrDefaultAsync();
-                BookCollections.Append(foundCollection);
+                BookCollections.Add(foundCollection);
             }
             return BookCollections;
         }
