@@ -96,7 +96,14 @@ public partial class BookDetailsPage : ContentPage
         }
     }
 
-	public async void RemoveFromCollection(object sender, EventArgs e)
+    public async void GoToBookCollection(object sender, EventArgs e)
+    {
+        Button button = (Button)sender;
+        int collectionId = (int)button.BindingContext;
+        await Shell.Current.GoToAsync($"CollectionDetailsPage?id={collectionId}");
+    }
+
+    public async void RemoveFromCollection(object sender, EventArgs e)
 	{
 		Button button = (Button)sender;
 		int collectionId = (int)button.BindingContext;

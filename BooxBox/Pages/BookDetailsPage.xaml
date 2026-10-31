@@ -70,9 +70,10 @@
                                 <CollectionView x:Name="BookCollectionView">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <Grid ColumnDefinitions="4*, *">
+                                            <Grid ColumnDefinitions="4*,*, *">
                                                 <Label Grid.Column="0" Text="{Binding Name}" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10"/>
-                                                <Button Grid.Column="1" Text="Verwijder verzameling" Clicked="RemoveFromCollection" BindingContext="{Binding Id}" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                                                <Button Grid.Column="1" Text="Naar verzameling" Clicked="GoToBookCollection" BindingContext="{Binding Id}" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                                                <Button Grid.Column="2" Text="Verwijder verzameling" Clicked="RemoveFromCollection" BindingContext="{Binding Id}" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
                                             </Grid>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
