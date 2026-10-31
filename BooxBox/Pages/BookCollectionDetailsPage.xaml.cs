@@ -40,6 +40,6 @@ public partial class BookCollectionDetailsPage : ContentPage
             BookLocations.Add(await _locationService.GetBookLocationById(book.BookLocationId));
         }
 
-        BindingContext = this;
+        BooksInCollection.ItemsSource = IncludedBooks;
     }
 }
