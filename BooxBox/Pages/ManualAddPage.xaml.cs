@@ -75,7 +75,7 @@ public partial class ManualAddPage : ContentPage
         LocationPicker.ItemsSource = Locations;
     }
 
-
+    //Add-button methods
 	public async void AddNewAuthor(object sender, EventArgs e)
 	{
 		string authorName = await DisplayPromptAsync("Nieuwe Auteur", "Voeg hieronder de naam van de auteur in.", "Auteur toevoegen", "Annuleer");
@@ -131,6 +131,31 @@ public partial class ManualAddPage : ContentPage
         await GetLocations();
     }
 
+
+    //Searchbar-methods
+    private void FilterAuthors(object sender, EventArgs e)
+    {
+        List<Author> filteredAuthors = Authors.Where(a => a.Name.Contains(AuthorSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+        AuthorPicker.ItemsSource = filteredAuthors;
+    }
+
+    private void FilterIllustrators(object sender, EventArgs e)
+    {
+        List<Illustrator> filteredIllustrators = Illustrators.Where(i => i.Name.Contains(IllustratorSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+        IllustratorPicker.ItemsSource = filteredIllustrators;
+    }
+
+    private void FilterLocations(object sender, EventArgs e)
+    {
+        List<BookLocation> filteredLocations = Locations.Where(l => l.Name.Contains(LocationSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+        LocationPicker.ItemsSource = filteredLocations;
+    }
+
+    private void FilterCollections(object sender, EventArgs e)
+    {
+        List<BookCollection> filteredCollections = Collections.Where(c => c.Name.Contains(AuthorSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+        CollectionPicker.ItemsSource = filteredCollections;
+    }
     public async void OnClickSubmit(object sender, EventArgs e)
     {
         bool allFieldsFilled = ConfirmInputs();
