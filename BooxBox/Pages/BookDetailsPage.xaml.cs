@@ -59,6 +59,12 @@ public partial class BookDetailsPage : ContentPage
 		BindingContext = this;
 	}
 
+	public async Task RefreshIncludedCollections()
+	{
+        IncludedCollections = await _collectionService.GetCollectionsContainingBookAsync(ChosenBook.Id);
+        BookCollectionView.ItemsSource = IncludedCollections;
+    }
+
 	public async void ChangeBookLocation(Object sender, EventArgs e)
 	{
 		List<BookLocation> allLocations = await _locationService.GetAllBookLocationsAsync();
@@ -86,13 +92,16 @@ public partial class BookDetailsPage : ContentPage
             await _collectionService.AssignBookToCollection(ChosenBook.Id, chosenCollection.Id);
             await DisplayAlertAsync("Succes", "Nieuwe verzameling toegekend", "ok");
 
-			IncludedCollections = await _collectionService.GetCollectionsContainingBookAsync(ChosenBook.Id);
-			BookCollectionView.ItemsSource = IncludedCollections;
+			RefreshIncludedCollections();
         }
     }
 
 	public async void RemoveFromCollection(object sender, EventArgs e)
 	{
-		int collectionId = 
+		Button button = (Button)sender;
+		int collectionId = (int)button.BindingContext;
+		await _collectionService.RemoveBookFromCollection(ChosenBook.Id, collectionId);
+
+		RefreshIncludedCollections();
 	}
 }

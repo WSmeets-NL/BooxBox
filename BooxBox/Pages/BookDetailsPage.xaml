@@ -58,7 +58,7 @@
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="3*, *">
                                         <Label Grid.Column="0" Text="{Binding Name}" />
-                                        <Button Grid.Column="1" Text="Verwijder uit verzameling" Clicked="RemoveFromCollection" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                                        <Button Grid.Column="1" Text="Verwijder uit verzameling" Clicked="RemoveFromCollection" BindingContext="{Binding Id}" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
