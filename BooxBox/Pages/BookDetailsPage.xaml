@@ -63,7 +63,7 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                        <Button Clicked="AddToCollection" Text="Verzameling toevoegen"/>
+                        <Button Clicked="AddToCollection" Text="Boek toevoegen aan verzameling"/>
                     </Grid>
                 </VerticalStackLayout>
             </Grid>

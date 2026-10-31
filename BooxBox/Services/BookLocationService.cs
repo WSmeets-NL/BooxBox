@@ -45,5 +45,6 @@ namespace BooxBox.Services
             string locationName = await _locationRepo.GetBookLocationNameAsync(id);
             return locationName;
         }
+
     }
 }

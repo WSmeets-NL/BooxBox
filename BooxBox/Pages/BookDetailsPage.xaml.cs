@@ -1,4 +1,6 @@
 namespace BooxBox.Pages;
+
+using Android.Renderscripts;
 using BooxBox.Data;
 using BooxBox.Models;
 using BooxBox.Services;
@@ -47,6 +49,8 @@ public partial class BookDetailsPage : ContentPage
 		ChosenBook = await _bookService.GetBookById(id);
 		BookAuthor = await _authorService.GetAuthorName(ChosenBook.AuthorId);
 
+		IncludedCollections = await _collectionService.GetCollectionsContainingBookAsync(id);
+		CollectionView.ItemsSource = IncludedCollections;
 
 		if (ChosenBook.IllustratorId != null)
 		{
@@ -74,6 +78,18 @@ public partial class BookDetailsPage : ContentPage
 
 	public async void AddToCollection(object sender, EventArgs e)
 	{
-		List<BookCollection>
-	}
+		List<BookCollection> allCollections = await _collectionService.GetAllBookCollectionsAsync();
+		string chosenCollectionName = await DisplayActionSheetAsync("Kies een verzameling", "Annuleer", null, allCollections.Select(c => c.Name).ToArray());
+
+        if (chosenCollectionName != "Annuleer")
+        {
+			BookCollection chosenCollection = allCollections.Find(c => c.Name == chosenCollectionName);
+
+            await _collectionService.AssignBookToCollection(ChosenBook.Id, chosenCollection.Id);
+            await DisplayAlertAsync("Succes", "Nieuwe verzameling toegekend", "ok");
+
+			IncludedCollections = await _collectionService.GetCollectionsContainingBookAsync(ChosenBook.Id);
+			CollectionView.ItemsSource = IncludedCollections;
+        }
+    }
 }
