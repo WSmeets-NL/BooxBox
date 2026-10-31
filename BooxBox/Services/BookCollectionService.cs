@@ -49,5 +49,10 @@ namespace BooxBox.Services
         {
             return await _collectionRepo.GetCollectionsContainingBookAsync(bookId);
         }
+
+        public async Task RemoveBookFromCollection(int bookId, int collectionId)
+        {
+            await _collectionRepo.RemoveBookFromCollection(bookId, collectionId);
+        }
     }
 }

@@ -87,7 +87,12 @@ public partial class BookDetailsPage : ContentPage
             await DisplayAlertAsync("Succes", "Nieuwe verzameling toegekend", "ok");
 
 			IncludedCollections = await _collectionService.GetCollectionsContainingBookAsync(ChosenBook.Id);
-			CollectionView.ItemsSource = IncludedCollections;
+			BookCollectionView.ItemsSource = IncludedCollections;
         }
     }
+
+	public async void RemoveFromCollection(object sender, EventArgs e)
+	{
+		int collectionId = 
+	}
 }

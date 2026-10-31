@@ -96,5 +96,10 @@ namespace BooxBox.Repos
             }
             return BookCollections;
         }
+
+        public async Task RemoveBookFromCollection(int bookId, int collectionId)
+        {
+            await _wrapper._database.Table<BookBookCollection>().Where(bbc => bbc.BookId == bookId && bbc.BookCollectionId == collectionId).DeleteAsync();
+        }
     }
 }

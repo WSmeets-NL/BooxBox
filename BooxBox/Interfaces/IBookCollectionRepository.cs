@@ -21,5 +21,6 @@ namespace BooxBox.Interfaces
 
         Task<List<BookCollection>> GetCollectionsContainingBookAsync(int bookId);
 
+        Task RemoveBookFromCollection(int bookId, int collectionId);
     }
 }
