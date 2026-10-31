@@ -207,6 +207,12 @@ public partial class ManualAddPage : ContentPage
             newBook.BookLocationId = selectedLocation.Id;
         }
 
+        if (CollectionPicker.SelectedItem != null)
+        {
+            BookCollection selectedCollection = (BookCollection))CollectionPicker.SelectedItem;
+            _collectionService.AddBook
+        }
+
         await _bookService.AddBook(newBook);
 		await DisplayAlertAsync("Succes", $"\"{newBook.Title}\" is toegevoegd", "Terug naar 'Mijn boeken'");
         await Shell.Current.GoToAsync(nameof(BooksPage));

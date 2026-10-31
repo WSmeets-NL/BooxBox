@@ -77,5 +77,11 @@ namespace BooxBox.Repos
                 }
             }
         }
+
+        public async Task AssignBookToCollectionAsync(int bookId, int collectionId)
+        {
+            BookBookCollection bookCollectionCouple = new BookBookCollection(bookId, collectionId);
+            await _wrapper._database.InsertAsync(bookCollectionCouple);
+        }
     }
 }

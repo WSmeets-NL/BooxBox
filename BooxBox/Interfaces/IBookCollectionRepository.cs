@@ -16,5 +16,7 @@ namespace BooxBox.Interfaces
         Task UpdateBookCollectionAsync(BookCollection collection);
 
         Task DeleteBookCollectionByIdAsync(int id);
+
+        Task AssignBookToCollectionAsync(int bookId, int collectionId;
     }
 }
