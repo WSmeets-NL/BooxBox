@@ -9,48 +9,59 @@ using System.Reflection.Metadata.Ecma335;
 public partial class ManualAddPage : ContentPage
 {
 	private readonly AuthorService _authorService;
-
+    private readonly BookCollectionService _collectionService;
 	private readonly IllustratorService _illustratorService;
 	private readonly LanguageService _languageService;
     private readonly BookLocationService _locationService;
 	private readonly BookService _bookService;
 
 	public List<Author> Authors;
-	public List<Illustrator> Illustrators;
-	public List<Language> Languages;
+    public List<BookCollection> Collections;
     public List<BookLocation> Locations;
-	public ManualAddPage(AuthorService authorService, BookService bookservice, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService)
+    public List<Illustrator> Illustrators;
+	public List<Language> Languages;
+
+	public ManualAddPage(AuthorService authorService, BookService bookservice, BookCollectionService collectionService, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService)
 	{
 		InitializeComponent();
 		_authorService = authorService;
 		_bookService = bookservice;
+        _collectionService = collectionService;
 		_illustratorService = illustratorService;
 		_languageService = languageService;
 		getAuthors();
+        getCollections();
 		getIllustrators();
 		getLanguages();
+        getLocations();
     }
 
-	private async void getAuthors()
+	private async Task getAuthors()
 	{
         Authors = await _authorService.GetAllAuthorsAsync();
         AuthorPicker.ItemsSource = Authors;
     }
 
-    private async void getIllustrators()
+    private async Task getCollections()
+    {
+        Collections = await _collectionService.GetAllBookCollectionsAsync();
+        CollectionPicker.ItemsSource = Collections;
+    }
+
+    private async Task getIllustrators()
     {
         Illustrators = await _illustratorService.GetAllIllustratorsAsync();
 		IllustratorPicker.ItemsSource = Illustrators;
     }
 
 
-    private async void getLanguages()
+    private async Task getLanguages()
 	{
 		Languages = await _languageService.GetAllLanguages();
         LanguagePicker.ItemsSource = Languages;
     }
 
-    private async void getLocations()
+    private async Task getLocations()
     {
         Locations = await _locationService.GetAllBookLocationsAsync();
         LocationPicker.ItemsSource = Locations;
@@ -59,14 +70,25 @@ public partial class ManualAddPage : ContentPage
 
 	public async Task AddNewAuthor(Object sender, EventArgs e)
 	{
-		string authorName = await DisplayPromptAsync("Nieuwe auteur", "Voeg hieronder de naam van de auteur in.", "Auteur toevoegen", "Annuleer");
+		string authorName = await DisplayPromptAsync("Nieuwe Auteur", "Voeg hieronder de naam van de auteur in.", "Auteur toevoegen", "Annuleer");
 		Author newAuthor = new Author
 		{
 			Name = authorName,
 		};
 		await _authorService.AddAuthor(newAuthor);
-		getAuthors();
+		await getAuthors();
 	}
+
+    public async Task AddNewCollection(Object sender, EventArgs e)
+    {
+        string collectionName = await DisplayPromptAsync("Nieuwe Verzameling", "Voeg hieronder de naam van de verzameling in.", "Verzameling toevoegen", "Annuleer");
+        BookCollection newCollection = new BookCollection
+        {
+            Name = collectionName,
+        };
+        await _collectionService.AddBookCollection(newCollection);
+        await getCollections();
+    }
 
     public async Task AddNewIllustrator(Object sender, EventArgs e)
     {
@@ -76,7 +98,7 @@ public partial class ManualAddPage : ContentPage
             Name = illustratorName,
         };
         await _illustratorService.AddIllustrator(newIllustrator);
-        getIllustrators();
+        await getIllustrators();
     }
 
     public async Task AddNewLanguage(Object sender, EventArgs e)
@@ -87,7 +109,7 @@ public partial class ManualAddPage : ContentPage
             Description = languageName,
         };
         await _languageService.AddLanguage(newLanguage);
-        getLanguages();
+        await getLanguages();
     }
 
     public async Task AddNewLocation(Object sender, EventArgs e)
@@ -98,7 +120,7 @@ public partial class ManualAddPage : ContentPage
             Name = locationName,
         };
         await _locationService.AddBookLocation(newLocation);
-        getLanguages();
+        await getLocations();
     }
 
     public async void OnClickSubmit(object sender, EventArgs e)
@@ -111,7 +133,7 @@ public partial class ManualAddPage : ContentPage
             }
             else
             {
-                DisplayAlertAsync("Foutmelding", "Niet alle velden zijn ingevuld.\nProbeer alstublieft opnieuw", "Bevestig");
+                await DisplayAlertAsync("Foutmelding", "Niet alle velden zijn ingevuld.\nProbeer alstublieft opnieuw", "Bevestig");
             }
         }
     }

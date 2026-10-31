@@ -38,6 +38,12 @@
                 <Button Grid.Column="1" Clicked="AddNewLocation" Text="Nieuwe Locatie" BackgroundColor="LightBlue"  />
             </Grid>
 
+            <Label Text="Wil je dit boek al toevoegen aan een verzameling?" FontSize="18"/>
+            <Grid ColumnDefinitions="4*, *">
+                <Picker Grid.Column="0" x:Name="CollectionPicker" ItemDisplayBinding="{Binding Name}" />
+                <Button Grid.Column="1" Clicked="AddNewCollection" Text="Nieuwe Verzameling" BackgroundColor="LightBlue"  />
+            </Grid>
+
             <Button Text="Boek toevoegen" Clicked="OnClickSubmit"  BackgroundColor="LightBlue"  />
         </VerticalStackLayout>
     </ScrollView>
