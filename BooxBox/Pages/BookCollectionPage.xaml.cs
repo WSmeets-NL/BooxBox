@@ -53,9 +53,11 @@ public partial class BookCollectionPage : ContentPage
         throw new NotImplementedException();
     }
 
-    public void ToCollectionDetails(Object sender, EventArgs e)
+    public async void ToCollectionDetails(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Button button = (Button)sender;
+        int collectionId = (int)button.BindingContext;
+        await Shell.Current.GoToAsync($"BookCollectionDetailsPage?id={collectionId}");
     }
 
     public async void DeleteCollection(Object sender, EventArgs e)
