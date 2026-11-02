@@ -20,5 +20,7 @@ namespace BooxBox.Interfaces
         Task UpdateBookAsync(Book book);
 
         Task DeleteBookByIdAsync(int id);
+
+        Task DeleteBookFromlocation(int bookId);
     }
 }

@@ -18,5 +18,6 @@ namespace BooxBox.Interfaces
         Task DeleteBookLocationByIdAsync(int id);
 
         Task<String> GetBookLocationNameAsync(int id);
+
     }
 }

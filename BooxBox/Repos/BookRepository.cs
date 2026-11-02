@@ -79,5 +79,16 @@ namespace BooxBox.Repos
                 return;
             }
         }
+
+        public async Task DeleteBookFromLocation(int bookId)
+        {
+            Book? foundBook = await GetBookByIdAsync(bookId);
+            if (foundBook != null)
+            {
+                foundBook.BookLocationId = null;
+                await UpdateBookAsync(foundBook);
+            }
+
+        }
     }
 }

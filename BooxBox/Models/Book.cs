@@ -16,7 +16,7 @@ namespace BooxBox.Models
         public int PublisherId { get; set; }
         public int? NumberOfPages { get; set; }
         public string ReadingStatus { get; set; } = "Nog niet gelezen";
-        public int BookLocationId { get; set; }
+        public int? BookLocationId { get; set; }
         public int? BookRating { get; set; }
         public string? ReaderComment { get; set; }
         public DateTime? PublishingDate { get; set; }
@@ -25,13 +25,11 @@ namespace BooxBox.Models
         {
         }
 
-        public Book(string title, int authorId, int publisherId, string iSBN, DateTime? publishingDate = null)
+        public Book(string title, int authorId, int languageId)
         {
             Title = title;
             AuthorId = authorId;
-            PublisherId = publisherId;
-            ISBN = iSBN;
-            PublishingDate = publishingDate;
+            LanguageId = languageId;
         }
 
     }
