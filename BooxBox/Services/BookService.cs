@@ -49,5 +49,10 @@ namespace BooxBox.Services
         {
             await _bookRepo.DeleteBookByIdAsync(id);
         }
+
+        public async Task DeleteBookFromLocation(int bookId)
+        {
+            await _bookRepo.DeleteBookFromLocation(bookId);
+        }
     }
 }

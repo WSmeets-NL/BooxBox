@@ -47,7 +47,7 @@ public partial class BookLocationDetailsPage : ContentPage
     {
         Button button = (Button)sender;
         int chosenBookId = (int)button.BindingContext;
-        await _bookService.RemoveBookFromLocation(chosenBookId);
+        await _bookService.Dele
         await GetLocation(ChosenLocation.Id);
     }
 }
