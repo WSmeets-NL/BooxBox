@@ -50,9 +50,11 @@ public partial class BookLocationPage : ContentPage
         throw new NotImplementedException();
     }
 
-    public void ToLocationDetails(Object sender, EventArgs e)
+    public async void ToLocationDetails(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Button button = (Button)sender;
+        int locationId = (int)button.BindingContext;
+        await Shell.Current.GoToAsync($"BookLocationDetailsPage?id={locationId}");
     }
 
     public async void DeleteLocation(Object sender, EventArgs e)

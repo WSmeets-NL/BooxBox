@@ -32,6 +32,7 @@ public partial class BookLocationDetailsPage : ContentPage
     {
         ChosenLocation = await _locationService.GetBookLocationById(locationId);
         IncludedBooks = await _bookService.GetAllBooksInLocation(locationId);
+        IncludedBooks = IncludedBooks.OrderBy(b => b.Title, StringComparer.OrdinalIgnoreCase).ToList();
         BooksInLocation.ItemsSource = IncludedBooks;
         BindingContext = this;
     }
@@ -47,7 +48,7 @@ public partial class BookLocationDetailsPage : ContentPage
     {
         Button button = (Button)sender;
         int chosenBookId = (int)button.BindingContext;
-        await _bookService.Dele
+        await _bookService.DeleteBookFromLocation(chosenBookId);
         await GetLocation(ChosenLocation.Id);
     }
 }

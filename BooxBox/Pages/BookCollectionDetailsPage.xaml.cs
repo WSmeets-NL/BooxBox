@@ -32,6 +32,7 @@ public partial class BookCollectionDetailsPage : ContentPage
     {
         ChosenCollection = await _collectionService.GetBookCollectionById(collectionId);
         IncludedBooks = await _bookService.GetAllBooksInCollection(collectionId);
+        IncludedBooks = IncludedBooks.OrderBy(b => b.Title, StringComparer.OrdinalIgnoreCase).ToList();
         BooksInCollection.ItemsSource = IncludedBooks;
         BindingContext = this;
     }

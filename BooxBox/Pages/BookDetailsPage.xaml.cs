@@ -28,7 +28,7 @@ public partial class BookDetailsPage : ContentPage
 	public String BookAuthor { get; set; }
 	public List<BookCollection> IncludedCollections { get; set; }
 	public String? BookIllustrator { get; set; } = "Geen illustrator";
-	public String BookLocation { get; set; } = "Geen locatie toegewezen.";
+	public String? BookLocation { get; set; } = "Geen locatie toegewezen.";
 	public String BookLanguage { get; set; }
 
 	public BookDetailsPage(AuthorService authorService, BookService bookService, BookCollectionService collectionService, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService)
@@ -55,7 +55,10 @@ public partial class BookDetailsPage : ContentPage
 			BookIllustrator = await _illustratorService.GetIllustratorName(ChosenBook.IllustratorId.Value);
 		}
 		BookLanguage = await _languageService.GetLanguageDescription(ChosenBook.LanguageId);
-		BookLocation = await _locationService.GetLocationName(ChosenBook.BookLocationId);
+		if (ChosenBook.BookLocationId != null)
+		{
+			BookLocation = await _locationService.GetLocationName((int)ChosenBook.BookLocationId);
+		}
 		BindingContext = this;
 	}
 
