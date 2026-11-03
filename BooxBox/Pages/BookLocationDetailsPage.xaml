@@ -4,7 +4,7 @@
              x:Class="BooxBox.Pages.BookLocationDetailsPage"
              Title="BookLocationDetailsPage">
     <VerticalStackLayout>
-        <Border Background="LightCoral">
+        <Border Background="MintCream" Padding="10">
             <Grid RowDefinitions="2*, *">
                 <Label
                     Grid.Row="0"
@@ -24,16 +24,29 @@
                     TextColor="Black" />
             </Grid>
         </Border>
+        <Grid Margin="10" ColumnDefinitions="*, 3*, *,  3*, *">
+            <Button Grid.Column="1" Text="Wijzig Locatienaam" Clicked="ChangeLocationName" BackgroundColor="DarkBlue" TextColor="White" />
+            <Button Grid.Column="3" Text="Wijzig Locatiebeschrijving" Clicked="ChangeLocationName" BackgroundColor="DarkBlue" TextColor="White" />
+        </Grid>
 
         <CollectionView x:Name="BooksInLocation" Margin="10">
+            
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border BackgroundColor="MintCream" StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
-                        <Grid ColumnDefinitions="*, 3*, *,*">
-                            <Image Grid.Column="0" Source="missingcover.png" />
-                            <Label Grid.Column="1" Text="{Binding Title}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="Black" />
-                            <Button Grid.Column="2" BindingContext="{Binding Id}" Clicked="ToBookDetails" Text="bekijk boek" TextColor="White" Margin="1"/>
-                            <Button Grid.Column="3" BindingContext="{Binding Id}" Clicked="RemoveBook" Text="Verwijder boek" BackgroundColor="DarkRed" TextColor="White" Margin="1"/>
+                        <Grid RowDefinitions="80, *, 50"  ColumnSpacing="10">
+                            <Image Grid.Row="0"  Source="missingcover.png" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Row="1">
+                                <Label Text="{Binding Title}" HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                            </VerticalStackLayout>
+                            <Grid Grid.Row="2" ColumnDefinitions="3*, *" Margin="2">
+                                <Button Grid.Column="0" BindingContext="{Binding Id}" Text="Details" Clicked="ToBookDetails" BackgroundColor="DarkBlue" TextColor="White" Margin="1" />
+                                <Button Grid.Column="1" Text="Verwijder" Clicked="RemoveBook" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                            </Grid>
                         </Grid>
                     </Border>
                 </DataTemplate>

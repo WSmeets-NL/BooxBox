@@ -33,8 +33,35 @@ public partial class BookLocationDetailsPage : ContentPage
         ChosenLocation = await _locationService.GetBookLocationById(locationId);
         IncludedBooks = await _bookService.GetAllBooksInLocation(locationId);
         IncludedBooks = IncludedBooks.OrderBy(b => b.Title, StringComparer.OrdinalIgnoreCase).ToList();
+        if(ChosenLocation.Description == null)
+        {
+            ChosenLocation.Description = "Deze locatie heeft nog geen beschrijving";
+        }
+        
         BooksInLocation.ItemsSource = IncludedBooks;
         BindingContext = this;
+    }
+
+    public async void ChangeLocationName(object sender, EventArgs e)
+    {
+        string newName = await DisplayPromptAsync("Naam wijzigen", "Wijzig hieronder de naam van deze locatie", "Wijzigen", "Annuleer", $"{ChosenLocation.Name}");
+        if(string.IsNullOrEmpty(newName) == false)
+        {
+            ChosenLocation.Name = newName;
+            await _locationService.UpdateBookLocation(ChosenLocation);
+            BindingContext = this;
+        }
+    }
+
+    public async void ChangeLocationDescription(object sender, EventArgs e)
+    {
+        string newDescription = await DisplayPromptAsync("Beschrijving wijzigen", "Wijzig hieronder de beschrijving van deze locatie", "Wijzigen", "Annuleer", $"{ChosenLocation.Description}");
+        if (string.IsNullOrEmpty(newDescription) == false)
+        {
+            ChosenLocation.Name = newDescription;
+            await _locationService.UpdateBookLocation(ChosenLocation);
+            BindingContext = this;
+        }
     }
 
     public async void ToBookDetails(object sender, EventArgs e)
