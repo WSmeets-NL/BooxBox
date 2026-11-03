@@ -14,7 +14,7 @@ namespace BooxBoxTests.ServiceUnitTests
     {
         [Fact]
 
-        public async void GetAllAuthorsReturnsAllAuthors()
+        public async Task GetAllAuthorsReturnsAllAuthors()
         {
             //Arrange
             List<Author> authors = new List<Author>();
@@ -34,7 +34,7 @@ namespace BooxBoxTests.ServiceUnitTests
             authors.Add(author1);
             authors.Add(author2);
 
-            Mock<AuthorRepository> mockAuthorRepo = new Mock<AuthorRepository>();
+            Mock<IAuthorRepository> mockAuthorRepo = new Mock<IAuthorRepository>();
 
             mockAuthorRepo.Setup(r => r.GetAllAuthorsAsync()).ReturnsAsync(authors);
 
@@ -50,7 +50,7 @@ namespace BooxBoxTests.ServiceUnitTests
         }
 
         [Fact]
-        public async void GetAuthorByIdReturnsCorrectAuthor()
+        public async Task GetAuthorByIdReturnsCorrectAuthor()
         {
             //Arrange
             List<Author> authors = new List<Author>();
@@ -70,9 +70,9 @@ namespace BooxBoxTests.ServiceUnitTests
             authors.Add(author1);
             authors.Add(author2);
 
-            Mock<AuthorRepository> mockAuthorRepo = new Mock<AuthorRepository>();
+            Mock<IAuthorRepository> mockAuthorRepo = new Mock<IAuthorRepository>();
 
-            mockAuthorRepo.Setup(r => r.GetAuthorById(1)).ReturnsAsync(authors.Where(a => a.Id == 1).First());
+            mockAuthorRepo.Setup(r => r.GetAuthorById(1)).ReturnsAsync(author1);
 
             AuthorService authorService = new AuthorService(mockAuthorRepo.Object);
 
@@ -82,14 +82,39 @@ namespace BooxBoxTests.ServiceUnitTests
 
             //Assert
             Assert.NotNull(returnedAuthor);
-            Assert.Equal(author1, returnedAuthor);
+            Assert.Equal(author1.Id, returnedAuthor.Id);
         }
         [Fact]
-        public async void AddAuthorAddsAuthorToDatabase()
+        public async Task AddAuthorCorrectlyCallsTheRepo()
         {
             //Arrange
-            List<Author> authors = new List<Author>();
 
+            Author newAuthor = new Author()
+            {
+                Id = 1,
+                Name = "Jef Nys"
+            };
+
+
+            Mock<IAuthorRepository> mockAuthorRepo = new Mock<IAuthorRepository>();
+
+            mockAuthorRepo.Setup(r => r.AddAuthor(newAuthor)).Returns(Task.CompletedTask);
+
+            AuthorService authorService = new AuthorService(mockAuthorRepo.Object);
+
+
+            //Act
+            await authorService.AddAuthor(newAuthor);
+
+            //Assert
+            mockAuthorRepo.Verify(r => r.AddAuthor(newAuthor), Times.Once);
+        }
+
+        [Fact]
+
+        public async Task GetAuthorByNameGetsTheCorrectAuthor()
+        {
+            //Arrange
             Author author1 = new Author()
             {
                 Id = 1,
@@ -102,32 +127,55 @@ namespace BooxBoxTests.ServiceUnitTests
                 Name = "Gerrit de Jager"
             };
 
-            authors.Add(author1);
-            authors.Add(author2);
 
-            Author newAuthor = new Author()
-            {
-                Id = 3,
-                Name = "Jef Nys"
-            };
+            Mock<IAuthorRepository> mockAuthorRepo = new Mock<IAuthorRepository>();
 
-            authors.Add(author1);
-            authors.Add(author2);
-
-            Mock<AuthorRepository> mockAuthorRepo = new Mock<AuthorRepository>();
-
-            mockAuthorRepo.Setup(r => r.AddAuthor(newAuthor)).Returns(Task.CompletedTask);
+            mockAuthorRepo.Setup(r => r.GetAuthorByName("Gerrit de Jager")).ReturnsAsync(author2);
 
             AuthorService authorService = new AuthorService(mockAuthorRepo.Object);
 
 
             //Act
-            authorService.AddAuthor(newAuthor);
-            List<Author> authorList = await authorService.GetAllAuthorsAsync();
+            Author returnedAuthor = await authorService.GetAuthorByName("Gerrit de Jager");
 
             //Assert
-            Assert.NotNull(authorList);
-            Assert.Equal(newAuthor, authorList[3]);
+            Assert.NotNull(returnedAuthor);
+            Assert.Equal(author2.Id, returnedAuthor.Id);
+
         }
+
+        [Fact]
+        public async Task GetAuthorNameReturnsAuthorName()
+        {
+            //Arrange
+            Author author1 = new Author()
+            {
+                Id = 1,
+                Name = "Willy Vandersteen"
+            };
+
+            Author author2 = new Author()
+            {
+                Id = 2,
+                Name = "Gerrit de Jager"
+            };
+
+
+            Mock<IAuthorRepository> mockAuthorRepo = new Mock<IAuthorRepository>();
+
+            mockAuthorRepo.Setup(r => r.GetAuthorName(1)).ReturnsAsync("Willy Vandersteen");
+
+            AuthorService authorService = new AuthorService(mockAuthorRepo.Object);
+
+
+            //Act
+            String returnedAuthorName = await authorService.GetAuthorName(1);
+
+            //Assert
+            Assert.NotNull(returnedAuthorName);
+            Assert.Equal(author1.Name, returnedAuthorName);
+
+        }
+
     }
 }
