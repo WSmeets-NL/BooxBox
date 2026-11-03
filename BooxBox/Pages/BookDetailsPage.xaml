@@ -50,10 +50,11 @@
 
                 <VerticalStackLayout Grid.Row="3">
                     <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
-                        <Grid ColumnDefinitions="*, 3*, *" >
+                        <Grid ColumnDefinitions="*, 2*, *, *" >
                             <Label Grid.Column="0" Text="Locatie:" FontSize="24" HorizontalTextAlignment="Center"/>
                             <Label Grid.Column="1" Text="{Binding BookLocation}" FontSize="24" HorizontalTextAlignment="Start"/>
-                            <Button Grid.Column="2" Text="wijzig" Clicked="ChangeBookLocation"/>
+                            <Button Grid.Column="2" Text="Naar deze locatie" Clicked="GoToBookLocation" BindingContext="{Binding Id}"  Margin="5" />
+                            <Button Grid.Column="3" Text="wijzig" Clicked="ChangeBookLocation" Margin="5"/>
                         </Grid>
                     </Border>
                 </VerticalStackLayout>
@@ -63,7 +64,7 @@
                         <Grid RowDefinitions="*, 4*">
                             <Grid Grid.Row="0" ColumnDefinitions="4*, *">
                                 <Label Grid.Column="0" Text="Verzamelingen:" FontSize="24" HorizontalTextAlignment="Start"/>
-                                <Button Grid.Column="1" Clicked="AddToCollection" Text="Verzameling Toevoegen"/>
+                                <Button Grid.Column="1" Clicked="AddToCollection" Text="Verzameling Toevoegen" Margin="5"/>
                             </Grid>
 
                             <Grid Padding="10" Grid.Row="1">
@@ -72,8 +73,8 @@
                                         <DataTemplate>
                                             <Grid ColumnDefinitions="4*,*, *">
                                                 <Label Grid.Column="0" Text="{Binding Name}" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10"/>
-                                                <Button Grid.Column="1" Text="Naar verzameling" Clicked="GoToBookCollection" BindingContext="{Binding Id}"  Margin="1" />
-                                                <Button Grid.Column="2" Text="Verwijder" Clicked="RemoveFromCollection" BindingContext="{Binding Id}" BackgroundColor="DarkRed" TextColor="White" Margin="1" />
+                                                <Button Grid.Column="1" Text="Naar verzameling" Clicked="GoToBookCollection" BindingContext="{Binding Id}"  Margin="5" />
+                                                <Button Grid.Column="2" Text="Verwijder" Clicked="RemoveFromCollection" BindingContext="{Binding Id}" BackgroundColor="DarkRed" TextColor="White" Margin="5" />
                                             </Grid>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>

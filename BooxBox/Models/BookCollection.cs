@@ -10,7 +10,7 @@ namespace BooxBox.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; } = 0;
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = "Deze verzameling heeft nog geen beschrijving";
 
         //public List<Book> BooksInCollection { get; set; } = new List<Book>();
 

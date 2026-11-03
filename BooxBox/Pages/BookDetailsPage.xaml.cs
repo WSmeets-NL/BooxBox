@@ -99,11 +99,18 @@ public partial class BookDetailsPage : ContentPage
         }
     }
 
+    public async void GoToBookLocation(object sender, EventArgs e)
+    {
+        Button button = (Button)sender;
+        int locationId = (int)button.BindingContext;
+        await Shell.Current.GoToAsync($"BookLocationnDetailsPage?id={locationId}");
+    }
+
     public async void GoToBookCollection(object sender, EventArgs e)
     {
         Button button = (Button)sender;
         int collectionId = (int)button.BindingContext;
-        await Shell.Current.GoToAsync($"CollectionDetailsPage?id={collectionId}");
+        await Shell.Current.GoToAsync($"BookCollectionDetailsPage?id={collectionId}");
     }
 
     public async void RemoveFromCollection(object sender, EventArgs e)

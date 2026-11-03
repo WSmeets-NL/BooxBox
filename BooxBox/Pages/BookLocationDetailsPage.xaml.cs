@@ -33,11 +33,6 @@ public partial class BookLocationDetailsPage : ContentPage
         ChosenLocation = await _locationService.GetBookLocationById(locationId);
         IncludedBooks = await _bookService.GetAllBooksInLocation(locationId);
         IncludedBooks = IncludedBooks.OrderBy(b => b.Title, StringComparer.OrdinalIgnoreCase).ToList();
-        if(ChosenLocation.Description == null)
-        {
-            ChosenLocation.Description = "Deze locatie heeft nog geen beschrijving";
-        }
-        
         BooksInLocation.ItemsSource = IncludedBooks;
         BindingContext = this;
     }
@@ -58,7 +53,7 @@ public partial class BookLocationDetailsPage : ContentPage
         string newDescription = await DisplayPromptAsync("Beschrijving wijzigen", "Wijzig hieronder de beschrijving van deze locatie", "Wijzigen", "Annuleer", $"{ChosenLocation.Description}");
         if (string.IsNullOrEmpty(newDescription) == false)
         {
-            ChosenLocation.Name = newDescription;
+            ChosenLocation.Description = newDescription;
             await _locationService.UpdateBookLocation(ChosenLocation);
             BindingContext = this;
         }
