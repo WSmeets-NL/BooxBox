@@ -30,7 +30,7 @@ namespace BooxBox.Repos
             foreach (BookBookCollection matchingId in matchingBookIds)
             {
                 Book matchingBook = await GetBookByIdAsync(matchingId.BookId);
-                matchingBooks.Append(matchingBook);
+                matchingBooks.Add(matchingBook);
             }
             return matchingBooks;
         }

@@ -101,9 +101,7 @@ public partial class BookDetailsPage : ContentPage
 
     public async void GoToBookLocation(object sender, EventArgs e)
     {
-        Button button = (Button)sender;
-        int locationId = (int)button.BindingContext;
-        await Shell.Current.GoToAsync($"BookLocationnDetailsPage?id={locationId}");
+		throw new NotImplementedException();
     }
 
     public async void GoToBookCollection(object sender, EventArgs e)
