@@ -46,6 +46,9 @@ namespace BooxBox
             builder.Services.AddSingleton<IBookLocationRepository, BookLocationRepository>();
             builder.Services.AddSingleton<BookLocationService>();
 
+            builder.Services.AddSingleton<IPublisherRepository, PublisherRepository>();
+            builder.Services.AddSingleton<PublisherService>();
+
 
             builder.Services.AddTransient<ManualAddPage>();
             builder.Services.AddTransient<BookCollectionPage>();
