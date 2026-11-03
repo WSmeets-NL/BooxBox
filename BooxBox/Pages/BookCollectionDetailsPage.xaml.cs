@@ -37,6 +37,28 @@ public partial class BookCollectionDetailsPage : ContentPage
         BindingContext = this;
     }
 
+    public async void ChangeCollectionName(object sender, EventArgs e)
+    {
+        string newName = await DisplayPromptAsync("Naam wijzigen", "Wijzig hieronder de naam van deze verzameling", "Wijzigen", "Annuleer", $"{ChosenCollection.Name}");
+        if (string.IsNullOrEmpty(newName) == false)
+        {
+            ChosenCollection.Name = newName;
+            await _collectionService.UpdateBookCollection(ChosenCollection);
+            BindingContext = this;
+        }
+    }
+
+    public async void ChangeCollectionDescription(object sender, EventArgs e)
+    {
+        string newDescription = await DisplayPromptAsync("Beschrijving wijzigen", "Wijzig hieronder de beschrijving van deze verzameling", "Wijzigen", "Annuleer", $"{ChosenCollection.Description}");
+        if (string.IsNullOrEmpty(newDescription) == false)
+        {
+            ChosenCollection.Description = newDescription;
+            await _collectionService.UpdateBookCollection(ChosenCollection);
+            BindingContext = this;
+        }
+    }
+
     public async void ToBookDetails(object sender, EventArgs e)
     {
         Button button = (Button)sender;
