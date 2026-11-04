@@ -30,7 +30,7 @@ public partial class BooksPage : ContentPage
 
     public void SearchBook(Object sender, EventArgs e)
     {
-        List<Book> filteredBooks = Books.Where(b => b.Title.Contains(BookSearch.Text), StringComparison.OrdinalIgnoreCase).ToList();
+        List<Book> filteredBooks = Books.Where(b => b.Title.Contains(BookSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
         BookView.ItemsSource = filteredBooks;
     }
 
@@ -59,7 +59,7 @@ public partial class BooksPage : ContentPage
         }
     }
 
-    public async Task FilterBooks(Object sender, EventArgs e)
+    public async void FilterBooks(Object sender, EventArgs e)
     {
         List<String> filterChoices = ["Auteur", "Illustrator", "LeesStatus",  "Score", "Uitgeverij"];
         string filterChoice = await DisplayActionSheetAsync("Waarop wil je filteren?", "Annuleer", null, filterChoices.ToArray());
@@ -69,11 +69,11 @@ public partial class BooksPage : ContentPage
         }
         if (filterChoice == "Auteur")
         {
-            await filterByAuthor();
+            filterByAuthor();
         }
     }
 
-    public async Task filterByAuthor()
+    public async void filterByAuthor()
     {
         List<Author> authors = await _authorService.GetAllAuthorsAsync();
         
