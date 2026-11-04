@@ -42,12 +42,14 @@ public partial class BookLocationPage : ContentPage
 
     public void SortAlphabetically(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        Locations = Locations.OrderBy(l => l.Name, StringComparer.OrdinalIgnoreCase).ToList();
+        BookLocationView.ItemsSource = Locations;
     }
 
     public void SearchLocation(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        List<BookLocation> filteredLocations = Locations.Where(l => l.Name.Contains(LocationSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+        BookLocationView.ItemsSource = filteredLocations;
     }
 
     public async void ToLocationDetails(Object sender, EventArgs e)
