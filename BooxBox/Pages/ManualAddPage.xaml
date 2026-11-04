@@ -82,6 +82,14 @@
                 </Grid>
             </Border>
 
+            <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                <Grid RowDefinitions="*,*, *">
+                    <Label Grid.Column="0" Grid.Row="0" Text="Maak een foto van je boek" VerticalTextAlignment="Center" FontSize="18"/>
+                    <Button Grid.Column="1" Grid.Row="1" Text="Foto maken" Clicked="AddPicture"/>
+                    <Image Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" MaximumWidthRequest="240" MaximumHeightRequest="240" x:Name="BookImage"/>
+                </Grid>
+            </Border>
+
             <Button Text="Boek toevoegen" Clicked="OnClickSubmit"  BackgroundColor="LightBlue"  />
         </VerticalStackLayout>
     </ScrollView>

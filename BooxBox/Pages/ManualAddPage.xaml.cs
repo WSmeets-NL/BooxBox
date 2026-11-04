@@ -5,6 +5,7 @@ using System.Diagnostics;
 using BooxBox.Services;
 using BooxBox.Interfaces;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.Maui.Media;
 
 public partial class ManualAddPage : ContentPage
 {
@@ -25,7 +26,10 @@ public partial class ManualAddPage : ContentPage
 
     public List<Publisher> Publishers;
 
-	public ManualAddPage(AuthorService authorService, BookService bookservice, BookCollectionService collectionService, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService, PublisherService publisherService)
+    public string? ImagePath { get; set; } = null;
+
+
+    public ManualAddPage(AuthorService authorService, BookService bookservice, BookCollectionService collectionService, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService, PublisherService publisherService)
 	{
 		InitializeComponent();
 		_authorService = authorService;
@@ -144,7 +148,7 @@ public partial class ManualAddPage : ContentPage
 
     public async void AddNewPublisher(object sender, EventArgs e)
     {
-        string publisherName = await DisplayPromptAsync("Nieuwe Uitgever", "Voer heironder de naam van de uitgever in.", "Uitgever toevoegen", "Annuleer");
+        string publisherName = await DisplayPromptAsync("Nieuwe Uitgever", "Voer hieronder de naam van de uitgever in.", "Uitgever toevoegen", "Annuleer");
         Publisher newPublisher = new Publisher
         {
             Name = publisherName,
@@ -247,9 +251,42 @@ public partial class ManualAddPage : ContentPage
             newBook.PublisherId = selectedPublisher.Id;
         }
 
+        if (ImagePath != null)
+        {
+            newBook.ImagePath = ImagePath;
+        }
+
         await _bookService.AddBook(newBook);
 		await DisplayAlertAsync("Succes", $"\"{newBook.Title}\" is toegevoegd", "Terug naar 'Mijn boeken'");
         await Shell.Current.GoToAsync(nameof(BooksPage));
     }
 
+    public async void AddPicture(object sender, EventArgs e)
+    {
+        if (MediaPicker.IsCaptureSupported != false)
+        {
+            FileResult bookPicture = await MediaPicker.Default.CapturePhotoAsync();
+
+            if (bookPicture == null)
+            {
+                return;
+            }
+
+            string saveLocation = Path.Combine(FileSystem.AppDataDirectory, "BookCovers");
+            Directory.CreateDirectory(saveLocation);
+            string localImageFile = Path.Combine(saveLocation, bookPicture.FileName);
+
+            using Stream sourceStream = await bookPicture.OpenReadAsync();
+            using Stream destinationStream = File.Create(localImageFile);
+            await sourceStream.CopyToAsync(destinationStream);
+            ImagePath = localImageFile;
+            BookImage.Source = localImageFile;
+        }
+
+        else
+        {
+            await DisplayAlertAsync("Niet ondersteund", "Dit device ondersteunt de camera niet", "Terug");
+        }
+    }
 }
+
