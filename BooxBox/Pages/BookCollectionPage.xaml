@@ -11,7 +11,7 @@
             <Button Grid.Column="1" Text="Sorteer A-Z" Margin="10" Clicked="SortAlphabetically" BackgroundColor="DarkBlue" TextColor="White" />
         </Grid>
 
-        <SearchBar Grid.Row="1" Placeholder="Zoek een Verzameling" Margin="10" TextChanged="SearchCollection" />
+        <SearchBar x:Name="CollectionSearch" Grid.Row="1" Placeholder="Zoek een Verzameling" Margin="10" TextChanged="SearchCollection" />
 
 
         <CollectionView Grid.Row="2" Margin="10" x:Name="BookCollectionView">

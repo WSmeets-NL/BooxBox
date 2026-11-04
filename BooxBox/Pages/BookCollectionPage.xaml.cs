@@ -1,8 +1,8 @@
 namespace BooxBox.Pages;
-
 using BooxBox.Interfaces;
 using BooxBox.Models;
 using BooxBox.Services;
+
 
 public partial class BookCollectionPage : ContentPage
 {
@@ -45,12 +45,14 @@ public partial class BookCollectionPage : ContentPage
 
     public void SortAlphabetically(Object sendeer, EventArgs e)
     {
-        throw new NotImplementedException();
+        BookCollections = BookCollections.OrderBy(b => b.Name, StringComparer.OrdinalIgnoreCase).ToList();
+        BookCollectionView.ItemsSource = BookCollections;
     }
 
     public void SearchCollection(Object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        List<BookCollection> filteredCollections = BookCollections.Where(c => c.Name.Contains(CollectionSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+        BookCollectionView.ItemsSource = filteredCollections;
     }
 
     public async void ToCollectionDetails(Object sender, EventArgs e)
