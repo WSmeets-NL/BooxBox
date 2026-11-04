@@ -86,14 +86,14 @@ namespace BooxBox.Repos
 
         public async Task<List<BookCollection>> GetCollectionsContainingBookAsync(int bookId)
         {
-            List<BookCollection> BookCollections = new List<BookCollection>();
+            List<BookCollection> bookCollections = new List<BookCollection>();
             List<BookBookCollection> coupledCollections = await _wrapper._database.Table<BookBookCollection>().Where(c => c.BookId == bookId).ToListAsync();
             foreach(BookBookCollection collection in coupledCollections)
             {
                 BookCollection foundCollection = await _wrapper._database.Table<BookCollection>().Where(c => c.Id == collection.BookCollectionId).FirstOrDefaultAsync();
-                BookCollections.Add(foundCollection);
+                bookCollections.Add(foundCollection);
             }
-            return BookCollections;
+            return bookCollections;
         }
 
         public async Task RemoveBookFromCollection(int bookId, int collectionId)

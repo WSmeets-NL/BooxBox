@@ -15,6 +15,7 @@ public partial class ManualAddPage : ContentPage
     private readonly IllustratorService _illustratorService;
 	private readonly LanguageService _languageService;
 
+    private readonly PublisherService _publisherService;
 
 	public List<Author> Authors;
     public List<BookCollection> Collections;
@@ -22,7 +23,9 @@ public partial class ManualAddPage : ContentPage
     public List<Illustrator> Illustrators;
 	public List<Language> Languages;
 
-	public ManualAddPage(AuthorService authorService, BookService bookservice, BookCollectionService collectionService, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService)
+    public List<Publisher> Publishers;
+
+	public ManualAddPage(AuthorService authorService, BookService bookservice, BookCollectionService collectionService, BookLocationService locationService, IllustratorService illustratorService, LanguageService languageService, PublisherService publisherService)
 	{
 		InitializeComponent();
 		_authorService = authorService;
@@ -31,6 +34,7 @@ public partial class ManualAddPage : ContentPage
 		_illustratorService = illustratorService;
 		_languageService = languageService;
         _locationService = locationService;
+        _publisherService = publisherService;
     }
 
     protected override async void OnAppearing()
@@ -42,6 +46,7 @@ public partial class ManualAddPage : ContentPage
         await GetIllustrators();
         await GetLanguages();
         await GetLocations();
+        await GetPublishers();
     }
 
 	private async Task GetAuthors()
@@ -75,10 +80,16 @@ public partial class ManualAddPage : ContentPage
         LocationPicker.ItemsSource = Locations;
     }
 
+    private async Task GetPublishers()
+    {
+        Publishers = await _publisherService.GetAllPublishersAsync();
+        PublisherPicker.ItemsSource = Publishers;
+    }
+
     //Add-button methods
-	public async void AddNewAuthor(object sender, EventArgs e)
+    public async void AddNewAuthor(object sender, EventArgs e)
 	{
-		string authorName = await DisplayPromptAsync("Nieuwe Auteur", "Voeg hieronder de naam van de auteur in.", "Auteur toevoegen", "Annuleer");
+		string authorName = await DisplayPromptAsync("Nieuwe Auteur", "Voer hieronder de naam van de auteur in.", "Auteur toevoegen", "Annuleer");
 		Author newAuthor = new Author
 		{
 			Name = authorName,
@@ -89,7 +100,7 @@ public partial class ManualAddPage : ContentPage
 
     public async void AddNewCollection(object sender, EventArgs e)
     {
-        string collectionName = await DisplayPromptAsync("Nieuwe Verzameling", "Voeg hieronder de naam van de verzameling in.", "Verzameling toevoegen", "Annuleer");
+        string collectionName = await DisplayPromptAsync("Nieuwe Verzameling", "Voer hieronder de naam van de verzameling in.", "Verzameling toevoegen", "Annuleer");
         BookCollection newCollection = new BookCollection
         {
             Name = collectionName,
@@ -100,7 +111,7 @@ public partial class ManualAddPage : ContentPage
 
     public async void AddNewIllustrator(object sender, EventArgs e)
     {
-        string illustratorName = await DisplayPromptAsync("Nieuwe Illustrator", "Voeg hieronder de naam van de illustrator in.", "Illustrator toevoegen", "Annuleer");
+        string illustratorName = await DisplayPromptAsync("Nieuwe Illustrator", "Voer hieronder de naam van de illustrator in.", "Illustrator toevoegen", "Annuleer");
         Illustrator newIllustrator = new Illustrator
         {
             Name = illustratorName,
@@ -111,7 +122,7 @@ public partial class ManualAddPage : ContentPage
 
     public async void AddNewLanguage(object sender, EventArgs e)
     {
-        string languageName = await DisplayPromptAsync("Nieuwe Taal", "Voeg hieronder de taal in.", "Taal toevoegen", "Annuleer");
+        string languageName = await DisplayPromptAsync("Nieuwe Taal", "Voer hieronder de taal in.", "Taal toevoegen", "Annuleer");
         Language newLanguage = new Language
         {
             Description = languageName,
@@ -122,13 +133,24 @@ public partial class ManualAddPage : ContentPage
 
     public async void AddNewLocation(object sender, EventArgs e)
     {
-        string locationName = await DisplayPromptAsync("Nieuwe Locatie", "Voeg hieronder de naam van de locatie in.", "Locatie toevoegen", "Annuleer");
+        string locationName = await DisplayPromptAsync("Nieuwe Locatie", "Voer hieronder de naam van de locatie in.", "Locatie toevoegen", "Annuleer");
         BookLocation newLocation = new BookLocation
         {
             Name = locationName,
         };
         await _locationService.AddBookLocation(newLocation);
         await GetLocations();
+    }
+
+    public async void AddNewPublisher(object sender, EventArgs e)
+    {
+        string publisherName = await DisplayPromptAsync("Nieuwe Uitgever", "Voer heironder de naam van de uitgever in.", "Uitgever toevoegen", "Annuleer");
+        Publisher newPublisher = new Publisher
+        {
+            Name = publisherName,
+        };
+        await _publisherService.AddPublisherAsync(newPublisher);
+        await GetPublishers();
     }
 
 
@@ -153,8 +175,14 @@ public partial class ManualAddPage : ContentPage
 
     private void FilterCollections(object sender, EventArgs e)
     {
-        List<BookCollection> filteredCollections = Collections.Where(c => c.Name.Contains(AuthorSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+        List<BookCollection> filteredCollections = Collections.Where(c => c.Name.Contains(CollectionSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
         CollectionPicker.ItemsSource = filteredCollections;
+    }
+
+    private void FilterPublishers(object sender, EventArgs e)
+    {
+        List<Publisher> filteredPublishers = Publishers.Where(p => p.Name.Contains(PublisherSearch.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+        PublisherPicker.ItemsSource = filteredPublishers;
     }
     public async void OnClickSubmit(object sender, EventArgs e)
     {
@@ -211,6 +239,12 @@ public partial class ManualAddPage : ContentPage
         {
             BookCollection selectedCollection = (BookCollection)CollectionPicker.SelectedItem;
             await _collectionService.AssignBookToCollection(newBook.Id, selectedCollection.Id);
+        }
+
+        if (PublisherPicker.SelectedItem !=null)
+        {
+            Publisher selectedPublisher = (Publisher)PublisherPicker.SelectedItem;
+            newBook.PublisherId = selectedPublisher.Id;
         }
 
         await _bookService.AddBook(newBook);

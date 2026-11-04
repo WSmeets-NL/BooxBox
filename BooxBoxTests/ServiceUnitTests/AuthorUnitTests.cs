@@ -72,7 +72,7 @@ namespace BooxBoxTests.ServiceUnitTests
 
             Mock<IAuthorRepository> mockAuthorRepo = new Mock<IAuthorRepository>();
 
-            mockAuthorRepo.Setup(r => r.GetAuthorById(1)).ReturnsAsync(author1);
+            mockAuthorRepo.Setup(r => r.GetAuthorById(1)).Returns((Task<Author>)authors.Where(a => a.Id == 1));
 
             AuthorService authorService = new AuthorService(mockAuthorRepo.Object);
 
@@ -82,7 +82,7 @@ namespace BooxBoxTests.ServiceUnitTests
 
             //Assert
             Assert.NotNull(returnedAuthor);
-            Assert.Equal(author1.Id, returnedAuthor.Id);
+            Assert.Equal(1, returnedAuthor.Id);
         }
         [Fact]
         public async Task AddAuthorCorrectlyCallsTheRepo()

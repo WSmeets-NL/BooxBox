@@ -38,7 +38,18 @@
                 <Picker Grid.Row="2"  x:Name="IllustratorPicker" ItemDisplayBinding="{Binding Name}"/>
                 </Grid>
             </Border>
-            
+
+            <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
+                <Grid RowDefinitions="*,*,*" Padding="10">
+                    <Label Grid.Row="0" Text="Wie is de uitgever?" FontSize="18"/>
+                    <Grid Grid.Row="1" ColumnDefinitions="4*, *">
+                        <SearchBar Grid.Column="0" x:Name="PublisherSearch" Placeholder="Zoek een Uitgever" TextChanged="FilterPublishers"/>
+                        <Button Grid.Column="1" Clicked="AddNewPublisher" Text="Nieuwe Uitgever" BackgroundColor="LightBlue"  />
+                    </Grid>
+                    <Picker Grid.Row="2"  x:Name="PublisherPicker" ItemDisplayBinding="{Binding Name}"/>
+                </Grid>
+            </Border>
+
             <Border StrokeThickness="1" Padding="10" Margin="10" StrokeShape="RoundRectangle 12">
                 <Grid Grid.Row="0" RowDefinitions="*,*">
                     <Label Text="In welke taal is het boek geschreven? *" FontSize="18"/>

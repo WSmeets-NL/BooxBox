@@ -6,7 +6,8 @@ using System.Text;
 
 namespace BooxBox.Services
 {
-    class PublisherService
+
+    public class PublisherService
     {
         private readonly IPublisherRepository _publisherRepo;
 

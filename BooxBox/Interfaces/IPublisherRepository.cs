@@ -1,11 +1,12 @@
-﻿using System;
+﻿
+using BooxBox.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using BooxBox.Models;
 
 namespace BooxBox.Interfaces
 {
-    interface IPublisherRepository
+    public interface IPublisherRepository
     {
         Task<List<Publisher>> GetAllPublishersAsync();
 

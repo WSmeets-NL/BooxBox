@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BooxBox.Repos
 {
-    class PublisherRepository : IPublisherRepository
+    public class PublisherRepository : IPublisherRepository
     {
         private readonly BooxBoxDbWrapper _wrapper;
 
