@@ -19,6 +19,7 @@ namespace BooxBox.Models
         public int? BookLocationId { get; set; }
         public int? BookRating { get; set; }
         public string? ReaderComment { get; set; }
+        public string? ImagePath { get; set; }
         public DateTime? PublishingDate { get; set; }
 
         public Book()

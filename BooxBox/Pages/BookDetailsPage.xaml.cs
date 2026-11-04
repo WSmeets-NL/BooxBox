@@ -2,7 +2,7 @@ namespace BooxBox.Pages;
 using BooxBox.Data;
 using BooxBox.Models;
 using BooxBox.Services;
-
+using Microsoft.Maui.Media;
 
 [QueryProperty(nameof(BookId), "id")]
 public partial class BookDetailsPage : ContentPage
@@ -60,6 +60,15 @@ public partial class BookDetailsPage : ContentPage
 			BookLocation = await _locationService.GetLocationName((int)ChosenBook.BookLocationId);
 		}
 		BindingContext = this;
+
+		if (ChosenBook.ImagePath != null)
+		{
+			BookImage.Source = ChosenBook.ImagePath.ToString();
+		}
+		else{
+			BookImage.Source = "missingcover.png";
+
+        }
 	}
 
 	public async Task RefreshIncludedCollections()
@@ -118,5 +127,37 @@ public partial class BookDetailsPage : ContentPage
 		await _collectionService.RemoveBookFromCollection(ChosenBook.Id, collectionId);
 
 		RefreshIncludedCollections();
+	}
+
+	public async void AddPicture(object sender, EventArgs e)
+	{
+		if(MediaPicker.IsCaptureSupported != false)
+		{
+			FileResult bookPicture = await MediaPicker.Default.CapturePhotoAsync();
+
+			if (bookPicture == null)
+			{
+				return;
+			}
+
+			var stream = await bookPicture.OpenReadAsync();
+
+			BookImage.Source = ImageSource.FromStream(()  => stream);
+
+			string saveLocation = Path.Combine(FileSystem.AppDataDirectory, "BookCovers");
+			Directory.CreateDirectory(saveLocation);
+			string localImageFile = Path.Combine(saveLocation, bookPicture.FileName);
+
+			using Stream sourceStream = await bookPicture.OpenReadAsync();
+			using Stream destinationStream = File.Create(localImageFile);
+			await sourceStream.CopyToAsync(destinationStream);
+			ChosenBook.ImagePath = localImageFile;
+			await _bookService.UpdateBook(ChosenBook);
+        }
+
+		else
+		{
+			await DisplayAlertAsync("Niet ondersteund", "Dit device ondersteunt de camera niet", "Terug");
+		}
 	}
 }
