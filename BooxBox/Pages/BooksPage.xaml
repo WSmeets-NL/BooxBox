@@ -12,7 +12,7 @@
             <Button Grid.Column="1" Text="Sorteer A-Z" Margin="10" Clicked="SortAlphabetically" BackgroundColor="DarkBlue" TextColor="White" />
         </Grid>
 
-        <SearchBar Grid.Row="1" Placeholder="Zoek een boek" Margin="10" />
+        <SearchBar x:Name="BookSearch" Grid.Row="1" Placeholder="Zoek een boek" Margin="10" TextChanged="SearchBook"/>
 
         <CollectionView x:Name="BookView" Grid.Row="3" Margin="10" ItemsSource="{Binding Books}">
             
